@@ -1,10 +1,19 @@
-#' Read ADCP txt file and label rows
+#' Read ADCP txt file
+#'
+#' @details Options to trim NA's and fix timestamp.
 #'
 #' @param path Path to the txt file (including ".txt" extension) or to the
 #'   folder where the txt file is saved.
 #'
 #' @param file_name Required if \code{path} does not include the file name.
 #'   Include the ".txt" file extension. Default is \code{file_name = NULL}.
+#'
+#' @param trim_NA Logical argument indicating whether to trim ensembles that
+#'   have NA in each WaterSpeed and WaterDirection bin.
+#'
+#' @param timestamp_utc Logical argument indicating whether to convert the
+#'   TIMESTAMP from the timezone it was recorded in (AST or DST) to UTC. Default
+#'   is \code{timestamp_utc = TRUE}.
 #'
 #' @return Returns a dataframe and / csv file of the data with a single header
 #'   row and each row labelled as "SensorDepth", "WaterSpeed", or
@@ -19,13 +28,14 @@
 #' @export
 
 
-adcp_read_txt <- function(path, file_name = NULL){
+adcp_read_txt <- function(path, file_name = NULL,
+                          trim_NA = TRUE,
+                          timestamp_utc = TRUE){
 
 
   if(!is.null(file_name)) path <- paste0(path, "/", file_name)
 
   path <- file.path(path)
-
 
   if(!str_detect(path, "txt")) stop("File extension not found. \nHINT: Include .txt in path or file_name.")
 
@@ -61,8 +71,12 @@ adcp_read_txt <- function(path, file_name = NULL){
     select(TIMESTAMP_NS, Num, VARIABLE, V8:last_col()) %>%
     mutate(across(V8:last_col(), ~if_else(is.nan(.), NA_real_, .)))
 
+  # Trim and/or Correct Timestamps ------------------------------------------
 
+  if(trim_NA) dat <- dat %>% adcp_trim_NA()
+  if(timestamp_utc) dat <- dat %>% adcp_correct_timestamp()
 
+  # QA checks ---------------------------------------------------------------
 
   # SensorDepth rows should only have data in col V8
   check <- dat %>%
@@ -71,7 +85,10 @@ adcp_read_txt <- function(path, file_name = NULL){
 
   if(!all(is.na(check))) warning("More than one SensorDepth found for one row. \nHINT: Check labelling code")
 
-  # return dat
+  adcp_check_duplicate_timestamp(dat)
+
+  # Return dat --------------------------------------------------------------
+
   dat
 
 }
