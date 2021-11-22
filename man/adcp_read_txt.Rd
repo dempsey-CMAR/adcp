@@ -2,9 +2,9 @@
 % Please edit documentation in R/adcp_read_txt.R
 \name{adcp_read_txt}
 \alias{adcp_read_txt}
-\title{Read ADCP txt file and label rows}
+\title{Read ADCP txt file}
 \usage{
-adcp_read_txt(path, file_name = NULL)
+adcp_read_txt(path, file_name = NULL, trim_NA = TRUE, timestamp_utc = TRUE)
 }
 \arguments{
 \item{path}{Path to the txt file (including ".txt" extension) or to the
@@ -12,6 +12,13 @@ folder where the txt file is saved.}
 
 \item{file_name}{Required if \code{path} does not include the file name.
 Include the ".txt" file extension. Default is \code{file_name = NULL}.}
+
+\item{trim_NA}{Logical argument indicating whether to trim ensembles that
+have NA in each WaterSpeed and WaterDirection bin.}
+
+\item{timestamp_utc}{Logical argument indicating whether to convert the
+TIMESTAMP from the timezone it was recorded in (AST or DST) to UTC. Default
+is \code{timestamp_utc = TRUE}.}
 }
 \value{
 Returns a dataframe and / csv file of the data with a single header
@@ -19,5 +26,8 @@ Returns a dataframe and / csv file of the data with a single header
   "WaterDirection". Single TIMESTAMP column
 }
 \description{
-Read ADCP txt file and label rows
+Read ADCP txt file
+}
+\details{
+Options to trim NA's and fix timestamp.
 }
