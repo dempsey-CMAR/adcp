@@ -33,3 +33,10 @@ adcp_trim_NA <- function(dat){
     select(-TRIM, -n_GROUP, -NA_sum)
 
 }
+
+
+
+
+
+
+
