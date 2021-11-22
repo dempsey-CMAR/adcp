@@ -19,11 +19,12 @@ adcp_correct_timestamp <- function(dat){
   # determine whether instrument was deployed during DST
   DST <- dst(min(dat$TIMESTAMP_NS))
 
-  if(DST) UTC_corr <-  hours(3)
-  if(!DST) UTC_corr <-  hours(4)
+  if(DST) UTC_corr <- hours(3)
+  if(!DST) UTC_corr <- hours(4)
 
   dat %>%
-    mutate(TIMESTAMP = TIMESTAMP_NS + UTC_corr) %>%
+    mutate(TIMESTAMP = TIMESTAMP_NS + UTC_corr,
+           TIMESTAMP = force_tz(TIMESTAMP, tzone = "UTC")) %>%
     select(-TIMESTAMP_NS) %>%
     select(TIMESTAMP, everything())
 
