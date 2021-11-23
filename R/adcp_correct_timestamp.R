@@ -13,8 +13,7 @@
 adcp_correct_timestamp <- function(dat){
 
   dat <- dat %>%
-    mutate(TIMESTAMP_NS = as_datetime(TIMESTAMP_NS),
-           TIMESTAMP_NS = force_tz(TIMESTAMP_NS, tzone = "America/Halifax"))
+    mutate(TIMESTAMP_NS = as_datetime(TIMESTAMP_NS, tz = "America/Halifax"))
 
   # determine whether instrument was deployed during DST
   DST <- dst(min(dat$TIMESTAMP_NS))
