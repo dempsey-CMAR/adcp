@@ -2,15 +2,15 @@
 #'
 #' @param dat Output from \code{read_adcp_txt()}.
 #'
-#' @return Returns \code{dat} filtered to exclude ensembles with no water speed
-#'   or direction data (typically as the sensor is deployed and retrieved).
+#' @return Returns \code{dat} filtered to exclude ensembles (rows) with no water
+#'   speed or direction data (typically as the sensor is deployed and
+#'   retrieved).
 #'
 #' @importFrom dplyr across everything filter group_by if_else mutate ungroup
 #'   select
 #' @export
-#'
 
-adcp_trim_NA <- function(dat){
+adcp_trim_NA_ensembles <- function(dat){
 
   n_bins <- dat %>%
     select(V8:last_col()) %>%
@@ -34,9 +34,26 @@ adcp_trim_NA <- function(dat){
 
 }
 
+#' Filter out bins with no depth, speed or direction data
+#'
+#' @param dat Output from \code{read_adcp_txt()}.
+#'
+#' @return Returns \code{dat} filtered to exclude bins (columns) with no water
+#'   speed or direction data (typically NA because of side lobe interference).
+#'
+#' @export
 
 
+adcp_trim_NA_bins <- function(dat){
 
+  dat_NA <- data.frame(is.na(dat))
 
+  colsum_NA <- apply(dat_NA, 2, sum)
+
+  keep_col <- colsum_NA < nrow(dat_NA)
+
+  dat[ , keep_col]
+
+}
 
 
