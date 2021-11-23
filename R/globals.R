@@ -27,6 +27,15 @@ utils::globalVariables(c(
   # adcp_correct_timestamp
   "TIMESTAMP",
 
+  # adcp_format_opendata
+  "WaterDirection",
+  "WaterSpeed",
+  "SENSOR_DEPTH",
+  "SPEED",
+  "DIRECTION",
+  "BIN_ALTITUDE",
+  "VALUE",
+
   #read_nsdfa_tracking
   "County", "Waterbody", "Station_Name", "Lease#",
   "Depl_Date", "Depl_Lat", "Depl_Lon", "Recv_Date",
