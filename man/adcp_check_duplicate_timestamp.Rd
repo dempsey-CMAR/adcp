@@ -10,7 +10,8 @@ adcp_check_duplicate_timestamp(dat)
 \item{dat}{Dataframe, as exported from \code{adcp_read_txt()}}
 }
 \value{
-Returns a warning if any duplicate values are detected.
+If duplicate TIMESTAMPs are detected, returns a warning and
+  \code{TRUE}. Otherwise returns \code{FALSE}.
 }
 \description{
 Check for duplicate TIMESTAMP values

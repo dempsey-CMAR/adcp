@@ -2,7 +2,8 @@
 #'
 #' @param dat Dataframe, as exported from \code{adcp_read_txt()}
 #'
-#' @return Returns a warning if any duplicate values are detected.
+#' @return If duplicate TIMESTAMPs are detected, returns a warning and
+#'   \code{TRUE}. Otherwise returns \code{FALSE}.
 #'
 #' @importFrom dplyr filter select
 #'
@@ -31,7 +32,7 @@ adcp_check_duplicate_timestamp <- function(dat){
 
     return(TRUE)
 
-  }
+  } else return(FALSE)
 
 
 }
