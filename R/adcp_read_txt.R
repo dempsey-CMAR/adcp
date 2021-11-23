@@ -22,7 +22,7 @@
 #' @importFrom data.table fread
 #' @importFrom dplyr %>% across case_when everything filter if_else last_col
 #'   mutate n select
-#' @importFrom lubridate make_datetime
+#' @importFrom lubridate make_datetime force_tz
 #' @importFrom stringr str_detect
 
 #' @export
@@ -65,15 +65,18 @@ adcp_read_txt <- function(path, file_name = NULL,
              INDEX %in% seq(3, n(), 3) ~ params[3],
              TRUE ~ NA_character_
            ),
-           TIMESTAMP_NS = make_datetime(Year, Month, Day, Hour, Min, Sec)
+           TIMESTAMP_NS = make_datetime(
+             Year, Month, Day, Hour, Min, Sec, tz = "America/Halifax"
+           ),
+           # TIMESTAMP_NS = force_tz(TIMESTAMP_NS, tzone = "America/Halifax")
     ) %>%
     select(-INDEX) %>%
     select(TIMESTAMP_NS, Num, VARIABLE, V8:last_col()) %>%
     mutate(across(V8:last_col(), ~if_else(is.nan(.), NA_real_, .)))
 
-  # Trim and/or Correct Timestamps ------------------------------------------
+  # Trim ensembles and/or Correct Timestamps ------------------------------------------
 
-  if(trim_NA) dat <- dat %>% adcp_trim_NA()
+  if(trim_NA) dat <- dat %>% adcp_trim_NA_ensembles()       # do NOT remove NA bins here bc it could affect the atlitude calculation
   if(timestamp_utc) dat <- dat %>% adcp_correct_timestamp()
 
   # QA checks ---------------------------------------------------------------
