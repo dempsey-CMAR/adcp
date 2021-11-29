@@ -16,13 +16,15 @@ utils::globalVariables(c(
   "Hour",
   "Min",
   "Sec",
-  "TIMESTAMP_NS",
 
   # adcp_trim_NA
   "TRIM",
   "NA_sum",
   "n_GROUP",
   ".",
+
+  # adcp_flag_data
+  "sensor_depth",
 
   # adcp_correct_timestamp
   "TIMESTAMP",
@@ -35,6 +37,9 @@ utils::globalVariables(c(
   "DIRECTION",
   "BIN_ALTITUDE",
   "VALUE",
+
+  # helpers
+  "DEPLOYMENT",
 
   #read_nsdfa_tracking
   "County", "Waterbody", "Station_Name", "Lease#",

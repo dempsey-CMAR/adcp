@@ -12,8 +12,10 @@ LazyData: true
 Imports: 
     data.table,
     dplyr,
+    glue,
     lubridate,
     readxl,
+    stringi,
     stringr,
     tidyr
 RoxygenNote: 7.1.2
