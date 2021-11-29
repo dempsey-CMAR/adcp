@@ -1,6 +1,13 @@
 #' Read ADCP txt file
 #'
-#' @details Options to trim NA's and fix timestamp.
+#' @details The \code{TIMESTAMP} column is in the timezone of the deployment
+#'   date (e.g., "AST" if deployed in November to March and "DST" if deployed in
+#'   March to November). The \code{TIMESTAMP} does NOT account for changes to
+#'   daylight savings time. The \code{TIMESTAMP} is assigned a timezone of "UTC"
+#'   to avoid \code{NA} values during the beginning of daylight savings time
+#'   (e.g., 2019-03-10 02:30:00 is NOT a valid time for the "America/Halifax"
+#'   timezone). This \code{TIMESTAMP} can be converted to true UTC using
+#'   \code{adcp_correct_timestamp()}.
 #'
 #' @param path Path to the txt file (including ".txt" extension) or to the
 #'   folder where the txt file is saved.
@@ -8,16 +15,8 @@
 #' @param file_name Required if \code{path} does not include the file name.
 #'   Include the ".txt" file extension. Default is \code{file_name = NULL}.
 #'
-#' @param trim_NA Logical argument indicating whether to trim ensembles that
-#'   have NA in each WaterSpeed and WaterDirection bin.
-#'
-#' @param timestamp_utc Logical argument indicating whether to convert the
-#'   TIMESTAMP from the timezone it was recorded in (AST or DST) to UTC. Default
-#'   is \code{timestamp_utc = TRUE}.
-#'
-#' @return Returns a dataframe and / csv file of the data with a single header
-#'   row and each row labelled as "SensorDepth", "WaterSpeed", or
-#'   "WaterDirection". Single TIMESTAMP column
+#' @return Returns a dataframe of the data with a single header row and each row
+#'   labelled as "SensorDepth", "WaterSpeed", or "WaterDirection".
 #'
 #' @importFrom data.table fread
 #' @importFrom dplyr %>% across case_when everything filter if_else last_col
@@ -28,9 +27,14 @@
 #' @export
 
 
-adcp_read_txt <- function(path, file_name = NULL,
-                          trim_NA = TRUE,
-                          timestamp_utc = TRUE){
+adcp_read_txt <- function(path, file_name = NULL){
+
+  #@param trim_NA Logical argument indicating whether to trim ensembles that
+  #   have NA in each WaterSpeed and WaterDirection bin.
+  #
+  # @param timestamp_utc Logical argument indicating whether to convert the
+  #   TIMESTAMP from the timezone it was recorded in (AST or DST) to UTC. Default
+  #   is \code{timestamp_utc = TRUE}.
 
 
   if(!is.null(file_name)) path <- paste0(path, "/", file_name)
@@ -65,19 +69,17 @@ adcp_read_txt <- function(path, file_name = NULL,
              INDEX %in% seq(3, n(), 3) ~ params[3],
              TRUE ~ NA_character_
            ),
-           TIMESTAMP_NS = make_datetime(
-             Year, Month, Day, Hour, Min, Sec, tz = "America/Halifax"
-           ),
-           # TIMESTAMP_NS = force_tz(TIMESTAMP_NS, tzone = "America/Halifax")
+           # do not assign tz= "America/Halifax". This will introduce NA values for the skipped hour of DST
+           TIMESTAMP = make_datetime(Year, Month, Day, Hour, Min, Sec, tz = "UTC"),
     ) %>%
     select(-INDEX) %>%
-    select(TIMESTAMP_NS, Num, VARIABLE, V8:last_col()) %>%
+    select(TIMESTAMP, Num, VARIABLE, V8:last_col()) %>%
     mutate(across(V8:last_col(), ~if_else(is.nan(.), NA_real_, .)))
 
   # Trim ensembles and/or Correct Timestamps ------------------------------------------
 
-  if(trim_NA) dat <- dat %>% adcp_trim_NA_ensembles()       # do NOT remove NA bins here bc it could affect the atlitude calculation
-  if(timestamp_utc) dat <- dat %>% adcp_correct_timestamp()
+  # if(trim_NA) dat <- dat %>% adcp_trim_NA_ensembles()       # do NOT remove NA bins here bc it could affect the atlitude calculation
+  #  if(timestamp_utc) dat <- dat %>% adcp_correct_timestamp()
 
   # QA checks ---------------------------------------------------------------
 

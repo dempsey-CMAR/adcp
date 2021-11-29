@@ -4,7 +4,7 @@
 \alias{adcp_read_txt}
 \title{Read ADCP txt file}
 \usage{
-adcp_read_txt(path, file_name = NULL, trim_NA = TRUE, timestamp_utc = TRUE)
+adcp_read_txt(path, file_name = NULL)
 }
 \arguments{
 \item{path}{Path to the txt file (including ".txt" extension) or to the
@@ -12,22 +12,21 @@ folder where the txt file is saved.}
 
 \item{file_name}{Required if \code{path} does not include the file name.
 Include the ".txt" file extension. Default is \code{file_name = NULL}.}
-
-\item{trim_NA}{Logical argument indicating whether to trim ensembles that
-have NA in each WaterSpeed and WaterDirection bin.}
-
-\item{timestamp_utc}{Logical argument indicating whether to convert the
-TIMESTAMP from the timezone it was recorded in (AST or DST) to UTC. Default
-is \code{timestamp_utc = TRUE}.}
 }
 \value{
-Returns a dataframe and / csv file of the data with a single header
-  row and each row labelled as "SensorDepth", "WaterSpeed", or
-  "WaterDirection". Single TIMESTAMP column
+Returns a dataframe of the data with a single header row and each row
+  labelled as "SensorDepth", "WaterSpeed", or "WaterDirection".
 }
 \description{
 Read ADCP txt file
 }
 \details{
-Options to trim NA's and fix timestamp.
+The \code{TIMESTAMP} column is in the timezone of the deployment
+  date (e.g., "AST" if deployed in November to March and "DST" if deployed in
+  March to November). The \code{TIMESTAMP} does NOT account for changes to
+  daylight savings time. The \code{TIMESTAMP} is assigned a timezone of "UTC"
+  to avoid \code{NA} values during the beginning of daylight savings time
+  (e.g., 2019-03-10 02:30:00 is NOT a valid time for the "America/Halifax"
+  timezone). This \code{TIMESTAMP} can be converted to true UTC using
+  \code{adcp_correct_timestamp()}.
 }
