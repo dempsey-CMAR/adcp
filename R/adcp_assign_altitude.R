@@ -37,7 +37,7 @@ adcp_assign_altitude <- function(dat,
 
   }
 
-  # number of bins to name
+  # number of bins to name - could use the find_index function here instead of V8
   n_bins <- dat %>% select(V8:last_col()) %>% ncol()
 
   # altitude of the first bin
@@ -48,7 +48,6 @@ adcp_assign_altitude <- function(dat,
 
   # keep TIMESTAMP, Num, and VARIABLE column names
   colnames_keep <- colnames(dat)[1:(which(colnames(dat) == "V8") - 1)]
-
 
   colnames_new <- c(colnames_keep, colnames_bins)
 
