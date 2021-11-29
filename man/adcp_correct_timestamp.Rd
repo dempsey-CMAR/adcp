@@ -7,7 +7,7 @@
 adcp_correct_timestamp(dat)
 }
 \arguments{
-\item{dat}{Dataframe with at least one column \code{TIMESTAMP_NS}.}
+\item{dat}{Dataframe with at least one column \code{TIMESTAMP}.}
 }
 \value{
 Returns \code{dat} with \code{TIMESTAMP} in UTC.
