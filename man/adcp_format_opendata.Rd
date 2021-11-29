@@ -4,10 +4,13 @@
 \alias{adcp_format_opendata}
 \title{Convert ADCP data from raw format to Open Data Portal format}
 \usage{
-adcp_format_opendata(dat)
+adcp_format_opendata(dat, rm_NA = TRUE)
 }
 \arguments{
 \item{dat}{Output from  \code{adcp_read_txt()} or \code{adcp_assign_alt()}.}
+
+\item{rm_NA}{Logical argument. If \code{rm_NA = TRUE}, rows where \code{SPEED}
+is \code{NA} OR \code{DIRECTION} is \code{NA} will be removed.}
 }
 \value{
 Fill this in
