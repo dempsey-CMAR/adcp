@@ -1,17 +1,14 @@
-# should also include a test file from NOT in daylight savings to compare
 
 library(adcp)
 library(dplyr)
 library(lubridate)
 
-path1 <- system.file("testdata", package = "adcp")
+path <- system.file("testdata", package = "adcp")
 
 path2 <-  system.file("testdata/2019-01-17_Long_Beach.txt", package = "adcp")
 
 
-dat1 <- adcp_read_txt(path1, "2019-01-17_Long_Beach.txt",
-                      trim_NA = FALSE,
-                      timestamp_utc = FALSE)
+dat1 <- adcp_read_txt(path1, "2019-01-17_Long_Beach.txt")
 
 # use default values for trim_NA and timestamp_utc (TRUE)
 dat2 <- adcp_read_txt(path2)
