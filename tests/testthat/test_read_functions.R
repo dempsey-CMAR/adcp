@@ -77,7 +77,6 @@ test_that("adcp_assign_altitude() returns expected results" ,{
 
 dat_od <- adcp_format_opendata(dat_alt)
 
-
 test_that("adcp_format", {
 
   expect_equal(class(dat_od$TIMESTAMP), c("POSIXct", "POSIXt"))
@@ -103,7 +102,18 @@ test_that("adcp_format_opendata() returns expected SENSOR_DEPTH",{
 })
 
 
+# Flags -------------------------------------------------------------------
 
+dat_flag <- adcp_flag_data(dat_od)
+n_row <- nrow(dat_flag)
 
+flag <- unique(dat_flag[which(dat_flag$TIMESTAMP == min(dat_flag$TIMESTAMP)), "FLAG"])
+good <- unique(dat_flag[-which(dat_flag$TIMESTAMP == min(dat_flag$TIMESTAMP)), "FLAG"])
 
+test_that("adcp_flag_data() flags correct observations", {
+
+  expect_equal(as.character(flag$FLAG), "SENSOR_DEPTH changed by > 1 m")
+  expect_equal(as.character(good$FLAG), "good")
+
+})
 
