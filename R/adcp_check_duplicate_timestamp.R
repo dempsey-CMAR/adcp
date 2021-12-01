@@ -1,6 +1,7 @@
 #' Check for duplicate TIMESTAMP values
 #'
-#' @param dat Dataframe, as exported from \code{adcp_read_txt()}
+#' @param dat_wide Dataframe of ADCP data, as returned from
+#'   \code{adcp_read_txt()}.
 #'
 #' @return If duplicate TIMESTAMPs are detected, returns a warning and
 #'   \code{TRUE}. Otherwise returns \code{FALSE}.
@@ -10,17 +11,17 @@
 #' @export
 
 
-adcp_check_duplicate_timestamp <- function(dat){
+adcp_check_duplicate_timestamp <- function(dat_wide){
 
-  depth <- dat %>%
+  depth <- dat_wide %>%
     filter(VARIABLE == "SensorDepth") %>%
     select(contains("TIMESTAMP"))
 
-  speed <- dat %>%
+  speed <- dat_wide %>%
     filter(VARIABLE == "WaterSpeed") %>%
     select(contains("TIMESTAMP"))
 
-  direction <- dat %>%
+  direction <- dat_wide %>%
     filter(VARIABLE == "WaterDirection") %>%
     select(contains("TIMESTAMP"))
 
