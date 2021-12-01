@@ -1,8 +1,10 @@
 #' Flag ensembles with suspect SENSOR_DEPTH recordings
 #'
-#' @param dat The usual (formatted)
+#' @param dat Dataframe of ACDP data in long format, as returned by
+#'   \code{adcp_format_opendata()}.
 #'
-#' @param depth_flag The change in \code{SENSOR_DEPTH} that will trigger a flag.
+#' @param depth_flag The change in \code{SENSOR_DEPTH} that will trigger a flag
+#'   (in metres).
 #'
 #' @return Returns dat with two extra columns for inspection: \code{DIFF} =
 #'   lead(SENSOR_DEPTH) - SENSOR_DEPTH and \code{FLAG}.
@@ -23,8 +25,8 @@ adcp_flag_data <- function(dat, depth_flag = 1) {
     mutate(
       DIFF = lead(SENSOR_DEPTH) - SENSOR_DEPTH,
       FLAG = case_when(
-        DIFF > depth_flag ~ flag_message,
-        lag(DIFF) < -depth_flag ~ flag_message,
+        DIFF > depth_flag ~ flag_message,        # when sensor is being lowered
+        lag(DIFF) < -depth_flag ~ flag_message,  # when sensor is being retrieved
         TRUE ~ "good"
       )
     )

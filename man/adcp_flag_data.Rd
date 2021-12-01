@@ -7,9 +7,11 @@
 adcp_flag_data(dat, depth_flag = 1)
 }
 \arguments{
-\item{dat}{The usual (formatted)}
+\item{dat}{Dataframe of ACDP data in long format, as returned by
+\code{adcp_format_opendata()}.}
 
-\item{depth_flag}{The change in \code{SENSOR_DEPTH} that will trigger a flag.}
+\item{depth_flag}{The change in \code{SENSOR_DEPTH} that will trigger a flag
+(in metres).}
 }
 \value{
 Returns dat with two extra columns for inspection: \code{DIFF} =
