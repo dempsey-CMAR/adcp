@@ -38,6 +38,9 @@ utils::globalVariables(c(
   "BIN_ALTITUDE",
   "VALUE",
 
+  # adcp_plot_depth_flags
+  "FLAG",
+
   # helpers
   "DEPLOYMENT",
 
