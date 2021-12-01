@@ -1,9 +1,12 @@
 #' Plot SENSOR_DEPTH colour-coded by FLAG
 #'
-#' @param dat same same
-#' @param title Plot title
+#' @param dat Dataframe of ACDP data in long format, including \code{FLAG}
+#'   column, \code{adcp_flag_data()}.
 #'
-#' @return ggplot object
+#' @param title Optional title for the figure.
+#'
+#' @return ggplot object. Figure shows SENSOR_DEPTH over time, coloured by the
+#'   \code{FLAG} column.
 #'
 #' @importFrom ggplot2 aes geom_point ggplot labs scale_colour_manual
 #' @importFrom dplyr distinct mutate select
@@ -27,10 +30,11 @@ adcp_plot_depth_flags <- function(dat, title = NULL){
 
 #' Plot SENSOR_DEPTH
 #'
-#' @param dat same same
-#' @param title Plot title
+#' @param dat Dataframe of ACDP data in long format, as returned by
+#'   \code{adcp_format_opendata()}.
+#' @param title Optional title for the figure.
 #'
-#' @return ggplot object
+#' @return ggplot object. Figure shows SENSOR_DEPTH over time.
 #'
 #' @importFrom ggplot2 aes geom_point ggplot labs scale_colour_manual
 #' @importFrom dplyr distinct mutate select

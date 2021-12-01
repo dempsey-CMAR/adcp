@@ -7,12 +7,13 @@
 adcp_plot_depth(dat, title = NULL)
 }
 \arguments{
-\item{dat}{same same}
+\item{dat}{Dataframe of ACDP data in long format, as returned by
+\code{adcp_format_opendata()}.}
 
-\item{title}{Plot title}
+\item{title}{Optional title for the figure.}
 }
 \value{
-ggplot object
+ggplot object. Figure shows SENSOR_DEPTH over time.
 }
 \description{
 Plot SENSOR_DEPTH

@@ -7,12 +7,14 @@
 adcp_plot_depth_flags(dat, title = NULL)
 }
 \arguments{
-\item{dat}{same same}
+\item{dat}{Dataframe of ACDP data in long format, including \code{FLAG}
+column, \code{adcp_flag_data()}.}
 
-\item{title}{Plot title}
+\item{title}{Optional title for the figure.}
 }
 \value{
-ggplot object
+ggplot object. Figure shows SENSOR_DEPTH over time, coloured by the
+  \code{FLAG} column.
 }
 \description{
 Plot SENSOR_DEPTH colour-coded by FLAG
