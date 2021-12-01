@@ -29,8 +29,15 @@ adcp_format_opendata <- function(dat, rm_NA = TRUE){
                  names_to = "BIN_ALTITUDE", values_to = "VALUE") %>%
     pivot_wider(names_from = "VARIABLE", values_from = VALUE) %>%
     left_join(sensor_depth, by = "TIMESTAMP") %>%
-    rename(SPEED = WaterSpeed, DIRECTION = WaterDirection) #%>%
+    rename(SPEED = WaterSpeed, DIRECTION = WaterDirection)
    # mutate(TIMESTAMP = as.character(TIMESTAMP))
+
+  if(suppressWarnings(!is.na(as.numeric(dat$BIN_ALTITUDE[1])))) {
+
+    dat <- dat %>%
+      mutate(BIN_ALTITUDE = as.numeric(BIN_ALTITUDE))
+
+  }
 
   if(rm_NA) dat <- filter(dat, !is.na(SPEED) & !is.na(DIRECTION))
 
