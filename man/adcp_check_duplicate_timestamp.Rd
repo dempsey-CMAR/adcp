@@ -4,10 +4,11 @@
 \alias{adcp_check_duplicate_timestamp}
 \title{Check for duplicate TIMESTAMP values}
 \usage{
-adcp_check_duplicate_timestamp(dat)
+adcp_check_duplicate_timestamp(dat_wide)
 }
 \arguments{
-\item{dat}{Dataframe, as exported from \code{adcp_read_txt()}}
+\item{dat_wide}{Dataframe of ADCP data, as returned from
+\code{adcp_read_txt()}.}
 }
 \value{
 If duplicate TIMESTAMPs are detected, returns a warning and
