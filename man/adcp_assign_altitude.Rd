@@ -5,7 +5,7 @@
 \title{Assign altitude (height above sea floor) to each bin}
 \usage{
 adcp_assign_altitude(
-  dat,
+  dat_wide,
   metadata = NULL,
   inst_alt = NULL,
   bin_size = NULL,
@@ -13,13 +13,14 @@ adcp_assign_altitude(
 )
 }
 \arguments{
-\item{dat}{Output from \code{read_adcp_txt()}.}
+\item{dat_wide}{Dataframe of ADCP data, as exported from
+\code{adcp_read_txt()}.}
 
 \item{metadata}{Dataframe with metadata information for the deployment in
-\code{dat} (e.g., a row from the NSDFA tracking sheet). Must include
+\code{dat_wide} (e.g., a row from the NSDFA tracking sheet). Must include
 columns \code{Inst_Altitude}, \code{Bin_Size}, and \code{First_Bin_Range}.
-If default value \code{metadata = NULL} is used, the remaining arguments
-must be provided.}
+Option to use default value \code{metadata = NULL} and provide the required
+values in the remaining arguments.}
 
 \item{inst_alt}{Height of the instrument above the sea floor (in metres). Not
 required if \code{metadata} argument is specified.}
@@ -31,9 +32,20 @@ argument is specified.}
 \code{metadata} argument is specified.}
 }
 \value{
-Returns \code{dat}, with bin columns re-named with corresponding
+Returns \code{dat_wide}, with bin columns re-named with corresponding
   altitude (in metres).
 }
 \description{
 Assign altitude (height above sea floor) to each bin
+}
+\details{
+The altitude of the bins is calculated as:
+
+  first bin altitude = inst altitude + first bin range
+
+  second bin altitude = first bin altitude + bin size
+
+  third bin altitude = second bin altitude + bin size
+
+  And so on.
 }
