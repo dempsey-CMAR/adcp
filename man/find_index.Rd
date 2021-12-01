@@ -4,10 +4,10 @@
 \alias{find_index}
 \title{Index of first bin column}
 \usage{
-find_index(dat)
+find_index(dat_wide)
 }
 \arguments{
-\item{dat}{Output from  \code{adcp_read_txt()} or \code{adcp_assign_alt()}.}
+\item{dat_wide}{fill this in}
 }
 \value{
 Returns the index of the first column with bin data

@@ -1,6 +1,6 @@
 #' Index of first bin column
 #'
-#' @inheritParams adcp_format_opendata
+#' @param dat_wide fill this in
 #'
 #' @return Returns the index of the first column with bin data
 #'
@@ -9,10 +9,10 @@
 #'
 #' @export
 
-find_index <- function(dat){
+find_index <- function(dat_wide){
 
   # so can use with output directly from adcp_read_text()
-  colnames_numeric <- str_match(colnames(dat), "V\\d*$") %>%
+  colnames_numeric <- str_match(colnames(dat_wide), "V\\d*$") %>%
     str_remove("V")
 
   if(length(na.omit(colnames_numeric)) > 0) {
@@ -25,13 +25,13 @@ find_index <- function(dat){
       colnames_numeric == max(as.numeric(colnames_numeric), na.rm = TRUE)
     )
 
-    colnames(dat)[col_start:col_end] <- colnames_numeric[col_start:col_end]
+    colnames(dat_wide)[col_start:col_end] <- colnames_numeric[col_start:col_end]
 
   }
 
   # index of the first measurement column
   suppressWarnings(
-    which(colnames(dat) == min(as.numeric(colnames(dat)), na.rm = TRUE))
+    which(colnames(dat_wide) == min(as.numeric(colnames(dat_wide)), na.rm = TRUE))
   )
 
 }
@@ -66,7 +66,6 @@ extract_deployment_info <- function(file_path){
              into = c("Depl_Date", "Station_Name"),
              remove = FALSE) %>%
     mutate(Depl_Date = as_datetime(Depl_Date))
-
 
 }
 
