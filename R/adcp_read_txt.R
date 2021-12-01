@@ -1,13 +1,19 @@
-#' Read ADCP txt file
+#' Read ADCP .txt file
+#'
+#' @description Read raw ADCP txt file into R and format. Label each row with
+#'   the appropriate variable name (i.e., "SensorDepth", "WaterSpeed", or
+#'   "WaterDirection").
 #'
 #' @details The \code{TIMESTAMP} column is in the timezone of the deployment
 #'   date (e.g., "AST" if deployed in November to March and "DST" if deployed in
-#'   March to November). The \code{TIMESTAMP} does NOT account for changes to
-#'   daylight savings time. The \code{TIMESTAMP} is assigned a timezone of "UTC"
-#'   to avoid \code{NA} values during the beginning of daylight savings time
-#'   (e.g., 2019-03-10 02:30:00 is NOT a valid time for the "America/Halifax"
-#'   timezone). This \code{TIMESTAMP} can be converted to true UTC using
-#'   \code{adcp_correct_timestamp()}.
+#'   March to November). The \code{TIMESTAMP} does NOT account for changes in
+#'   daylight savings time. Here, the \code{TIMESTAMP} is assigned a timezone of
+#'   "UTC" to avoid \code{NA} values during the beginning of daylight savings
+#'   time (e.g., 2019-03-10 02:30:00 is NOT a valid time for the
+#'   "America/Halifax" timezone). This \code{TIMESTAMP} can be converted to true
+#'   UTC using \code{adcp_correct_timestamp()}.
+#'
+#'   A warning will be printed if duplicate \code{TIMESTAMP}s are detected.
 #'
 #' @param path Path to the txt file (including ".txt" extension) or to the
 #'   folder where the txt file is saved.
@@ -29,19 +35,13 @@
 
 adcp_read_txt <- function(path, file_name = NULL){
 
-  #@param trim_NA Logical argument indicating whether to trim ensembles that
-  #   have NA in each WaterSpeed and WaterDirection bin.
-  #
-  # @param timestamp_utc Logical argument indicating whether to convert the
-  #   TIMESTAMP from the timezone it was recorded in (AST or DST) to UTC. Default
-  #   is \code{timestamp_utc = TRUE}.
-
-
   if(!is.null(file_name)) path <- paste0(path, "/", file_name)
 
   path <- file.path(path)
 
-  if(!str_detect(path, "txt")) stop("File extension not found. \nHINT: Include .txt in path or file_name.")
+  if(!str_detect(path, "txt")) {
+    stop("File extension not found. \nHINT: Include .txt in path or file_name.")
+  }
 
   # names and order of parameters in txt file (SensorDepth, WaterSpeed, WaterDirection)
   params <- data.table::fread(path, nrows = 3, header = FALSE, select = 8)
@@ -74,21 +74,19 @@ adcp_read_txt <- function(path, file_name = NULL){
     ) %>%
     select(-INDEX) %>%
     select(TIMESTAMP, Num, VARIABLE, V8:last_col()) %>%
+    # change NaN values to NA
     mutate(across(V8:last_col(), ~if_else(is.nan(.), NA_real_, .)))
 
-  # Trim ensembles and/or Correct Timestamps ------------------------------------------
-
-  # if(trim_NA) dat <- dat %>% adcp_trim_NA_ensembles()       # do NOT remove NA bins here bc it could affect the atlitude calculation
-  #  if(timestamp_utc) dat <- dat %>% adcp_correct_timestamp()
-
-  # QA checks ---------------------------------------------------------------
+  # QA check ---------------------------------------------------------------
 
   # SensorDepth rows should only have data in col V8
   check <- dat %>%
     filter(VARIABLE == "SensorDepth") %>%
     select(V9:last_col())
 
-  if(!all(is.na(check))) warning("More than one SensorDepth found for one row. \nHINT: Check labelling code")
+  if(!all(is.na(check))) {
+    warning("More than one SensorDepth found in row. \nHINT: Check labelling code")
+  }
 
   adcp_check_duplicate_timestamp(dat)
 

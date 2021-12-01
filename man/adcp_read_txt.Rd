@@ -2,7 +2,7 @@
 % Please edit documentation in R/adcp_read_txt.R
 \name{adcp_read_txt}
 \alias{adcp_read_txt}
-\title{Read ADCP txt file}
+\title{Read ADCP .txt file}
 \usage{
 adcp_read_txt(path, file_name = NULL)
 }
@@ -18,15 +18,19 @@ Returns a dataframe of the data with a single header row and each row
   labelled as "SensorDepth", "WaterSpeed", or "WaterDirection".
 }
 \description{
-Read ADCP txt file
+Read raw ADCP txt file into R and format. Label each row with
+  the appropriate variable name (i.e., "SensorDepth", "WaterSpeed", or
+  "WaterDirection").
 }
 \details{
 The \code{TIMESTAMP} column is in the timezone of the deployment
   date (e.g., "AST" if deployed in November to March and "DST" if deployed in
-  March to November). The \code{TIMESTAMP} does NOT account for changes to
-  daylight savings time. The \code{TIMESTAMP} is assigned a timezone of "UTC"
-  to avoid \code{NA} values during the beginning of daylight savings time
-  (e.g., 2019-03-10 02:30:00 is NOT a valid time for the "America/Halifax"
-  timezone). This \code{TIMESTAMP} can be converted to true UTC using
-  \code{adcp_correct_timestamp()}.
+  March to November). The \code{TIMESTAMP} does NOT account for changes in
+  daylight savings time. Here, the \code{TIMESTAMP} is assigned a timezone of
+  "UTC" to avoid \code{NA} values during the beginning of daylight savings
+  time (e.g., 2019-03-10 02:30:00 is NOT a valid time for the
+  "America/Halifax" timezone). This \code{TIMESTAMP} can be converted to true
+  UTC using \code{adcp_correct_timestamp()}.
+
+  A warning will be printed if duplicate \code{TIMESTAMP}s are detected.
 }
