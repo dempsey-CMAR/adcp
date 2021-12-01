@@ -1,10 +1,10 @@
 Package: adcp
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Format raw ADCP data for Open Data Portal
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
+Author: Danielle Dempsey
+Maintainer: The package maintainer <ddempsey@perennia.ca>
+Description: Add more here
     Use four spaces when indenting paragraphs within the Description.
 License: GPL (>= 3)
 Encoding: UTF-8
