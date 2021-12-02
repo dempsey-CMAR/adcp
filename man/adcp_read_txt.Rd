@@ -4,7 +4,7 @@
 \alias{adcp_read_txt}
 \title{Read ADCP .txt file}
 \usage{
-adcp_read_txt(path, file_name = NULL)
+adcp_read_txt(path, file_name = NULL, rm_dups = TRUE)
 }
 \arguments{
 \item{path}{Path to the txt file (including ".txt" extension) or to the
@@ -12,6 +12,10 @@ folder where the txt file is saved.}
 
 \item{file_name}{Required if \code{path} does not include the file name.
 Include the ".txt" file extension. Default is \code{file_name = NULL}.}
+
+\item{rm_dups}{Logical argument indicating whether to remove duplicate rows.
+Default is \code{TRUE}. (Note: the \code{Num} colunm is removed before
+checking for duplicate rows.)}
 }
 \value{
 Returns a dataframe of the data with a single header row and each row

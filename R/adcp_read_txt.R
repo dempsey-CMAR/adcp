@@ -21,19 +21,24 @@
 #' @param file_name Required if \code{path} does not include the file name.
 #'   Include the ".txt" file extension. Default is \code{file_name = NULL}.
 #'
+#' @param rm_dups Logical argument indicating whether to remove duplicate rows.
+#'   Default is \code{TRUE}. (Note: the \code{Num} colunm is removed before
+#'   checking for duplicate rows.)
+#'
 #' @return Returns a dataframe of the data with a single header row and each row
 #'   labelled as "SensorDepth", "WaterSpeed", or "WaterDirection".
 #'
 #' @importFrom data.table fread
 #' @importFrom dplyr %>% across case_when everything filter if_else last_col
 #'   mutate n select
+#' @importFrom glue glue
 #' @importFrom lubridate make_datetime force_tz
 #' @importFrom stringr str_detect
 
 #' @export
 
 
-adcp_read_txt <- function(path, file_name = NULL){
+adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE){
 
   if(!is.null(file_name)) path <- paste0(path, "/", file_name)
 
@@ -77,6 +82,23 @@ adcp_read_txt <- function(path, file_name = NULL){
     # change NaN values to NA
     mutate(across(V8:last_col(), ~if_else(is.nan(.), NA_real_, .)))
 
+  if(adcp_check_duplicate_timestamp(dat) & rm_dups){
+
+    dups <- dat %>%
+      filter(VARIABLE == "SensorDepth")
+    dups <- dups[duplicated(dups$TIMESTAMP), ]
+    dups <- unique(dups$TIMESTAMP)
+
+    message(glue("{length(dups)} duplicate TIMESTAMPs found and removed: {dups}."))
+
+    dat <- dat %>%
+      select(-Num) %>%
+      distinct() %>%
+      mutate(Num = sort(rep(1:(n()/3), 3))) %>%
+      select(TIMESTAMP, Num, VARIABLE, everything())
+
+  }
+
   # QA check ---------------------------------------------------------------
 
   # SensorDepth rows should only have data in col V8
@@ -87,8 +109,6 @@ adcp_read_txt <- function(path, file_name = NULL){
   if(!all(is.na(check))) {
     warning("More than one SensorDepth found in row. \nHINT: Check labelling code")
   }
-
-  adcp_check_duplicate_timestamp(dat)
 
   # Return dat --------------------------------------------------------------
 
