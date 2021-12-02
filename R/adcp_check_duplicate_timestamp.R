@@ -29,7 +29,7 @@ adcp_check_duplicate_timestamp <- function(dat_wide){
      any(duplicated(speed[,1])) |
      any(duplicated(direction[,1]))) {
 
-    warning("Duplicate TIMESTAMP values found.")
+  #  warning("Duplicate TIMESTAMP values found.")
 
     return(TRUE)
 
