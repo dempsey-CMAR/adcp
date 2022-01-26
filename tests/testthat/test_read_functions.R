@@ -57,7 +57,7 @@ test_that("adcp_correct_timestamp() works for daylight savings transitions", {
 })
 
 
-# Altitude ----------------------------------------------------------------
+# Altitude (Bin heigh above sea floor) ----------------------------------------------------------------
 
 metadata <- tibble(Inst_Altitude = 0.5,
                    Bin_Size = 1,
@@ -80,22 +80,23 @@ dat_od <- adcp_format_opendata(dat_alt)
 test_that("adcp_format", {
 
   expect_equal(class(dat_od$TIMESTAMP), c("POSIXct", "POSIXt"))
-  expect_equal(class(dat_od$BIN_ALTITUDE), "numeric")
+  expect_equal(class(dat_od$BIN_HEIGHT_ABOVE_SEAFLOOR), "numeric")
   expect_equal(class(dat_od$SPEED), "numeric")
   expect_equal(class(dat_od$DIRECTION), "numeric")
-  expect_equal(class(dat_od$SENSOR_DEPTH), "numeric")
+  expect_equal(class(dat_od$SENSOR_DEPTH_BELOW_SURFACE), "numeric")
+  expect_equal(class(dat_od$BIN_DEPTH_BELOW_SURFACE), "numeric")
 
 })
 
 
-dat_od_depth <- distinct(dat_od, TIMESTAMP, SENSOR_DEPTH)
+dat_od_depth <- distinct(dat_od, TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE)
 
 dat_depth <- dat %>%
   filter(VARIABLE == "SensorDepth") %>%
-  select(TIMESTAMP, SENSOR_DEPTH = V8) %>%
-  filter(SENSOR_DEPTH > 10)
+  select(TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE = V8) %>%
+  filter(SENSOR_DEPTH_BELOW_SURFACE > 10)
 
-test_that("adcp_format_opendata() returns expected SENSOR_DEPTH",{
+test_that("adcp_format_opendata() returns expected SENSOR_DEPTH_BELOW_SURFACE",{
 
   expect_equal(dat_od_depth, tibble(dat_depth))
 
@@ -112,7 +113,7 @@ good <- unique(dat_flag[-which(dat_flag$TIMESTAMP == min(dat_flag$TIMESTAMP)), "
 
 test_that("adcp_flag_data() flags correct observations", {
 
-  expect_equal(as.character(flag$FLAG), "SENSOR_DEPTH changed by > 1 m")
+  expect_equal(as.character(flag$FLAG), "SENSOR_DEPTH_BELOW_SURFACE changed by > 1 m")
   expect_equal(as.character(good$FLAG), "good")
 
 })

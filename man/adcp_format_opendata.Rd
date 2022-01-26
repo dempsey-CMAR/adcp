@@ -10,12 +10,32 @@ adcp_format_opendata(dat_wide, rm_NA = TRUE)
 \item{dat_wide}{Dataframe of ADCP data, as returned from
 \code{adcp_read_txt()} or \code{adcp_assign_alt()}.}
 
-\item{rm_NA}{Logical argument. If \code{rm_NA = TRUE}, rows where \code{SPEED}
-is \code{NA} OR \code{DIRECTION} is \code{NA} will be removed.}
+\item{rm_NA}{Logical argument. If \code{rm_NA = TRUE}, rows where
+\code{SPEED} is \code{NA} OR \code{DIRECTION} is \code{NA} will be removed.}
 }
 \value{
-Returns data in a long format, with columns:
+Returns data in a long format.
+
+  If \code{dat_wide} is from \code{adcp_read_txt()} (i.e., bin altitude has
+  not been assigned), then the following columns are returned: TIMESTAMP,
+  SENSOR_DEPTH_BELOW_SURFACE (SensorDepth), BIN_ID (the default column names
+  when imported using read_adcp_txt; starts at V8), SPEED (WaterSpeed), and
+  DIRECTION (WaterDirection).
+
+  If \code{dat_wide} is from \code{adcp_assign_altitude()}, then the
+  following columns are returned: TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE
+  (SensorDepth), BIN_DEPTH_BELOW_SURFACE, BIN_HEIGHT_ABOVE_SEAFLOOR, SPEED
+  (WaterSpeed), and DIRECTION (WaterDirection).
 }
 \description{
 Convert ADCP data from raw format to Open Data Portal format
+}
+\details{
+Both the bin height above the bottom and bin depth below the surface
+  are reported, where:
+
+  BIN_DEPTH_BELOW_SURFACE = SENSOR_DEPTH_BELOW_SURFACE -
+  BIN_HEIGHT_ABOVE_SEAFLOOR
+
+  A warning is printed if any BIN_DEPTH_BELOW_SURFACE are negative.
 }

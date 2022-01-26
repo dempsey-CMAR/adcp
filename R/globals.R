@@ -32,10 +32,13 @@ utils::globalVariables(c(
   # adcp_format_opendata
   "WaterDirection",
   "WaterSpeed",
-  "SENSOR_DEPTH",
+  "SENSOR_DEPTH_BELOW_SURFACE",
   "SPEED",
   "DIRECTION",
-  "BIN_ALTITUDE",
+  "BIN_HEIGHT_ABOVE_SEAFLOOR",
+  "BIN_DEPTH_BELOW_SURFACE",
+  "BIN_ID",
+  "BIN_DEPTH_CHECK",
   "VALUE",
 
   # adcp_plot_depth_flags

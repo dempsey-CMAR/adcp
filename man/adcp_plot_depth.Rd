@@ -2,7 +2,7 @@
 % Please edit documentation in R/adcp_plot_depth_flags.R
 \name{adcp_plot_depth}
 \alias{adcp_plot_depth}
-\title{Plot SENSOR_DEPTH}
+\title{Plot SENSOR_DEPTH_BELOW_SURFACE}
 \usage{
 adcp_plot_depth(dat, title = NULL)
 }
@@ -13,8 +13,8 @@ adcp_plot_depth(dat, title = NULL)
 \item{title}{Optional title for the figure.}
 }
 \value{
-ggplot object. Figure shows SENSOR_DEPTH over time.
+ggplot object. Figure shows SENSOR_DEPTH_BELOW_SURFACE over time.
 }
 \description{
-Plot SENSOR_DEPTH
+Plot SENSOR_DEPTH_BELOW_SURFACE
 }

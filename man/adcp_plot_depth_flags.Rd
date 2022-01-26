@@ -2,7 +2,7 @@
 % Please edit documentation in R/adcp_plot_depth_flags.R
 \name{adcp_plot_depth_flags}
 \alias{adcp_plot_depth_flags}
-\title{Plot SENSOR_DEPTH colour-coded by FLAG}
+\title{Plot SENSOR_DEPTH_BELOW_SURFACE colour-coded by FLAG}
 \usage{
 adcp_plot_depth_flags(dat, title = NULL)
 }
@@ -13,9 +13,9 @@ column, \code{adcp_flag_data()}.}
 \item{title}{Optional title for the figure.}
 }
 \value{
-ggplot object. Figure shows SENSOR_DEPTH over time, coloured by the
+ggplot object. Figure shows SENSOR_DEPTH_BELOW_SURFACE over time, coloured by the
   \code{FLAG} column.
 }
 \description{
-Plot SENSOR_DEPTH colour-coded by FLAG
+Plot SENSOR_DEPTH_BELOW_SURFACE colour-coded by FLAG
 }
