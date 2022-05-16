@@ -49,7 +49,7 @@ find_index <- function(dat_wide){
 #'   \code{Depl_Date}, and \code{Station_Name}.
 #'
 #' @importFrom dplyr mutate tibble
-#' @importFrom lubridate as_datetime
+#' @importFrom lubridate as_date
 #' @importFrom stringi stri_locate
 #' @importFrom stringr str_remove str_sub
 #' @importFrom tidyr separate
@@ -65,7 +65,7 @@ extract_deployment_info <- function(file_path){
     separate(col = 1, sep = "_",
              into = c("Depl_Date", "Station_Name"),
              remove = FALSE) %>%
-    mutate(Depl_Date = as_datetime(Depl_Date))
+    mutate(Depl_Date = as_date(Depl_Date))
 
 }
 
