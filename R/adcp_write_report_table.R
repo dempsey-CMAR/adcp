@@ -24,7 +24,7 @@ adcp_write_report_table <- function(metadata){
       `Averaging intervals (s)` = Current_Averaging_Interval_s,
       `Pings/Ensemble` = Current_PingsPerEnsemble,
       `Bin Size (m)` = Bin_Size,
-      `First Bin Range` = First_Bin_Range) %>%
+      `First Bin Range (m)` = First_Bin_Range) %>%
     mutate(`Depth (m)` = as.numeric(`Depth (m)`))
 
 }
