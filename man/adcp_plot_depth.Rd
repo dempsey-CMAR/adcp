@@ -4,13 +4,17 @@
 \alias{adcp_plot_depth}
 \title{Plot SENSOR_DEPTH_BELOW_SURFACE}
 \usage{
-adcp_plot_depth(dat, title = NULL)
+adcp_plot_depth(dat, title = NULL, date_format = "\%Y-\%b-\%d", geom = "point")
 }
 \arguments{
 \item{dat}{Dataframe of ACDP data in long format, as returned by
 \code{adcp_format_opendata()}.}
 
 \item{title}{Optional title for the figure.}
+
+\item{date_format}{Format for the date labels. Default is "\%Y-\%b-\%d"}
+
+\item{geom}{Geom to plot. Options are \code{"point"} or \code{"line"}.}
 }
 \value{
 ggplot object. Figure shows SENSOR_DEPTH_BELOW_SURFACE over time.

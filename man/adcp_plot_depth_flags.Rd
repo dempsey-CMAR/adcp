@@ -4,13 +4,15 @@
 \alias{adcp_plot_depth_flags}
 \title{Plot SENSOR_DEPTH_BELOW_SURFACE colour-coded by FLAG}
 \usage{
-adcp_plot_depth_flags(dat, title = NULL)
+adcp_plot_depth_flags(dat, title = NULL, date_format = "\%Y-\%b-\%d")
 }
 \arguments{
 \item{dat}{Dataframe of ACDP data in long format, including \code{FLAG}
 column, \code{adcp_flag_data()}.}
 
 \item{title}{Optional title for the figure.}
+
+\item{date_format}{Format for the date labels. Default is "\%Y-\%b-\%d"}
 }
 \value{
 ggplot object. Figure shows SENSOR_DEPTH_BELOW_SURFACE over time, coloured by the
