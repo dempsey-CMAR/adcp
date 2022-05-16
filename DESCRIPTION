@@ -1,7 +1,7 @@
 Package: adcp
 Type: Package
 Title: Format raw ADCP data for Open Data Portal
-Version: 0.1.0
+Version: 0.2.0
 Author: Danielle Dempsey
 Maintainer: The package maintainer <ddempsey@perennia.ca>
 Description: Add more here
@@ -12,9 +12,12 @@ LazyData: true
 Imports: 
     data.table,
     dplyr,
+    flextable,
     ggplot2,
     glue,
+    janitor,
     lubridate,
+    officer,
     readxl,
     stringi,
     stringr,

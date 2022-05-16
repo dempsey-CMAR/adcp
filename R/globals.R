@@ -47,10 +47,38 @@ utils::globalVariables(c(
   # helpers
   "DEPLOYMENT",
 
-  #read_nsdfa_tracking
+  # read_nsdfa_tracking
   "County", "Waterbody", "Station_Name", "Lease#",
   "Depl_Date", "Depl_Lat", "Depl_Lon", "Recv_Date",
   "Inst_Model", "Inst_Serial", "Inst_Depth", "Inst_Altitude",
-  "Bin_Size", "First_Bin_Range", "Notes"
+  "Bin_Size", "First_Bin_Range", "Notes",
+
+  # write_report_table
+  "Current_Averaging_Interval_s",
+  "Current_Ensemble_Interval_s",
+  "Current_PingsPerEnsemble",
+  "Depl_Duration",
+  "Depl_Sounding",
+  "Depth (m)",
+
+  # format_report_table
+  "Record",
+  "Deployment Info",
+
+  # bin_obs
+  "lower",
+  "upper",
+  "ints_label",
+  "Freq",
+  "prop",
+
+  # plot_speed_hist
+  "freq"
+
 
 ))
+
+
+
+
+
