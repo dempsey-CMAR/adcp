@@ -4,10 +4,17 @@
 \alias{adcp_read_nsdfa_metadata}
 \title{Import NSDFA tracking sheet and extra deployment metadata}
 \usage{
-adcp_read_nsdfa_metadata(path, station = NULL, deployment_date = NULL)
+adcp_read_nsdfa_metadata(
+  path,
+  sheet = NULL,
+  station = NULL,
+  deployment_date = NULL
+)
 }
 \arguments{
-\item{path}{Path to the tracking sheet (include file name and extension)}
+\item{path}{Path to the tracking sheet (include file name and extension).}
+
+\item{sheet}{Sheet to read in. Defaults to the first sheet.}
 
 \item{station}{Station for which to return metadata.}
 
