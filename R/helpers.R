@@ -70,5 +70,35 @@ extract_deployment_info <- function(file_path){
 }
 
 
+#' Convert FLAG column to ordered factor
+#'
+#' @param dat Dataframe of ACDP data in long format, as returned by
+#'   \code{adcp_flag_data()}.
+#'
+#' @return Returns dat, with the FLAG column as an ordered factor, with levels
+#' "good" < "SENSOR_DEPTH_BELOW_SURFACE changed by > x m" < "manual flag".
+#'
+#' @importFrom dplyr mutate
+#' @importFrom stringr str_detect
+#'
+#' @export
+
+adcp_convert_flag_to_ordered_factor <- function(dat){
+
+  flags <- unique(dat$FLAG)
+
+  auto_flag <- flags[str_detect(flags,"SENSOR_DEPTH")]
+
+  flags_order <- c("good", auto_flag, "manual flag")
+
+  dat %>%
+    mutate(
+      FLAG = as.character(FLAG),
+      FLAG =  factor(FLAG, levels = flags_order, ordered = TRUE)
+    )
+
+}
+
+
 
 
