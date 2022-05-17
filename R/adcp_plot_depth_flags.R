@@ -27,7 +27,7 @@ adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d"){
     ggplot(aes(TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE, col = FLAG)) +
     geom_point(alpha = 0.7, size = 1) +
     scale_x_datetime(date_labels = date_format) +
-    scale_colour_manual("Flag", values = c("#66C2A5", "#FC8D62")) +
+    scale_colour_manual("Flag", values = c("#66C2A5", "#FC8D62", "#B3B3B3"), drop = TRUE) +
     labs(title = title) +
     theme(legend.position = "bottom")
 
