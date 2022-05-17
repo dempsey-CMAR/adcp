@@ -89,6 +89,7 @@ adcp_read_nsdfa_metadata <- function(
         Station_Name == "Ram Island S" & Depl_Date == "43378" ~ "Ram Island",
         Station_Name == "Saddle NE" & Depl_Date == "42650" ~ "Saddle Island NE",
         Station_Name == "Saddle SW" & Depl_Date == "42284" ~ "Saddle Island SW",
+        Station_Name == "Shut In Island" & Depl_Date == "44015" ~ "Shut-In Island", # for consistency with strings
         Station_Name == "St Margarets Bay Center" & Depl_Date == "44110" ~ "St. Margarets Bay Center",
         Station_Name == "Tor Bay Center" & Depl_Date == "43501"  ~ "Center Bay",
 
