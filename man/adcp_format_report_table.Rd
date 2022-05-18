@@ -4,11 +4,16 @@
 \alias{adcp_format_report_table}
 \title{Formats deployment table for summary report}
 \usage{
-adcp_format_report_table(report_table)
+adcp_format_report_table(report_table, transpose = TRUE)
 }
 \arguments{
 \item{report_table}{Deployment metadata from the NSDFA tracking sheet, as
 returned from \code{adcp_write_report_table()}.}
+
+\item{transpose}{Logical argument indicating whether to transpose
+\code{report_table} before applying the format. Use the default \code{TRUE}
+for the deployment table. Set to \code{FALSE} for the document history
+table.}
 }
 \value{
 Returns a flextable object that will render nicely in the Word
