@@ -4,24 +4,33 @@
 \alias{adcp_count_obs}
 \title{Count number and proportion of observations in equal intervals}
 \usage{
-adcp_count_obs(dat_speed, n_ints = 12, n_digits = 2, label_sep = "\\n")
+adcp_count_obs(dat_speed, n_ints = 12, n_digits = 3, label_sep = "\\n")
 }
 \arguments{
-\item{dat_speed}{Data observations to assign intervals. The interval size is determined by the
-range of these observations and \code{n_ints}.}
-
-\item{n_ints}{Number of intervals to divide observations into. The interval size is
+\item{dat_speed}{Data observations to assign intervals. The interval size is
 determined by the range of these observations and \code{n_ints}.}
+
+\item{n_ints}{Number of intervals to divide observations into. The interval
+size is determined by the range of these observations and \code{n_ints}.}
 
 \item{n_digits}{Number of digits to show in interval limits.}
 
-\item{label_sep}{Separator for the interval labels ("lower to upper"). Default is
-a new line to save room on plot axis.}
+\item{label_sep}{Separator for the interval labels ("lower to upper").
+Default is a new line to save room on plot axis.}
 }
 \value{
-Returns a dataframe of upper and lower interval limits (lower inclusive),
-  and frequency and proportion of observations in each interval.
+Returns a dataframe of upper and lower interval limits (lower
+  inclusive), and frequency and proportion of observations in each interval.
 }
 \description{
 Count number and proportion of observations in equal intervals
+}
+\details{
+Uses the \code{cut()} function to assign intervals to
+  \code{dat_speed}. Intervals are right-inclusive, such that a value of 16.8
+  is assigned to the interval (11.2, 16.8). Note that the interval break
+  points use more decimals than are displayed. For example, the value 39.1
+  may be assigned to the interval (39.1, 44.6), which appears counter to the
+  previous example. However, increasing \code{n_digits} to 4, the interval is
+  displayed as (39.07, 44.63).
 }
