@@ -12,6 +12,9 @@
 #' @param speed_cols Vector of colours. Must be the same length as
 #'   \code{breaks}.
 #'
+#' @param speed_label Title of the current speed legend. Default is "Current
+#'   Speed (cm/s)".
+#'
 #' @return Returns an "openair" object, a rose plot of current speed and
 #'   direction.
 #'
@@ -20,7 +23,8 @@
 #' @export
 
 
-adcp_plot_current_rose <- function(dat, breaks, speed_cols){
+adcp_plot_current_rose <- function(dat, breaks, speed_cols,
+                                   speed_label = "Current Speed (cm/s)"){
 
   openair::windRose(
     dat,
@@ -30,7 +34,7 @@ adcp_plot_current_rose <- function(dat, breaks, speed_cols){
     paddle = FALSE,
     auto.text = FALSE,
     annotate = FALSE,
-    key.header = "Current Speed (cm/s)",
+    key.header = speed_label,
     key.footer = "",
     key.position = "right"
   )

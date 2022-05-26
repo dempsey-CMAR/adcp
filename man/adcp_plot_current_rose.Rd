@@ -4,7 +4,12 @@
 \alias{adcp_plot_current_rose}
 \title{Generate current rose}
 \usage{
-adcp_plot_current_rose(dat, breaks, speed_cols)
+adcp_plot_current_rose(
+  dat,
+  breaks,
+  speed_cols,
+  speed_label = "Current Speed (cm/s)"
+)
 }
 \arguments{
 \item{dat}{Dataframe that includes columns \code{SPEED} and \code{DIRECTION}.}
@@ -14,6 +19,9 @@ Lower-inclusive.}
 
 \item{speed_cols}{Vector of colours. Must be the same length as
 \code{breaks}.}
+
+\item{speed_label}{Title of the current speed legend. Default is "Current
+Speed (cm/s)".}
 }
 \value{
 Returns an "openair" object, a rose plot of current speed and

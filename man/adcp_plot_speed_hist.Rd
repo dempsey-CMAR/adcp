@@ -4,7 +4,7 @@
 \alias{adcp_plot_speed_hist}
 \title{Plot histogram of speed observations}
 \usage{
-adcp_plot_speed_hist(dat_hist, bar_cols)
+adcp_plot_speed_hist(dat_hist, bar_cols, speed_label = "Current Speed (cm/s)")
 }
 \arguments{
 \item{dat_hist}{Dataframe that includes columns \code{bins_plot} (text),
@@ -12,6 +12,9 @@ adcp_plot_speed_hist(dat_hist, bar_cols)
 
 \item{bar_cols}{Vector of colours. Must be the same length as the number of
 bins to plot.}
+
+\item{speed_label}{Title of the current speed legend. Default is "Current
+Speed (cm/s)".}
 }
 \value{
 Returns a dataframe of upper and lower bin limits (lower inclusive),
