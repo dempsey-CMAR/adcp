@@ -61,7 +61,7 @@ adcp_read_nsdfa_metadata <- function(
 
 
   # NSDFA Tracking Sheet
-  nsdfa <- read_excel(path, sheet = sheet, na = c("", "n/a")) %>%
+  nsdfa <- read_excel(path, sheet = sheet, na = c("", "n/a", "N/A")) %>%
     select(-contains("Column")) %>%
     mutate(
       # Fix incorrect entries
