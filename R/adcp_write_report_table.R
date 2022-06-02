@@ -20,8 +20,8 @@ adcp_write_report_table <- function(metadata){
       `Deployment Date` = Depl_Date, `Recovery Date` = Recv_Date,
       `Duration (d)` = Depl_Duration,
       `Depth (m)` = Depl_Sounding,
-      `Ensemble intervals (s)` = Current_Ensemble_Interval_s,
-      `Averaging intervals (s)` = Current_Averaging_Interval_s,
+      `Ensemble Intervals (s)` = Current_Ensemble_Interval_s,
+      `Averaging Intervals (s)` = Current_Averaging_Interval_s,
       `Pings/Ensemble` = Current_PingsPerEnsemble,
       `Bin Size (m)` = Bin_Size,
       `First Bin Range (m)` = First_Bin_Range) %>%
