@@ -70,6 +70,13 @@ adcp_read_nsdfa_metadata <- function(
         Waterbody == "St.Ann's Harbour" ~ "St. Ann's Harbour",
         Waterbody == "St Margarets Bay" ~ "St. Margarets Bay",
         Waterbody == "Straight of Canso" ~ "Strait of Canso",
+        Waterbody == "St. Mary's Bay" & Depl_Date == "40632" &
+          Station_Name == "Brier Island" ~ "Westport Harbour",
+        Waterbody == "Whycocomagh Bay" & Depl_Date == "43327" &
+          Station_Name == "Gypsum Mine" ~ "Bras d'Or Lakes",
+        Waterbody == "Lennox Passage" & Depl_Date == "44440" &
+          Station_Name == "Walshs Deep Cove" ~ "Carry Passage",
+
         Waterbody == "St Peters Inlet" ~ "St. Peters Inlet",
         TRUE ~ Waterbody
       ),
