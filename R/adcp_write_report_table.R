@@ -5,7 +5,7 @@
 #' @return Returns a tibble with three columns: \code{DEPLOYMENT},
 #'   \code{Depl_Date}, and \code{Station_Name}.
 #'
-#' @importFrom dplyr mutate select tibble
+#' @importFrom dplyr if_else mutate select tibble
 #'
 #' @export
 
@@ -19,12 +19,17 @@ adcp_write_report_table <- function(metadata){
       Latitude = Depl_Lat, Longitude = Depl_Lon,
       `Deployment Date` = Depl_Date, `Recovery Date` = Recv_Date,
       `Duration (d)` = Depl_Duration,
-      `Depth (m)` = Depl_Sounding,
+      `Depth Sounding (m)` = Depl_Sounding,
       `Ensemble Intervals (s)` = Current_Ensemble_Interval_s,
       `Averaging Intervals (s)` = Current_Averaging_Interval_s,
       `Pings/Ensemble` = Current_PingsPerEnsemble,
       `Bin Size (m)` = Bin_Size,
       `First Bin Range (m)` = First_Bin_Range) %>%
-    mutate(`Depth (m)` = as.numeric(`Depth (m)`))
+    mutate(
+      `Depth Sounding (m)` = as.character(`Depth Sounding (m)`),
+      `Depth Sounding (m)` = if_else(
+        is.na(`Depth Sounding (m)`), "Not recorded", `Depth Sounding (m)`
+      )
+    )
 
 }
