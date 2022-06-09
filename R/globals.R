@@ -59,7 +59,7 @@ utils::globalVariables(c(
   "Current_PingsPerEnsemble",
   "Depl_Duration",
   "Depl_Sounding",
-  "Depth (m)",
+  "Depth Sounding (m)",
 
   # format_report_table
   "Record",
