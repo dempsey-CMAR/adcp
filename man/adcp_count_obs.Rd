@@ -8,7 +8,7 @@ adcp_count_obs(
   dat,
   column = SPEED,
   n_ints = 12,
-  n_digits = 3,
+  n_digits = 4,
   label_sep = "\\n",
   lowest = FALSE
 )
