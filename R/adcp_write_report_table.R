@@ -22,7 +22,7 @@ adcp_write_report_table <- function(metadata){
       `Depth Sounding (m)` = Depl_Sounding,
       `Ensemble Intervals (s)` = Current_Ensemble_Interval_s,
       `Averaging Intervals (s)` = Current_Averaging_Interval_s,
-      `Pings/Ensemble` = Current_PingsPerEnsemble,
+      `Pings per Ensemble` = Current_PingsPerEnsemble,
       `Bin Size (m)` = Bin_Size,
       `First Bin Range (m)` = First_Bin_Range) %>%
     mutate(
