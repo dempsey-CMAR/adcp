@@ -4,33 +4,66 @@
 \alias{adcp_count_obs}
 \title{Count number and proportion of observations in equal intervals}
 \usage{
-adcp_count_obs(dat_speed, n_ints = 12, n_digits = 3, label_sep = "\\n")
+adcp_count_obs(
+  dat,
+  column = SPEED,
+  n_ints = 12,
+  n_digits = 3,
+  label_sep = "\\n",
+  lowest = FALSE
+)
 }
 \arguments{
-\item{dat_speed}{Data observations to assign intervals. The interval size is
-determined by the range of these observations and \code{n_ints}.}
+\item{dat}{Dataframe including the column with observations that will be
+assigned to intervals. The interval size is determined by the range of
+these observations and \code{n_ints}.}
+
+\item{column}{Column in \code{dat} that will be assigned to intervals for
+frequency table (NOT QUOTED).}
 
 \item{n_ints}{Number of intervals to divide observations into. The interval
-size is determined by the range of these observations and \code{n_ints}.}
+size is determined by the range of these observations and \code{n_ints}.
+Alternatively, a vector of two or more unique break points. Passed to the
+\code{breaks} argument of \code{cut()}.}
 
-\item{n_digits}{Number of digits to show in interval limits.}
+\item{n_digits}{Number of digits to show in interval labels. Note that
+additional digits may be used in the actual break values. See vignettes for
+more detail. Passed to the \code{dig.lab} argument of \code{cut()}.}
 
 \item{label_sep}{Separator for the interval labels ("lower to upper").
 Default is a new line to save room on plot axis.}
+
+\item{lowest}{Logical. If \code{TRUE}, the first interval will be left *and*
+right inclusive. Passed to the \code{include.lowest} argument of
+\code{cut()}.}
 }
 \value{
-Returns a dataframe of upper and lower interval limits (lower
+Returns a dataframe of lower and upper interval limits (right
   inclusive), and frequency and proportion of observations in each interval.
 }
 \description{
 Count number and proportion of observations in equal intervals
 }
 \details{
-Uses the \code{cut()} function to assign intervals to
-  \code{dat_speed}. Intervals are right-inclusive, such that a value of 16.8
-  is assigned to the interval (11.2, 16.8). Note that the interval break
-  points use more decimals than are displayed. For example, the value 39.1
-  may be assigned to the interval (39.1, 44.6), which appears counter to the
-  previous example. However, increasing \code{n_digits} to 4, the interval is
-  displayed as (39.07, 44.63).
+Assigns intervals to \code{column} using the \code{cut()} function.
+  Argument \code{right = TRUE} to match the intervals assigned in the
+  \code{openair::windRose()} function (which is called in
+  \code{adcp_plot_current_rose()}). This means intervals are right-inclusive,
+  i.e., a value of 4 is assigned to the interval (1,4].
+
+  NOTE: The \code{openair::windRose()} function  has the \code{cut()}
+  argument \code{include.lower} hard-coded to \code{FALSE}. This causes an
+  issue with the intervals extracted from \code{adcp_count_obs()} being
+  passed to \code{adcp_plot_current_rose()} (which passes all arguments to
+  \code{openair::windRose()}).
+
+  Assume the first interval is in the form (x1, x2], and the minimum value of
+  the observations is xmin.
+
+  This means that if the round(x1, digits = n_digits) equals xmin, values of
+  xmin will NOT be assigned to an interval. In this case, xmin falls outside
+  of the first interval (because it is left exclusive). To avoid this,
+  n_digits should be large enough to ensure round(x1, digits = n_digits) <
+  xmin. This could also be solved if \code{include.lower} could be set to
+  \code{TRUE} in \code{openair::windRose()}.
 }
