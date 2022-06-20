@@ -41,9 +41,10 @@ find_index <- function(dat_wide){
 
 #' Extract deployment date and station name from file path
 #'
-#' @param file_path Path to the file, include file name. File name must include
-#'   the deployment date and the station name, in the format YYYY-MM-DD_Station
-#'   Name.txt (e.g., 2007-12-18_Spectacle Island.txt)
+#' @param file_path Path to the file, include file name and extension (.csv or
+#'   .txt). File name must include the deployment date and the station name, in
+#'   the format YYYY-MM-DD_Station Name.ext (e.g., 2007-12-18_Spectacle
+#'   Island.txt)
 #'
 #' @return Returns a tibble with three columns: \code{DEPLOYMENT},
 #'   \code{Depl_Date}, and \code{Station_Name}.
@@ -56,11 +57,11 @@ find_index <- function(dat_wide){
 #'
 #' @export
 
-extract_deployment_info <- function(file_path){
+adcp_extract_deployment_info <- function(file_path){
 
   data.frame(file_path) %>%
     str_sub(stringi::stri_locate_last(file_path, regex = "/")[1] + 1) %>%
-    str_remove(pattern = ".txt") %>%
+    str_remove(pattern = ".txt|.csv") %>%
     tibble(DEPLOYMENT = .) %>%
     separate(col = 1, sep = "_",
              into = c("Depl_Date", "Station_Name"),
