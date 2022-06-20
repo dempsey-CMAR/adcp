@@ -31,7 +31,7 @@ adcp_read_nsdfa_metadata <- function(
     Station_ID = NA,
     Record_ID = NA,
     County = "Digby",
-    Waterbody = "St. Mary's Bay",
+    Waterbody = "Grand Passage",
     Station_Name = "Grand Passage",
     `Lease#` = "829",
     Status = "Retrieved",
