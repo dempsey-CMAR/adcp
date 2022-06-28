@@ -103,6 +103,13 @@ adcp_read_nsdfa_metadata <- function(
         TRUE ~ Station_Name
       ),
 
+      # needs to go here because uses fixed Station names
+      County = case_when(
+        Waterbody == "Woods Harbour" & Station_Name == "Camerons Cove" & Depl_Date == "43503" ~ "Shelburne",
+        Waterbody == "Woods Harbour" & Station_Name == "Woods Harbour" & Depl_Date == "44075" ~ "Shelburne",
+        TRUE ~ County
+      ),
+
       Depl_Date = case_when(
         Depl_Date == "Current, Waves, Temperature, Pressure" ~ "40522", # December 10, 2010
         TRUE ~ Depl_Date
