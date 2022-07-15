@@ -23,12 +23,12 @@ Option to use default value \code{metadata = NULL} and provide the required
 values in the remaining arguments.}
 
 \item{inst_alt}{Height of the instrument above the sea floor (in metres). Not
-required if \code{metadata} argument is specified.}
+used if \code{metadata} argument is specified.}
 
-\item{bin_size}{Size of each bin (in metres). Not required if \code{metadata}
+\item{bin_size}{Size of each bin (in metres). Not used if \code{metadata}
 argument is specified.}
 
-\item{first_bin_range}{Size of the first bin (in metres). Not required if
+\item{first_bin_range}{Size of the first bin (in metres). Not used if
 \code{metadata} argument is specified.}
 }
 \value{

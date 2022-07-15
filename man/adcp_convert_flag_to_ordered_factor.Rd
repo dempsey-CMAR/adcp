@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{adcp_convert_flag_to_ordered_factor}
 \alias{adcp_convert_flag_to_ordered_factor}
-\title{Convert FLAG column to ordered factor}
+\title{Convert depth_flag column to ordered factor}
 \usage{
 adcp_convert_flag_to_ordered_factor(dat)
 }
@@ -11,9 +11,9 @@ adcp_convert_flag_to_ordered_factor(dat)
 \code{adcp_flag_data()}.}
 }
 \value{
-Returns dat, with the FLAG column as an ordered factor, with levels
+Returns dat, with the depth_flag column as an ordered factor, with levels
 "good" < "SENSOR_DEPTH_BELOW_SURFACE changed by > x m" < "manual flag".
 }
 \description{
-Convert FLAG column to ordered factor
+Convert depth_flag column to ordered factor
 }

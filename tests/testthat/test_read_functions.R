@@ -7,22 +7,22 @@ path <- system.file("testdata", package = "adcp")
 
 dat <- adcp_read_txt(path, "2019-01-17_Long_Beach.txt")
 
-# TIMESTAMP -------------------------------------------------------------------
+# timestamp -------------------------------------------------------------------
 
-test_that("adcp_read_txt() exports TIMESTAMP as a datetime object in UTC", {
+test_that("adcp_read_txt() exports timestamp as a datetime object in UTC", {
 
-  expect_equal(class(dat$TIMESTAMP), c("POSIXct", "POSIXt"))
+  expect_equal(class(dat$timestamp_ns), c("POSIXct", "POSIXt"))
 
-  expect_equal(tz(dat$TIMESTAMP), "UTC")
+  expect_equal(tz(dat$timestamp_ns), "UTC")
 
 })
 
 
-ts1 <- data.frame(TIMESTAMP = seq(as_datetime("2021-03-13 19:00:00"),
+ts1 <- data.frame(timestamp_ns = seq(as_datetime("2021-03-13 19:00:00"),
           as_datetime("2021-03-14 12:00:00"),
           by = "15 mins"))
 
-ts2 <- data.frame(TIMESTAMP = seq(as_datetime("2021-11-06 19:00:00"),
+ts2 <- data.frame(timestamp_ns = seq(as_datetime("2021-11-06 19:00:00"),
                                   as_datetime("2021-11-07 12:00:00"),
                                   by = "15 mins"))
 
@@ -32,38 +32,38 @@ ts2_corrected <- adcp_correct_timestamp(ts2)
 
 test_that("adcp_correct_timestamp() works for daylight savings transitions", {
 
-  expect_equal(tz(ts1_corrected$TIMESTAMP), "UTC")
+  expect_equal(tz(ts1_corrected$timestamp_utc), "UTC")
 
   expect_equal(
-    unique(as.numeric(difftime(ts1_corrected$TIMESTAMP, ts1$TIMESTAMP))), 4
+    unique(as.numeric(difftime(ts1_corrected$timestamp_utc, ts1$timestamp))), 4
   )
 
   # check that March 14 at 02:00 was not converted to NA for "spring forward"
   expect_equal(
-    sum(is.na(ts1_corrected$TIMESTAMP)), 0
+    sum(is.na(ts1_corrected$timestamp_utc)), 0
   )
 
-  expect_equal(tz(ts2_corrected$TIMESTAMP), "UTC")
+  expect_equal(tz(ts2_corrected$timestamp_utc), "UTC")
 
   expect_equal(
-    unique(as.numeric(difftime(ts2_corrected$TIMESTAMP, ts2$TIMESTAMP))), 3
+    unique(as.numeric(difftime(ts2_corrected$timestamp_utc, ts2$timestamp))), 3
   )
 
   # check that no times are repeated for "fall back"
   expect_equal(
-    sum(duplicated(ts2_corrected$TIMESTAMP)), 0
+    sum(duplicated(ts2_corrected$timestamp_utc)), 0
   )
 
 })
 
 
-# Altitude (Bin heigh above sea floor) ----------------------------------------------------------------
+# Altitude (Bin height above sea floor) ----------------------------------------------------------------
 
 metadata <- tibble(Inst_Altitude = 0.5,
                    Bin_Size = 1,
                    First_Bin_Range = 1)
 
-dat_alt <- adcp_assign_altitude( dat, metadata)
+dat_alt <- adcp_assign_altitude(dat, metadata)
 
 test_that("adcp_assign_altitude() returns expected results" ,{
 
@@ -75,28 +75,51 @@ test_that("adcp_assign_altitude() returns expected results" ,{
 
 # Format ------------------------------------------------------------------
 
-dat_od <- adcp_format_opendata(dat_alt)
+dat_long <- dat_alt %>%
+  adcp_correct_timestamp() %>%
+  adcp_pivot_longer()
 
-test_that("adcp_format", {
+test_that("adcp_pivot_longer() returns correct columns and classes", {
 
-  expect_equal(class(dat_od$TIMESTAMP), c("POSIXct", "POSIXt"))
-  expect_equal(class(dat_od$BIN_HEIGHT_ABOVE_SEAFLOOR), "numeric")
-  expect_equal(class(dat_od$SPEED), "numeric")
-  expect_equal(class(dat_od$DIRECTION), "numeric")
-  expect_equal(class(dat_od$SENSOR_DEPTH_BELOW_SURFACE), "numeric")
-  expect_equal(class(dat_od$BIN_DEPTH_BELOW_SURFACE), "numeric")
+  expect_equal(class(dat_long$timestamp_utc), c("POSIXct", "POSIXt"))
+  expect_equal(class(dat_long$bin_height_above_sea_floor_m), "numeric")
+  expect_equal(class(dat_long$sea_water_speed_m_s), "numeric")
+  expect_equal(class(dat_long$sea_water_to_direction_degree), "numeric")
+  expect_equal(class(dat_long$sensor_depth_below_surface_m), "numeric")
 
 })
 
 
-dat_od_depth <- distinct(dat_od, TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE)
+# bin depth calculation ---------------------------------------------------
+
+dat_od <- dat_long %>%
+  adcp_calculate_bin_depth(metadata = metadata)
+
+test_that("adcp_calculate_bin_depth() calculates expected bin depth", {
+
+  expect_equal(class(dat_od$bin_depth_below_surface_m), "numeric")
+  expect_equal(
+    dat_od$sensor_depth_below_surface_m,
+    dat_od$bin_depth_below_surface_m +
+      dat_od$bin_height_above_sea_floor_m -
+      metadata$Inst_Altitude
+  )
+
+})
+
+
+# sensor depth ------------------------------------------------------------
+
+dat_od_depth <- distinct(dat_od, timestamp_utc, sensor_depth_below_surface_m)
 
 dat_depth <- dat %>%
-  filter(VARIABLE == "SensorDepth") %>%
-  select(TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE = V8) %>%
-  filter(SENSOR_DEPTH_BELOW_SURFACE > 10)
+  adcp_correct_timestamp() %>%
+  filter(variable == "SensorDepth") %>%
+  select(timestamp_utc, sensor_depth_below_surface_m = V8) %>%
+  # trim to start of deployment
+  filter(sensor_depth_below_surface_m > 10)
 
-test_that("adcp_format_opendata() returns expected SENSOR_DEPTH_BELOW_SURFACE",{
+test_that("adcp_pivot_longer() returns expected sensor_depth_below_surface_m",{
 
   expect_equal(dat_od_depth, tibble(dat_depth))
 
@@ -108,13 +131,22 @@ test_that("adcp_format_opendata() returns expected SENSOR_DEPTH_BELOW_SURFACE",{
 dat_flag <- adcp_flag_data(dat_od)
 n_row <- nrow(dat_flag)
 
-flag <- unique(dat_flag[which(dat_flag$TIMESTAMP == min(dat_flag$TIMESTAMP)), "FLAG"])
-good <- unique(dat_flag[-which(dat_flag$TIMESTAMP == min(dat_flag$TIMESTAMP)), "FLAG"])
+flag <- unique(
+  dat_flag[
+    which(dat_flag$timestamp_utc == min(dat_flag$timestamp_utc)), "depth_flag"
+  ]
+)
+
+good <- unique(
+  dat_flag[
+    -which(dat_flag$timestamp_utc == min(dat_flag$timestamp_utc)), "depth_flag"
+  ]
+)
 
 test_that("adcp_flag_data() flags correct observations", {
 
-  expect_equal(as.character(flag$FLAG), "SENSOR_DEPTH_BELOW_SURFACE changed by > 1 m")
-  expect_equal(as.character(good$FLAG), "good")
+  expect_equal(as.character(flag$depth_flag), "sensor_depth_below_surface_m changed by > 1 m")
+  expect_equal(as.character(good$depth_flag), "good")
 
 })
 

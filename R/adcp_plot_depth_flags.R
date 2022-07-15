@@ -1,14 +1,14 @@
-#' Plot SENSOR_DEPTH_BELOW_SURFACE colour-coded by FLAG
+#' Plot sensor_depth_below_surface_m colour-coded by depth_flag
 #'
-#' @param dat Dataframe of ACDP data in long format, including \code{FLAG}
+#' @param dat Dataframe of ACDP data in long format, including \code{depth_flag}
 #'   column, \code{adcp_flag_data()}.
 #'
 #' @param title Optional title for the figure.
 #'
 #' @param date_format Format for the date labels. Default is "\%Y-\%b-\%d"
 #'
-#' @return ggplot object. Figure shows SENSOR_DEPTH_BELOW_SURFACE over time, coloured by the
-#'   \code{FLAG} column.
+#' @return ggplot object. Figure shows sensor_depth_below_surface_m over time, coloured by the
+#'   \code{depth_flag} column.
 #'
 #' @importFrom ggplot2 aes geom_point ggplot labs scale_colour_manual scale_x_datetime theme
 #' @importFrom dplyr distinct mutate select
@@ -19,22 +19,23 @@
 
 adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d"){
 
-  #"#66C2A5" "#FC8D62" "#8DA0CB"
   dat %>%
-    select(TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE, FLAG) %>%
-    mutate(TIMESTAMP = as_datetime(TIMESTAMP)) %>%
+    select(timestamp_utc, sensor_depth_below_surface_m, depth_flag) %>%
+    mutate(timestamp_utc = as_datetime(timestamp_utc)) %>%
     distinct() %>%
-    ggplot(aes(TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE, col = FLAG)) +
+    ggplot(aes(timestamp_utc, sensor_depth_below_surface_m, col = depth_flag)) +
     geom_point(alpha = 0.7, size = 1) +
     scale_x_datetime(date_labels = date_format) +
-    scale_colour_manual("Flag", values = c("#66C2A5", "#FC8D62", "#B3B3B3"), drop = TRUE) +
+    scale_colour_manual(
+      "Depth Flag", values = c("#66C2A5", "#FC8D62", "#B3B3B3"), drop = TRUE
+    ) +
     labs(title = title) +
     theme(legend.position = "bottom")
 
 }
 
 
-#' Plot SENSOR_DEPTH_BELOW_SURFACE
+#' Plot sensor_depth_below_surface_m
 #'
 #' @param dat Dataframe of ACDP data in long format, as returned by
 #'   \code{adcp_format_opendata()}.
@@ -45,7 +46,7 @@ adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d"){
 #'
 #' @param geom Geom to plot. Options are \code{"point"} or \code{"line"}.
 #'
-#' @return ggplot object. Figure shows SENSOR_DEPTH_BELOW_SURFACE over time.
+#' @return ggplot object. Figure shows sensor_depth_below_surface_m over time.
 #'
 #' @importFrom ggplot2 aes geom_point ggplot labs scale_colour_manual
 #'   scale_x_datetime
@@ -66,10 +67,10 @@ adcp_plot_depth <- function(dat, title = NULL, date_format = "%Y-%b-%d", geom = 
 
   #"#66C2A5" "#FC8D62" "#8DA0CB"
   p <- dat %>%
-    select(TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE) %>%
-    mutate(TIMESTAMP = as_datetime(TIMESTAMP)) %>%
+    select(timestamp_utc, sensor_depth_below_surface_m) %>%
+    mutate(timestamp_utc = as_datetime(timestamp_utc)) %>%
     distinct() %>%
-    ggplot(aes(TIMESTAMP, SENSOR_DEPTH_BELOW_SURFACE), col = "#66C2A5") +
+    ggplot(aes(timestamp_utc, sensor_depth_below_surface_m), col = "#66C2A5") +
     scale_x_datetime("Date", date_labels = "%Y-%b-%d") +
     scale_y_continuous("Sensor Depth Below Surface (m)") +
     labs(title = title) +

@@ -4,16 +4,16 @@
 #'   the appropriate variable name (i.e., "SensorDepth", "WaterSpeed", or
 #'   "WaterDirection").
 #'
-#' @details The \code{TIMESTAMP} column is in the timezone of the deployment
+#' @details The \code{timestamp_ns} column is in the timezone of the deployment
 #'   date (e.g., "AST" if deployed in November to March and "DST" if deployed in
-#'   March to November). The \code{TIMESTAMP} does NOT account for changes in
-#'   daylight savings time. Here, the \code{TIMESTAMP} is assigned a timezone of
+#'   March to November). The \code{timestamp_ns} does NOT account for changes in
+#'   daylight savings time. Here, the \code{timestamp_ns} is assigned a timezone of
 #'   "UTC" to avoid \code{NA} values during the beginning of daylight savings
 #'   time (e.g., 2019-03-10 02:30:00 is NOT a valid time for the
-#'   "America/Halifax" timezone). This \code{TIMESTAMP} can be converted to true
+#'   "America/Halifax" timezone). This \code{timestamp_ns} can be converted to true
 #'   UTC using \code{adcp_correct_timestamp()}.
 #'
-#'   A warning will be printed if duplicate \code{TIMESTAMP}s are detected.
+#'   A warning will be printed if duplicate \code{timestamp_ns}s are detected.
 #'
 #' @param path Path to the txt file (including ".txt" extension) or to the
 #'   folder where the txt file is saved.
@@ -53,12 +53,14 @@ adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE){
   params <- params$V8
 
   # read in data
-  dat_raw <- fread(path,
-                   sep2 = ",",         # make separate columns for each cell
-                   fill = TRUE,        # add NA for cells that do not have data
-                   header = TRUE,      # keep header names
-                   skip = 2,           # skip first two rows (duplicate header vals)
-                   data.table = FALSE) # return a dataframe (instead of data.table)
+  dat_raw <- fread(
+    path,
+    sep2 = ",",         # make separate columns for each cell
+    fill = TRUE,        # add NA for cells that do not have data
+    header = TRUE,      # keep header names
+    skip = 2,           # skip first two rows (duplicate header vals)
+    data.table = FALSE  # return a dataframe (instead of data.table)
+  )
 
   # one column will be named SensorDepth, WaterSpeed, or WaterDirection. Change to V8
   colnames(dat_raw)[which(colnames(dat_raw) %in% params)] <- paste0(
@@ -67,35 +69,35 @@ adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE){
 
   # rows alternate between SensorDepth, WaterSpeed, and WaterDirection
   dat <- dat_raw %>%
-    mutate(INDEX = 1:n(),
-           VARIABLE = case_when(
-             INDEX %in% seq(1, n(), 3) ~ params[1],
-             INDEX %in% seq(2, n(), 3) ~ params[2],
-             INDEX %in% seq(3, n(), 3) ~ params[3],
+    mutate(index = 1:n(),
+           variable = case_when(
+             index %in% seq(1, n(), 3) ~ params[1],
+             index %in% seq(2, n(), 3) ~ params[2],
+             index %in% seq(3, n(), 3) ~ params[3],
              TRUE ~ NA_character_
            ),
            # do not assign tz= "America/Halifax". This will introduce NA values for the skipped hour of DST
-           TIMESTAMP = make_datetime(Year, Month, Day, Hour, Min, Sec, tz = "UTC"),
+           timestamp_ns = make_datetime(Year, Month, Day, Hour, Min, Sec, tz = "UTC"),
     ) %>%
-    select(-INDEX) %>%
-    select(TIMESTAMP, Num, VARIABLE, V8:last_col()) %>%
+    select(-index) %>%
+    select(timestamp_ns, Num, variable, V8:last_col()) %>%
     # change NaN values to NA
     mutate(across(V8:last_col(), ~if_else(is.nan(.), NA_real_, .)))
 
   if(adcp_check_duplicate_timestamp(dat) & rm_dups){
 
     dups <- dat %>%
-      filter(VARIABLE == "SensorDepth")
-    dups <- dups[duplicated(dups$TIMESTAMP), ]
-    dups <- unique(dups$TIMESTAMP)
+      filter(variable == "SensorDepth")
+    dups <- dups[duplicated(dups$timestamp_ns), ]
+    dups <- unique(dups$timestamp_ns)
 
-    message(glue("{length(dups)} duplicate TIMESTAMPs found and removed: {dups}."))
+    message(glue("{length(dups)} duplicate timestamps found and removed: {dups}."))
 
     dat <- dat %>%
       select(-Num) %>%
       distinct() %>%
       mutate(Num = sort(rep(1:(n()/3), 3))) %>%
-      select(TIMESTAMP, Num, VARIABLE, everything())
+      select(timestamp_ns, Num, variable, everything())
 
   }
 
@@ -103,7 +105,7 @@ adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE){
 
   # SensorDepth rows should only have data in col V8
   check <- dat %>%
-    filter(VARIABLE == "SensorDepth") %>%
+    filter(variable == "SensorDepth") %>%
     select(V9:last_col())
 
   if(!all(is.na(check))) {

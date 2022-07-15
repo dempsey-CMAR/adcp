@@ -11,7 +11,7 @@ adcp_check_duplicate_timestamp(dat_wide)
 \code{adcp_read_txt()}.}
 }
 \value{
-If duplicate TIMESTAMPs are detected, returns a warning and
+If duplicate timestamps are detected, returns a warning and
   \code{TRUE}. Otherwise returns \code{FALSE}.
 }
 \description{

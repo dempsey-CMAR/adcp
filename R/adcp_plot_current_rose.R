@@ -26,6 +26,9 @@
 adcp_plot_current_rose <- function(dat, breaks, speed_cols,
                                    speed_label = "Current Speed (cm/s)"){
 
+  dat <- dat %>%
+    select(SPEED = contains("speed"), DIRECTION = contains("direction"))
+
   openair::windRose(
     dat,
     ws = "SPEED", wd = "DIRECTION",

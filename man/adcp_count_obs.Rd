@@ -6,7 +6,7 @@
 \usage{
 adcp_count_obs(
   dat,
-  column = SPEED,
+  column = sea_water_speed_cm_s,
   n_ints = 12,
   n_digits = 4,
   label_sep = "\\n",

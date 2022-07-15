@@ -20,12 +20,12 @@
 #'   values in the remaining arguments.
 #'
 #' @param inst_alt Height of the instrument above the sea floor (in metres). Not
-#'   required if \code{metadata} argument is specified.
+#'   used if \code{metadata} argument is specified.
 #'
-#' @param bin_size Size of each bin (in metres). Not required if \code{metadata}
+#' @param bin_size Size of each bin (in metres). Not used if \code{metadata}
 #'   argument is specified.
 #'
-#' @param first_bin_range Size of the first bin (in metres). Not required if
+#' @param first_bin_range Size of the first bin (in metres). Not used if
 #'   \code{metadata} argument is specified.
 #'
 #' @return Returns \code{dat_wide}, with bin columns re-named with corresponding
@@ -33,11 +33,13 @@
 #'
 #' @export
 
-adcp_assign_altitude <- function(dat_wide,
-                            metadata = NULL,
-                            inst_alt = NULL,
-                            bin_size = NULL,
-                            first_bin_range = NULL){
+adcp_assign_altitude <- function(
+  dat_wide,
+  metadata = NULL,
+  inst_alt = NULL,
+  bin_size = NULL,
+  first_bin_range = NULL
+){
 
   if(!is.null(metadata)){
 
@@ -57,7 +59,7 @@ adcp_assign_altitude <- function(dat_wide,
   # altitude of each bin
   colnames_bins <- seq(first_bin, by = bin_size, length.out = n_bins)
 
-  # keep TIMESTAMP, Num, and VARIABLE column names
+  # keep timestamp, Num, and variable column names
   colnames_keep <- colnames(dat_wide)[1:(index - 1)]
 
   colnames_new <- c(colnames_keep, colnames_bins)

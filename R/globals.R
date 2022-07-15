@@ -4,8 +4,8 @@
 utils::globalVariables(c(
 
   # adcp_read_txt
-  "INDEX",
-  "VARIABLE",
+  "index",
+  "variable",
   "Num",
   "V8",
   "V9",
@@ -27,22 +27,26 @@ utils::globalVariables(c(
   "sensor_depth",
 
   # adcp_correct_timestamp
-  "TIMESTAMP",
+  #"TIMESTAMP",
+  "timestamp_ns",
+  "timestamp_utc",
 
-  # adcp_format_opendata
+  # adcp_pivot_longer
+  "timestamp_foo",
   "WaterDirection",
   "WaterSpeed",
-  "SENSOR_DEPTH_BELOW_SURFACE",
-  "SPEED",
-  "DIRECTION",
-  "BIN_HEIGHT_ABOVE_SEAFLOOR",
-  "BIN_DEPTH_BELOW_SURFACE",
-  "BIN_ID",
+  "sensor_depth_below_surface_m",
+  "sea_water_speed_m_s",
+  "sea_water_to_direction_degree",
+  "bin_height_above_sea_floor_m",
+  "bin_depth_below_surface_m",
+  "bin_id",
+  "value",
   "BIN_DEPTH_CHECK",
-  "VALUE",
 
   # adcp_plot_depth_flags
-  "FLAG",
+  "depth_flag",
+  "depth_diff",
 
   # helpers
   "DEPLOYMENT",
@@ -73,8 +77,20 @@ utils::globalVariables(c(
   "prop",
 
   # plot_speed_hist
-  "freq"
+  "freq",
 
+  # count_obs()
+  "sea_water_speed_cm_s",
+
+  # import current data
+  "Open_Data_Station",
+  '2022 Report (sidelobe trimmed)',
+  "Report_2022",
+
+  # export_deployment_info
+  "Depl_ID",
+  "county",
+  "waterbody"
 
 ))
 

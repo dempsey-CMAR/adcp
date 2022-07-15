@@ -1,7 +1,7 @@
 Package: adcp
 Type: Package
 Title: Format and visualize ADCP data
-Version: 0.2.5
+Version: 1.0.0
 Author: Danielle Dempsey
 Maintainer: The package maintainer <ddempsey@perennia.ca>
 Description: Add more here
@@ -20,6 +20,8 @@ Imports:
     lubridate,
     officer,
     openair,
+    purrr,
+    readr,
     readxl,
     stringi,
     stringr,

@@ -2,21 +2,22 @@
 % Please edit documentation in R/adcp_flag_data.R
 \name{adcp_flag_data}
 \alias{adcp_flag_data}
-\title{Flag ensembles with suspect SENSOR_DEPTH_BELOW_SURFACE recordings}
+\title{Flag ensembles with suspect sensor_depth_below_surface_m recordings}
 \usage{
-adcp_flag_data(dat, depth_flag = 1)
+adcp_flag_data(dat, depth_flag_threshold = 1)
 }
 \arguments{
 \item{dat}{Dataframe of ACDP data in long format, as returned by
-\code{adcp_format_opendata()}.}
+\code{adcp_pivot_longer()}.}
 
-\item{depth_flag}{The change in \code{SENSOR_DEPTH_BELOW_SURFACE} that will trigger a flag
-(in metres).}
+\item{depth_flag_threshold}{The change in \code{sensor_depth_below_surface_m} that will
+trigger a flag (in metres).}
 }
 \value{
 Returns dat with two extra columns for inspection: \code{DIFF} =
-  lead(SENSOR_DEPTH_BELOW_SURFACE) - SENSOR_DEPTH_BELOW_SURFACE and \code{FLAG}.
+  lead(sensor_depth_below_surface_m) - sensor_depth_below_surface_m and
+  \code{FLAG}.
 }
 \description{
-Flag ensembles with suspect SENSOR_DEPTH_BELOW_SURFACE recordings
+Flag ensembles with suspect sensor_depth_below_surface_m recordings
 }

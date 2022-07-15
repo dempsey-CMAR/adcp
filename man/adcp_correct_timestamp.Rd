@@ -4,33 +4,36 @@
 \alias{adcp_correct_timestamp}
 \title{Convert timestamp to UTC from AST or DST}
 \usage{
-adcp_correct_timestamp(dat)
+adcp_correct_timestamp(dat, rm = TRUE)
 }
 \arguments{
-\item{dat}{Dataframe with at least one column \code{TIMESTAMP} (long or wide
-format).}
+\item{dat}{Dataframe with at least one column \code{timestamp_ns} (long or
+wide format).}
+
+\item{rm}{Logical argument. If \code{TRUE} the original \code{timestamp_ns}
+column will be removed.}
 }
 \value{
-Returns \code{dat} with \code{TIMESTAMP} in true UTC.
+Returns \code{dat} with \code{timestamp_utc} in true UTC.
 }
 \description{
 Convert timestamp to UTC from AST or DST
 }
 \details{
-For the raw ADCP data: the \code{TIMESTAMP} column is in the
+For the raw ADCP data: the \code{timestamp} column is in the
   timezone of the deployment date (e.g., "AST" if deployed in November to
-  March and "DST" if deployed in March to November). The \code{TIMESTAMP}
+  March and "DST" if deployed in March to November). The \code{timestamp}
   does NOT account for changes in daylight savings time.
 
-  \code{adcp_read_text()} assigns the \code{TIMESTAMP} a timezone of "UTC" to
+  \code{adcp_read_text()} assigns the \code{timestamp} a timezone of "UTC" to
   avoid \code{NA} values during the beginning of daylight savings time (e.g.,
   2019-03-10 02:30:00 is NOT a valid time for the "America/Halifax"
   timezone).
 
-  \code{adcp_correct_timestamp()} converts each \code{TIMESTAMP} to true UTC
+  \code{adcp_correct_timestamp()} converts each \code{timestamp} to true UTC
   by adding 3 hours if the deployment date was during daylight savings, or 4
   hours if the deployment date was during Atlantic Standard Time.
 
-  This \code{TIMESTAMP} can be converted to true UTC using
+  This \code{timestamp} can be converted to true UTC using
   \code{adcp_correct_timestamp()}.
 }
