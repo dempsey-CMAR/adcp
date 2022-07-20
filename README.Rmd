@@ -23,7 +23,7 @@ repo <- "dempsey-CMAR/adcp"
 ```{r, echo=FALSE, out.width="25%", fig.align='center'}
 
 knitr::include_graphics(
-  "https://github.com/dempsey-CMAR/adcp/tree/main/man/figures/README-adcp-hex.png"
+  "https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-adcp-hex.png"
 )
 
 ```
@@ -56,7 +56,7 @@ _Current_ data is collected with Acoustic Doppler Current Profilers (ADCPs) depl
 
 ```{r, echo=FALSE, out.width="65%"}
 
-knitr::include_graphics("https://github.com/dempsey-CMAR/adcp/tree/main/man/figures/README-fig1.png")
+knitr::include_graphics("https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig1.jpg")
 
 ```
 Figure 1: ADCP diagram (not to scale).
