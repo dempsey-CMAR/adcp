@@ -20,7 +20,7 @@ Returns \code{dat} with \code{timestamp_utc} in true UTC.
 Convert timestamp to UTC from AST or DST
 }
 \details{
-For the raw ADCP data: the \code{timestamp} column is in the
+For the raw ADCP data, the \code{timestamp} column is in the
   timezone of the deployment date (e.g., "AST" if deployed in November to
   March and "DST" if deployed in March to November). The \code{timestamp}
   does NOT account for changes in daylight savings time.
@@ -34,6 +34,5 @@ For the raw ADCP data: the \code{timestamp} column is in the
   by adding 3 hours if the deployment date was during daylight savings, or 4
   hours if the deployment date was during Atlantic Standard Time.
 
-  This \code{timestamp} can be converted to true UTC using
-  \code{adcp_correct_timestamp()}.
+  The earliest timestamp is used to define the original timezone (AST/DST).
 }

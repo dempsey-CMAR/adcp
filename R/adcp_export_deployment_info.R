@@ -48,12 +48,13 @@ adcp_export_deployment_info <- function(
   metadata <- nsdfa %>%
     left_join(depl_id, by = c("County", "Waterbody", "Depl_Date", "Station_Name")) %>%
     filter(Depl_ID %in% deployments) %>%
-    select(
-      county,
-      waterbody,
+    transmute(
+      deployment_id = Depl_ID,
+      county = County,
+      waterbody = Waterbody,
       station = Station_Name,
-      deployment_date = Depl_Date,
-      recovery_date = Recv_Date,
+      deployment_date = as.character(Depl_Date),
+      recovery_date = as.character(as_date(Recv_Date)),
       deployment_duration_days = Depl_Duration,
       lease = `Lease#`,
       latitude = Depl_Lat,
@@ -68,7 +69,8 @@ adcp_export_deployment_info <- function(
       ensemble_interval_s = Current_Ensemble_Interval_s,
       averaging_interval_s = Current_Averaging_Interval_s,
       pings_per_ensemble = Current_PingsPerEnsemble
-    )
+    ) %>%
+    arrange(deployment_id)
 
 
 # filter and format columns ----------------------------------------------------------

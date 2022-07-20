@@ -22,13 +22,13 @@ columns \code{Depl_ID}, \code{Waterbody}, and \code{Station}. Option to use
 default value \code{metadata = NULL} and provide the required values in the
 remaining arguments.}
 
-\item{deployment_id}{Unique ID assigned to each deployment. Not required if
+\item{deployment_id}{Unique ID assigned to each deployment. Not used if
 \code{metadata} argument is specified.}
 
-\item{waterbody}{Waterbody in which ADCP was deployed. Not required if
+\item{waterbody}{Waterbody in which ADCP was deployed. Not used if
 \code{metadata} argument is specified.}
 
-\item{station}{Specific area in which ADCP was deployed. Not required if
+\item{station}{Specific area in which ADCP was deployed. Not used if
 \code{metadata} argument is specified.}
 }
 \value{

@@ -11,7 +11,8 @@ adcp_pivot_longer(dat_wide, rm_NA = TRUE)
 \code{adcp_read_txt()} or \code{adcp_assign_alt()}.}
 
 \item{rm_NA}{Logical argument. If \code{rm_NA = TRUE}, rows where
-\code{SPEED} is \code{NA} OR \code{DIRECTION} is \code{NA} will be removed.}
+\code{sea_water_speed_m_s} is \code{NA} OR
+\code{sea_water_to_direction_degree} is \code{NA} will be removed.}
 }
 \value{
 Returns data in a long format.
@@ -19,8 +20,8 @@ Returns data in a long format.
   If \code{dat_wide} is from \code{adcp_read_txt()} (i.e., bin altitude has
   not been assigned), then the following columns are returned: timestamp_utc,
   sensor_depth_below_surface_m (SensorDepth), bin_id (the default column
-  names when imported using read_adcp_txt; starts at V8), SPEED (WaterSpeed),
-  and DIRECTION (WaterDirection).
+  names when imported using read_adcp_txt; starts at V8), sea_water_speed_m_s
+  (WaterSpeed), and sea_water_to_direction_degree (WaterDirection).
 
   If \code{dat_wide} is from \code{adcp_assign_altitude()}, then the
   following columns are returned: timestamp_utc, sensor_depth_below_surface_m

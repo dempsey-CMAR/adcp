@@ -1,6 +1,6 @@
 #' Convert timestamp to UTC from AST or DST
 #'
-#' @details For the raw ADCP data: the \code{timestamp} column is in the
+#' @details For the raw ADCP data, the \code{timestamp} column is in the
 #'   timezone of the deployment date (e.g., "AST" if deployed in November to
 #'   March and "DST" if deployed in March to November). The \code{timestamp}
 #'   does NOT account for changes in daylight savings time.
@@ -14,8 +14,7 @@
 #'   by adding 3 hours if the deployment date was during daylight savings, or 4
 #'   hours if the deployment date was during Atlantic Standard Time.
 #'
-#'   This \code{timestamp} can be converted to true UTC using
-#'   \code{adcp_correct_timestamp()}.
+#'   The earliest timestamp is used to define the original timezone (AST/DST).
 
 #' @param dat Dataframe with at least one column \code{timestamp_ns} (long or
 #'   wide format).
@@ -36,8 +35,8 @@ adcp_correct_timestamp <- function(dat, rm = TRUE){
   # determine whether instrument was deployed during DST
   DST <- dst(force_tz(min(dat$timestamp_ns), tzone = "America/Halifax"))
 
-  if(DST) UTC_corr <- hours(3)
-  if(!DST) UTC_corr <- hours(4)
+  if(isTRUE(DST)) UTC_corr <- hours(3)
+  if(isFALSE(DST)) UTC_corr <- hours(4)
 
   dat <- dat %>%
     mutate(

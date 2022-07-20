@@ -9,13 +9,13 @@
 #'   default value \code{metadata = NULL} and provide the required values in the
 #'   remaining arguments.
 #'
-#' @param deployment_id Unique ID assigned to each deployment. Not required if
+#' @param deployment_id Unique ID assigned to each deployment. Not used if
 #'   \code{metadata} argument is specified.
 #'
-#' @param waterbody Waterbody in which ADCP was deployed. Not required if
+#' @param waterbody Waterbody in which ADCP was deployed. Not used if
 #'   \code{metadata} argument is specified.
 #'
-#' @param station Specific area in which ADCP was deployed. Not required if
+#' @param station Specific area in which ADCP was deployed. Not used if
 #'   \code{metadata} argument is specified.
 #'
 #' @return Returns \code{dat} with columns deployment_id, waterbody, and

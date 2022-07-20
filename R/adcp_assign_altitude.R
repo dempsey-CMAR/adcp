@@ -1,6 +1,6 @@
 #' Assign altitude (height above sea floor) to each bin
 #'
-#' @details The altitude of the bins is calculated as:
+#' @details The height to the centre of the bins is calculated as:
 #'
 #'   first bin altitude = inst altitude + first bin range
 #'
@@ -19,14 +19,14 @@
 #'   Option to use default value \code{metadata = NULL} and provide the required
 #'   values in the remaining arguments.
 #'
-#' @param inst_alt Height of the instrument above the sea floor (in metres). Not
+#' @param inst_alt Height of the sensor above the sea floor (in metres). Not
 #'   used if \code{metadata} argument is specified.
 #'
 #' @param bin_size Size of each bin (in metres). Not used if \code{metadata}
 #'   argument is specified.
 #'
-#' @param first_bin_range Size of the first bin (in metres). Not used if
-#'   \code{metadata} argument is specified.
+#' @param first_bin_range Distance from the transducer face to the centre of the
+#'   first bin (in metres). Not used if \code{metadata} argument is specified.
 #'
 #' @return Returns \code{dat_wide}, with bin columns re-named with corresponding
 #'   altitude (in metres).

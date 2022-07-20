@@ -30,11 +30,11 @@ Read raw ADCP txt file into R and format. Label each row with
 The \code{timestamp_ns} column is in the timezone of the deployment
   date (e.g., "AST" if deployed in November to March and "DST" if deployed in
   March to November). The \code{timestamp_ns} does NOT account for changes in
-  daylight savings time. Here, the \code{timestamp_ns} is assigned a timezone of
-  "UTC" to avoid \code{NA} values during the beginning of daylight savings
+  daylight savings time. Here, the \code{timestamp_ns} is assigned a timezone
+  of "UTC" to avoid \code{NA} values during the beginning of daylight savings
   time (e.g., 2019-03-10 02:30:00 is NOT a valid time for the
-  "America/Halifax" timezone). This \code{timestamp_ns} can be converted to true
-  UTC using \code{adcp_correct_timestamp()}.
+  "America/Halifax" timezone). This \code{timestamp_ns} can be converted to
+  true UTC using \code{adcp_correct_timestamp()}.
 
-  A warning will be printed if duplicate \code{timestamp_ns}s are detected.
+  A warning will be printed if duplicate \code{timestamp_ns} are detected.
 }
