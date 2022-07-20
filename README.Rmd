@@ -1,0 +1,77 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+
+library(badger)
+
+repo <- "dempsey-CMAR/adcp"
+```
+
+# adcp: DRAFT README
+
+
+```{r, echo=FALSE, out.width="25%", fig.align='center'}
+
+knitr::include_graphics(
+  "https://github.com/dempsey-CMAR/adcp/blob/master/man/figures/README-adcp-hex.png"
+)
+
+```
+
+<!-- badges: start -->
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) `r badge_devel(repo, "blue")` `r badge_codefactor(repo)` `r badge_github_actions(repo)`
+
+<!-- badges: end -->
+
+Format and visualize Current data collect by Acoustic Current Doppler Profilers (ADCPs).
+
+## Installation
+
+You can install the development version of adcp from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("dempsey-CMAR/adcp")
+```
+
+## Background
+
+The Centre for Marine Applied Research ([CMAR](https://cmar.ca/)) coordinates an extensive [Coastal Monitoring Program](https://cmar.ca/coastal-monitoring-program/) to measure [Essential Ocean Variables](https://www.goosocean.org/index.php?option=com_content&view=article&id=14&Itemid=114) from around the coast of Nova Scotia, Canada. There are three main branches of the program: _Water Quality_, _Currents_, and _Waves_. Processed data for each branch can be viewed and downloaded from several sources, as outlined in the [CMAR Report & Data Access Cheat Sheet](https://github.com/Centre-for-Marine-Applied-Research/strings/blob/master/man/figures/README-access-cheatsheet.pdf) (download for clickable links).
+
+The `adcp` package is used to format and visualize data from the _Current_ branch of the Coastal Monitoring Program. 
+
+_Current_ data is collected with Acoustic Doppler Current Profilers (ADCPs) deployed on the seafloor. An ADCP is a hydroacoustic current meter that measures water velocities over a range of depths. These sensors measure soundwaves scattered back from moving particles in the water column and use the Doppler effect to estimate speed and direction (Figure 1). 
+
+
+```{r, echo=FALSE, out.width="65%"}
+
+knitr::include_graphics("https://github.com/dempsey-CMAR/adcp/blob/master/man/figures//README-fig1.png")
+
+```
+Figure 1: ADCP diagram (not to scale).
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
