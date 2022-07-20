@@ -65,7 +65,15 @@ Figure 1: ADCP diagram (not to scale).
 <br>
 
 
+Current data is recorded for vertical bins throughout the water column. The `adcp` package uses data from the sensor configuration to calculate the bin height above sea floor and the bin depth below the surface (Figure 2). Note that the *bin height* always refers to the same point in space; the same *bin depth* can refer to different points due to changing tides.
 
+
+```{r, echo=FALSE}
+
+knitr::include_graphics("https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig2.jpg")
+
+```
+Figure 2: The bin height above the sea floor and the bin depth below the surface are calculated from deployment configurations including the sensor depth, sensor height above the sea floor, first bin range, and bin size.
 
 
 
