@@ -65,7 +65,7 @@ the bin height above sea floor and the bin depth below the surface
 in space; the same *bin depth* can refer to different points due to
 changing tides.
 
-<img src="https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig2.jpg" width="100%" />
+<img src="https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig2.png" width="100%" />
 Figure 2: The bin height above the sea floor and the bin depth below the
 surface are calculated from deployment configurations including the
 sensor depth, sensor height above the sea floor, first bin range, and
