@@ -7,10 +7,11 @@
 #'
 #' @param date_format Format for the date labels. Default is "\%Y-\%b-\%d"
 #'
-#' @return ggplot object. Figure shows sensor_depth_below_surface_m over time, coloured by the
-#'   \code{depth_flag} column.
+#' @return ggplot object. Figure shows sensor_depth_below_surface_m over time,
+#'   coloured by the \code{depth_flag} column.
 #'
-#' @importFrom ggplot2 aes geom_point ggplot labs scale_colour_manual scale_x_datetime theme
+#' @importFrom ggplot2 aes geom_point ggplot labs scale_colour_manual
+#'   scale_x_datetime theme theme_light
 #' @importFrom dplyr distinct mutate select
 #' @importFrom lubridate as_date
 #'
@@ -30,6 +31,7 @@ adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d"){
       "Depth Flag", values = c("#66C2A5", "#FC8D62", "#B3B3B3"), drop = TRUE
     ) +
     labs(title = title) +
+    theme_light() +
     theme(legend.position = "bottom")
 
 }
