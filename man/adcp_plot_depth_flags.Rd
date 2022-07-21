@@ -15,8 +15,8 @@ column, \code{adcp_flag_data()}.}
 \item{date_format}{Format for the date labels. Default is "\%Y-\%b-\%d"}
 }
 \value{
-ggplot object. Figure shows sensor_depth_below_surface_m over time, coloured by the
-  \code{depth_flag} column.
+ggplot object. Figure shows sensor_depth_below_surface_m over time,
+  coloured by the \code{depth_flag} column.
 }
 \description{
 Plot sensor_depth_below_surface_m colour-coded by depth_flag
