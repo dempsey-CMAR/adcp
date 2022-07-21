@@ -125,13 +125,20 @@ head(dat)
 #> 4  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
 #> 5  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
 #> 6  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
-#>   V36 V37 V38 V39
-#> 1  NA  NA  NA  NA
-#> 2  NA  NA  NA  NA
-#> 3  NA  NA  NA  NA
-#> 4  NA  NA  NA  NA
-#> 5  NA  NA  NA  NA
-#> 6  NA  NA  NA  NA
+#>   V36 V37 V38 V39 V40 V41 V42 V43 V44 V45 V46 V47 V48 V49 V50 V51 V52 V53 V54
+#> 1  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 2  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 3  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 4  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 5  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 6  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#>   V55 V56 V57 V58 V59 V60 V61 V62 V63 V64 V65 V66
+#> 1  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 2  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 3  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 4  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 5  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
+#> 6  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
 ```
 
 `adcp_assign_bin_altitude()` re-names the bin columns with the
@@ -302,8 +309,8 @@ trimmed.
 adcp_plot_depth_flags(dat)
 ```
 
-<img src="man/figures/README-README-fig4-1.png" width="100%" /> Filter
-data to keep “good” obsevations.
+<img src="man/figures/README-fig4-1.png" width="100%" /> Filter data to
+keep “good” obsevations.
 
 ``` r
 dat <- filter(dat, depth_flag == "good")
@@ -315,8 +322,8 @@ Plot sensor depth:
 adcp_plot_depth(dat, geom = "line")
 ```
 
-<img src="man/figures/README-README-fig5-1.png" width="100%" /> Plot
-current rose:
+<img src="man/figures/README-fig5-1.png" width="100%" /> Plot current
+rose:
 
 ``` r
 cols <- viridis(12, option = "F", direction = -1)
@@ -334,11 +341,11 @@ adcp_plot_current_rose(
 )
 ```
 
-<img src="man/figures/README-README-fig6-1.png" width="100%" /> Plot
-current speed histogram.
+<img src="man/figures/README-fig6-1.png" width="100%" /> Plot current
+speed histogram.
 
 ``` r
  adcp_plot_speed_hist(ints, bar_cols = cols, speed_label = "Current Speed (m/s)")
 ```
 
-<img src="man/figures/README-README-fig7-1.png" width="100%" />
+<img src="man/figures/README-fig7-1.png" width="100%" />

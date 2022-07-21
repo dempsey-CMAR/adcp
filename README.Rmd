@@ -198,7 +198,7 @@ head(dat)
 ### Plot data
 
 Plot the sensor depth to determine if any observations should be trimmed.
-```{r, README-fig4, fig.height=3.5, dpi=600}
+```{r, fig4, fig.height=3.5, dpi=600}
 adcp_plot_depth_flags(dat)
 ```
 Filter data to keep "good" obsevations.
@@ -208,12 +208,12 @@ dat <- filter(dat, depth_flag == "good")
 
 Plot sensor depth:
 
-```{r, README-fig5, fig.height=3.5, dpi=600}
+```{r, fig5, fig.height=3.5, dpi=600}
 adcp_plot_depth(dat, geom = "line")
 
 ```
 Plot current rose:
-```{r, README-fig6, fig.height=3.5, dpi=600}
+```{r, fig6, fig.height=3.5, dpi=600}
 
 cols <- viridis(12, option = "F", direction = -1)
 
@@ -230,7 +230,7 @@ adcp_plot_current_rose(
 
 ```
 Plot current speed histogram.
-```{r, README-fig7, fig.height=3.5, dpi=600}
+```{r, fig7, fig.height=3.5, dpi=600}
  adcp_plot_speed_hist(ints, bar_cols = cols, speed_label = "Current Speed (m/s)")
 ```
 
