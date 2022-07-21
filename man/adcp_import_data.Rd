@@ -8,7 +8,7 @@ adcp_import_data(
   path_input = NULL,
   county = "all",
   add_county_col = TRUE,
-  path_nsdfa
+  path_nsdfa = NULL
 )
 }
 \arguments{

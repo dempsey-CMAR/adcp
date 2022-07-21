@@ -17,7 +17,7 @@
 #'
 #' @return Exports csv file named todays-date_Current_Data_Deployment_Info.
 #'
-#' @importFrom dplyr %>% arrange distinct filter left_join rename select
+#' @importFrom dplyr %>% arrange distinct filter left_join rename transmute select
 #' @importFrom readr write_csv
 #' @importFrom readxl read_excel
 #' @importFrom stringr str_detect

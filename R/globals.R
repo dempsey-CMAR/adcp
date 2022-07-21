@@ -89,6 +89,7 @@ utils::globalVariables(c(
 
   # export_deployment_info
   "Depl_ID",
+  "deployment_id",
   "county",
   "waterbody"
 
