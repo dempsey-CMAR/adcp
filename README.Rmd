@@ -23,7 +23,7 @@ repo <- "dempsey-CMAR/adcp"
 ```{r, echo=FALSE, out.width="25%", fig.align='center'}
 
 knitr::include_graphics(
-  "https://raw.githubusercontent.com/dempsey-CMAR/adcp/main/man/figures/README-adcp-hex.png"
+  "man/figures/README-adcp-hex.png"
 )
 
 ```
