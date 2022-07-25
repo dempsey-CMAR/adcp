@@ -1,0 +1,221 @@
+---
+title: "Exploring Base R's cut() function"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploring Base R's cut() function}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message=FALSE}
+library(adcp)
+library(dplyr)
+library(gbRd)
+```
+
+This vignette explores the behavior of base R's `cut()` function, which is used to calculate the intervals in `adcp_count_obs()`. These intervals are used in `adcp_plot_speed_hist()` and can be passed to `adcp_plot_current_rose()` using the `breaks` argument.
+
+```{r, echo=FALSE}
+cat("\n")
+```
+
+
+## `cut()` function
+
+First, let's look at the help file for `cut`:
+```{r, echo=FALSE, results='asis'}
+#cut
+
+Rd <- Rd_fun(help("cut")) 
+htmlfile <- tempfile(fileext = ".html")
+tools::Rd2HTML(Rd, htmlfile, package = "", stages = c("install", "render"))
+htmllines <- readLines(htmlfile)
+i <- grep("<body>", htmllines)
+j <- grep("</body>", htmllines)
+
+cat(htmllines[(i+1):(j-1)], sep = "\n")
+
+```
+
+
+## Explore with simple example
+
+The arguments we want to explore are `include.lowest`, `right`, and `dig.lab`.
+
+Create a simple dataframe:
+```{r}
+df <- data.frame(value = seq(1:10))
+
+df
+```
+
+### Assign number of intervals
+
+Assign values to 3 even intervals using the default arguments (`include.lowest = FALSE`, `right = TRUE`, and `dig.lab = 3`):
+```{r}
+df$int1 <- cut(
+  df$value, 
+  breaks = 3, 
+  include.lowest = FALSE,
+  right = TRUE,
+  dig.lab = 3
+)
+
+df
+```
+Notes: 
+
+  - Intervals are **right** inclusive.
+  - Outer limits are expanded by 0.1 % of the range (`(10 - 1) * 0.001`).
+    - Start of first interval is the minimum value minus 0.1 % of the range.
+    - End of the last interval is the maximum value plus 0.1 % of the range.
+  - The end of the last interval is really `10.009`. Because `dig.lab = 3`, this is truncated to `10.0`, and `R` drops the trailing zero.
+
+To verify the end of the last interval, set `dig.lab = 5`:
+```{r}
+df$int2 <- cut(
+  df$value, 
+  breaks = 3, 
+  include.lowest = FALSE,
+  right = TRUE,
+  dig.lab = 5
+)
+
+df
+```
+
+For intervals that are **left inclusive**, set `right = FALSE`:
+```{r}
+df$int3 <- cut(
+  df$value, 
+  breaks = 3, 
+  include.lowest = FALSE,
+  right = FALSE,
+  dig.lab = 3
+)
+
+df
+```
+
+Notes:
+
+  - The assigned interval changes for values of 4 and 7.
+  - In this example, `dig.lab = 3`, so the final interval is displayed as `[7, 10)`. The value of `10` is assigned to this right-exclusive interval because it is really `[7, 10.009)`.
+  
+To verify the last interval set `right = FALSE` and `dig.lab = 5`:
+```{r}
+df$int4 <- cut(
+  df$value, 
+  breaks = 3, 
+  include.lowest = FALSE,
+  right = FALSE,
+  dig.lab = 5
+)
+
+df
+```
+
+The behavior of `include.lowest` depends on the value of `right`: 
+  - When `right = TRUE`, `include.lowest = TRUE` makes the first interval left-inclusive.
+  - When `right = FALSE`, `include.lowest = TRUE` makes the last interval right-inclusive.
+  
+For `right = TRUE` and `include.lowest = TRUE` (note the two square brackets for the first interval):
+```{r}
+df$int5 <- cut(
+  df$value, 
+  breaks = 3, 
+  include.lowest = TRUE,
+  right = TRUE,
+  dig.lab = 5
+)
+
+df
+```
+
+For `right = FALSE` and `include.lowest = TRUE` (note the two square brackets for the last interval):
+```{r}
+df$int6 <- cut(
+  df$value, 
+  breaks = 3, 
+  include.lowest = TRUE,
+  right = FALSE,
+  dig.lab = 5
+)
+
+df
+```
+
+
+### Assign break values
+
+
+
+Start fresh with a simple dataframe:
+```{r}
+df <- data.frame(value = seq(1:10))
+
+df
+```
+
+Assign values to intervals using the breaks `c(1, 4, 7, 10)` using the default arguments (`include.lowest = FALSE`, `right = TRUE`, and `dig.lab = 3`):
+
+```{r}
+df$int1 <- cut(
+  df$value, 
+  breaks = c(1, 4, 7, 10), 
+  include.lowest = FALSE,
+  right = TRUE,
+  dig.lab = 3
+)
+
+df
+```
+
+Notes:
+
+- The value of `1` is not assigned an interval because `include.lowest = FALSE`.
+
+Set `include.lowest = TRUE` so that the value `1` will be assigned to an interval.
+
+```{r}
+df$int2 <- cut(
+  df$value, 
+  breaks = c(1, 4, 7, 10), 
+  include.lowest = TRUE,
+  right = TRUE,
+  dig.lab = 3
+)
+
+df
+```
+
+Check to make sure there the break values were not truncated by increasing `dig.lab`"
+```{r}
+df$int3 <- cut(
+  df$value, 
+  breaks = c(1, 4, 7, 10), 
+  include.lowest = TRUE,
+  right = TRUE,
+  dig.lab = 5
+)
+
+df
+```
+
+
+
+
+
+
+
+
+
+
+
