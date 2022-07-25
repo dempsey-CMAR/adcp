@@ -5,8 +5,6 @@
 
 <img src="man/figures/README-adcp-hex.png" width="25%" style="display: block; margin: auto;" />
 
-[](man/figures/README-adcp-hex.png)
-
 <!-- badges: start -->
 
 [![License: GPL
@@ -55,8 +53,8 @@ sensors measure soundwaves scattered back from moving particles in the
 water column and use the Doppler effect to estimate speed and direction
 (Figure 1).
 
-<img src="https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig1.jpg" width="65%" />
-Figure 1: ADCP diagram (not to scale).
+<img src="man/figures/README-fig1.jpg" width="65%" /> Figure 1: ADCP
+diagram (not to scale).
 
 <br> <br>
 

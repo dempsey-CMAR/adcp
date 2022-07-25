@@ -28,7 +28,6 @@ knitr::include_graphics(
 
 ```
 
-[](man/figures/README-adcp-hex.png)
 
 <!-- badges: start -->
 
@@ -58,7 +57,7 @@ _Current_ data is collected with Acoustic Doppler Current Profilers (ADCPs) depl
 
 ```{r, echo=FALSE, out.width="65%"}
 
-knitr::include_graphics("https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig1.jpg")
+knitr::include_graphics("man/figures/README-fig1.jpg")
 
 ```
 Figure 1: ADCP diagram (not to scale).
