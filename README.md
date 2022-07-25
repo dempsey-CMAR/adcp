@@ -53,8 +53,8 @@ sensors measure soundwaves scattered back from moving particles in the
 water column and use the Doppler effect to estimate speed and direction
 (Figure 1).
 
-<img src="man/figures/README-fig1.jpg" width="65%" /> <br> Figure 1:
-ADCP diagram (not to scale).
+<img src="man/figures/README-fig1.jpg" width="65%" style="display: block; margin: auto;" />
+<br> Figure 1: ADCP diagram (not to scale).
 
 <br> <br>
 
@@ -83,8 +83,8 @@ Beach, St. Mary’s Bay.
 
 The raw .txt file looks like this:
 
-<img src="man/figures/README-fig3.png" width="100%" /> Figure 3: Raw
-ADCP data file for Long Beach.
+<img src="man/figures/README-fig3.png" width="100%" style="display: block; margin: auto;" />
+Figure 3: Raw ADCP data file for Long Beach.
 
 ### Import and format data
 
