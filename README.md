@@ -5,6 +5,8 @@
 
 <img src="https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-adcp-hex.png" width="25%" style="display: block; margin: auto;" />
 
+![](man/figures/README-adcp-hex.png)
+
 <!-- badges: start -->
 
 [![License: GPL

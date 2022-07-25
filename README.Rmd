@@ -28,6 +28,8 @@ knitr::include_graphics(
 
 ```
 
+![](man/figures/README-adcp-hex.png)
+
 <!-- badges: start -->
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) `r badge_devel(repo, "blue")` `r badge_codefactor(repo)` `r badge_github_actions(repo)`
