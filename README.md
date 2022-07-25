@@ -3,9 +3,9 @@
 
 # adcp: DRAFT README
 
-<img src="https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-adcp-hex.png" width="25%" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/dempsey-CMAR/adcp/main/man/figures/README-adcp-hex.png" width="25%" style="display: block; margin: auto;" />
 
-![](man/figures/README-adcp-hex.png)
+[](man/figures/README-adcp-hex.png)
 
 <!-- badges: start -->
 
