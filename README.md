@@ -53,8 +53,8 @@ sensors measure soundwaves scattered back from moving particles in the
 water column and use the Doppler effect to estimate speed and direction
 (Figure 1).
 
-<img src="man/figures/README-fig1.jpg" width="65%" /> Figure 1: ADCP
-diagram (not to scale).
+<img src="man/figures/README-fig1.jpg" width="65%" /> <br> Figure 1:
+ADCP diagram (not to scale).
 
 <br> <br>
 
@@ -65,13 +65,12 @@ the bin height above sea floor and the bin depth below the surface
 in space; the same *bin depth* can refer to different points due to
 changing tides.
 
-<img src="https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig2.png" width="100%" />
-Figure 2: The bin height above the sea floor and the bin depth below the
-surface are calculated from deployment configurations including the
-sensor depth, sensor height above the sea floor, first bin range, and
-bin size.
+<img src="man/figures/README-fig2.png" width="100%" /> Figure 2: The bin
+height above the sea floor and the bin depth below the surface are
+calculated from deployment configurations including the sensor depth,
+sensor height above the sea floor, first bin range, and bin size.
 
-## Example - move this to vignette
+## Example
 
 ``` r
 library(adcp)
@@ -84,8 +83,8 @@ Beach, St. Mary’s Bay.
 
 The raw .txt file looks like this:
 
-<img src="https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig3.png" width="100%" />
-Figure 3: Raw ADCP data file for Long Beach.
+<img src="man/figures/README-fig3.png" width="100%" /> Figure 3: Raw
+ADCP data file for Long Beach.
 
 ### Import and format data
 

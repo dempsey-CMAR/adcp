@@ -60,6 +60,7 @@ _Current_ data is collected with Acoustic Doppler Current Profilers (ADCPs) depl
 knitr::include_graphics("man/figures/README-fig1.jpg")
 
 ```
+<br>
 Figure 1: ADCP diagram (not to scale).
 
 <br>
@@ -71,13 +72,13 @@ Current data is recorded for vertical bins throughout the water column. The `adc
 
 ```{r, echo=FALSE}
 
-knitr::include_graphics("https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig2.png")
+knitr::include_graphics("man/figures/README-fig2.png")
 
 ```
 Figure 2: The bin height above the sea floor and the bin depth below the surface are calculated from deployment configurations including the sensor depth, sensor height above the sea floor, first bin range, and bin size.
 
 
-## Example - move this to vignette
+## Example
 
 ```{r message=FALSE}
 library(adcp)
@@ -93,7 +94,7 @@ The raw .txt file looks like this:
 
 ```{r, echo=FALSE}
 
-knitr::include_graphics("https://github.com/dempsey-CMAR/adcp/blob/main/man/figures/README-fig3.png")
+knitr::include_graphics("man/figures/README-fig3.png")
 
 ```
 Figure 3: Raw ADCP data file for Long Beach.
