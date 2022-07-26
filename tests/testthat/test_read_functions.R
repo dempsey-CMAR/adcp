@@ -1,4 +1,9 @@
-devtools::load_all()
+#' devtools load_all
+
+#' @importFrom lubridate tz
+#' @importFrom dplyr %>%
+
+#devtools::load_all()
 
 path <- system.file("testdata", package = "adcp")
 
