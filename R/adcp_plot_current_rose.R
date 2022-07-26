@@ -19,12 +19,17 @@
 #'   direction.
 #'
 #' @importFrom openair windRose
+#' @importFrom viridis viridis
 #'
 #' @export
 
 
-adcp_plot_current_rose <- function(dat, breaks, speed_cols,
+adcp_plot_current_rose <- function(dat, breaks, speed_cols = NULL,
                                    speed_label = "Current Speed (cm/s)"){
+
+  if (is.null(speed_cols)) {
+    speed_cols <- viridis(breaks, option = "F", direction = -1)
+  }
 
   dat <- dat %>%
     select(SPEED = contains("speed"), DIRECTION = contains("direction"))

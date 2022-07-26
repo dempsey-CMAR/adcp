@@ -7,7 +7,7 @@
 adcp_plot_current_rose(
   dat,
   breaks,
-  speed_cols,
+  speed_cols = NULL,
   speed_label = "Current Speed (cm/s)"
 )
 }
