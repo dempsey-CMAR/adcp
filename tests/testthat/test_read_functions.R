@@ -1,7 +1,4 @@
-
-library(adcp)
-library(dplyr)
-library(lubridate)
+devtools::load_all()
 
 path <- system.file("testdata", package = "adcp")
 
@@ -13,7 +10,7 @@ test_that("adcp_read_txt() exports timestamp as a datetime object in UTC", {
 
   expect_equal(class(dat$timestamp_ns), c("POSIXct", "POSIXt"))
 
-  expect_equal(tz(dat$timestamp_ns), "UTC")
+  expect_equal(lubridate::tz(dat$timestamp_ns), "UTC")
 
 })
 
@@ -32,7 +29,7 @@ ts2_corrected <- adcp_correct_timestamp(ts2)
 
 test_that("adcp_correct_timestamp() works for daylight savings transitions", {
 
-  expect_equal(tz(ts1_corrected$timestamp_utc), "UTC")
+  expect_equal(lubridate::tz(ts1_corrected$timestamp_utc), "UTC")
 
   expect_equal(
     unique(as.numeric(difftime(ts1_corrected$timestamp_utc, ts1$timestamp))), 4
@@ -43,7 +40,7 @@ test_that("adcp_correct_timestamp() works for daylight savings transitions", {
     sum(is.na(ts1_corrected$timestamp_utc)), 0
   )
 
-  expect_equal(tz(ts2_corrected$timestamp_utc), "UTC")
+  expect_equal(lubridate::tz(ts2_corrected$timestamp_utc), "UTC")
 
   expect_equal(
     unique(as.numeric(difftime(ts2_corrected$timestamp_utc, ts2$timestamp))), 3
