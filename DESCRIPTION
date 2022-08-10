@@ -3,7 +3,7 @@ Type: Package
 Title: Format and visualize ADCP data
 Version: 1.0.0
 Author: Danielle Dempsey
-Maintainer: The package maintainer <ddempsey@perennia.ca>
+Maintainer: Danielle Dempsey <ddempsey@perennia.ca>
 Description: Add more here
     Use four spaces when indenting paragraphs within the Description.
 License: GPL (>= 3)
