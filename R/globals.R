@@ -91,7 +91,10 @@ utils::globalVariables(c(
   "Depl_ID",
   "deployment_id",
   "county",
-  "waterbody"
+  "waterbody",
+
+  # import_data
+  "abb"
 
 ))
 

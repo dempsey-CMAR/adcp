@@ -19,6 +19,7 @@
 #' @importFrom dplyr %>% select left_join everything
 #' @importFrom stringr str_subset
 #' @importFrom purrr map_dfr
+#' @importFrom tidyr separate
 #'
 #' @export
 
@@ -28,12 +29,12 @@ adcp_import_data <- function(
   county = "all",
   add_county_col = TRUE,
   path_nsdfa = NULL
-){
+) {
 
 
-  if(is.null(path_input)){
+  if (is.null(path_input)){
     # path to Open Data folder
-    path_input <- "Y:/Coastal Monitoring Program/ADCP/Open Data/County Datasets"
+    path_input <- file.path("Y:/Coastal Monitoring Program/ADCP/Open Data/County Datasets")
 
   } else path_input <- path_input
 
@@ -48,19 +49,17 @@ adcp_import_data <- function(
   dat <- dat %>%
     purrr::map_dfr(readRDS)
 
-  # merge with Area_Info table to add COUNTY column
+  # add county column
   if(isTRUE(add_county_col)){
 
-    nsdfa <- adcp_read_nsdfa_metadata(path_nsdfa) %>%
-      select(
-        county = County,
-        waterbody = Waterbody,
-        station = Station_Name
-      )
+    # import county abbrevations from internal data file
+    load("R/sysdata.rda")
 
-    # merge dat and Area_Info
-    dat <- left_join(dat, nsdfa, by = c("waterbody", "station")) %>%
-      select(county, everything())
+    # merge dat and county abbreviation files
+    dat <- dat %>%
+      separate(col = deployment_id, sep = 2, into = c("abb", NA), remove = FALSE) %>%
+      left_join(county_abb, by = "abb") %>%
+      select(county, everything(), -abb)
 
   }
 

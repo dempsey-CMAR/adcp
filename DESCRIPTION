@@ -35,3 +35,5 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://dempsey-cmar.github.io/adcp/
+Depends: 
+    R (>= 2.10)
