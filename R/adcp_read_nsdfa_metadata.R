@@ -24,7 +24,7 @@ adcp_read_nsdfa_metadata <- function(
   sheet = NULL,
   station = NULL,
   deployment_date = NULL
-){
+) {
 
   # row for Grand Passage deployment (FORCE deployment but we have the data)
   force_row <- tibble(
@@ -59,22 +59,39 @@ adcp_read_nsdfa_metadata <- function(
   )
 
 
+# Read in and format tracking sheet ---------------------------------------
 
   # NSDFA Tracking Sheet
   nsdfa <- read_excel(path, sheet = sheet, na = c("", "n/a", "N/A")) %>%
-    select(-contains("Column")) %>%
+    select(-contains("Column"))
+
+  # to correct mistake in 2022-03-17 version of tracking sheet
+  if(suppressWarnings(is.na(as_date(nsdfa$Depl_Date[1])))) {
+
+    nsdfa <- nsdfa %>%
+      mutate(
+        Depl_Date = case_when(
+          Depl_Date == "Current, Waves, Temperature, Pressure" ~ "40522", # December 10, 2010
+          TRUE ~ Depl_Date),
+        Depl_Date = janitor::convert_to_date(as.numeric(Depl_Date))
+      )
+  }
+
+  nsdfa <- nsdfa %>%
     mutate(
+      Depl_Date = as.character(Depl_Date),
+
       # Fix incorrect entries
       Waterbody = case_when(
         Waterbody == "Dena's Pond" ~ "Denas Pond",
-        Waterbody == "St.Ann's Harbour" ~ "St. Ann's Harbour",
+        Waterbody == "St.Ann's Harbour" ~ "St. Anns Harbour",
         Waterbody == "St Margarets Bay" ~ "St. Margarets Bay",
         Waterbody == "Straight of Canso" ~ "Strait of Canso",
-        Waterbody == "St. Mary's Bay" & Depl_Date == "40632" &
+        Waterbody == "St. Mary's Bay" & Depl_Date == "2011-03-30" &
           Station_Name == "Brier Island" ~ "Westport Harbour",
-        Waterbody == "Whycocomagh Bay" & Depl_Date == "43327" &
+        Waterbody == "Whycocomagh Bay" & Depl_Date == "2018-08-15" &
           Station_Name == "Gypsum Mine" ~ "Bras d'Or Lakes",
-        Waterbody == "Lennox Passage" & Depl_Date == "44440" &
+        Waterbody == "Lennox Passage" & Depl_Date == "2021-09-01" &
           Station_Name == "Walshs Deep Cove" ~ "Carry Passage",
 
         Waterbody == "St Peters Inlet" ~ "St. Peters Inlet",
@@ -83,49 +100,44 @@ adcp_read_nsdfa_metadata <- function(
 
       Station_Name = case_when(
 
-        Station_Name == "778" & Depl_Date == "44020" ~ "St. Peters Inlet",
-        Station_Name == "1042 North" & Depl_Date == "44126" ~ "Cornwallis NE",
-        Station_Name == "1042 South" & Depl_Date == "44126" ~ "Cornwallis SW",
-        Station_Name == "1181" & Depl_Date == "44075" ~ "Woods Harbour",
-        Station_Name == "Buoy Test" & Depl_Date == "43763" ~ "Blue Island",
-        Station_Name == "Dena's Pond" & Depl_Date == "43690"  ~ "Denas Pond",
-        Station_Name == "Eddy Cove C" & Depl_Date == "41829" ~ "Eddy Cove Center",
-        Station_Name == "Inshore" & Depl_Date == "42551" ~ "Roy Island Inshore",
-        Station_Name == "Outside" & Depl_Date == "42587" ~ "Roy Island Outer",
-        Station_Name == "Outer Island" & Depl_Date == "43503" ~ "Camerons Cove",
-        Station_Name == "Ram Island S" & Depl_Date == "43378" ~ "Ram Island",
-        Station_Name == "Saddle NE" & Depl_Date == "42650" ~ "Saddle Island NE",
-        Station_Name == "Saddle SW" & Depl_Date == "42284" ~ "Saddle Island SW",
-        Station_Name == "Shut In Island" & Depl_Date == "44015" ~ "Shut-In Island", # for consistency with strings
-        Station_Name == "St Margarets Bay Center" & Depl_Date == "44110" ~ "St. Margarets Bay Center",
-        Station_Name == "Tor Bay Center" & Depl_Date == "43501"  ~ "Center Bay",
+        Station_Name == "778" & Depl_Date == "2020-07-08" ~ "St. Peters Inlet",
+        Station_Name == "1042 North" & Depl_Date == "2020-10-22" ~ "Cornwallis NE",
+        Station_Name == "1042 South" & Depl_Date == "2020-10-22" ~ "Cornwallis SW",
+        Station_Name == "1181" & Depl_Date == "2020-09-01" ~ "Woods Harbour",
+        Station_Name == "Buoy Test" & Depl_Date == "2019-10-25" ~ "Blue Island",
+        Station_Name == "Dena's Pond" & Depl_Date == "2019-08-13"  ~ "Denas Pond",
+        Station_Name == "Eddy Cove C" & Depl_Date == "2014-07-09" ~ "Eddy Cove Center",
+        Station_Name == "Inshore" & Depl_Date == "2016-06-30" ~ "Roy Island Inshore",
+        Station_Name == "Outside" & Depl_Date == "2016-08-05" ~ "Roy Island Outer",
+        Station_Name == "Outer Island" & Depl_Date == "2019-02-07" ~ "Camerons Cove",
+        Station_Name == "Ram Island S" & Depl_Date == "2018-10-05" ~ "Ram Island",
+        Station_Name == "Saddle NE" & Depl_Date == "2016-10-07" ~ "Saddle Island NE",
+        Station_Name == "Saddle SW" & Depl_Date == "2015-10-07" ~ "Saddle Island SW",
+        Station_Name == "Shut In Island" & Depl_Date == "2020-07-03" ~ "Shut-In Island", # for consistency with strings
+        Station_Name == "St Margarets Bay Center" & Depl_Date == "2020-10-06" ~ "St. Margarets Bay Center",
+        Station_Name == "Tor Bay Center" & Depl_Date == "2019-02-05"  ~ "Center Bay",
 
         TRUE ~ Station_Name
       ),
 
       # needs to go here because uses fixed Station names
       County = case_when(
-        Waterbody == "Woods Harbour" & Station_Name == "Camerons Cove" & Depl_Date == "43503" ~ "Shelburne",
-        Waterbody == "Woods Harbour" & Station_Name == "Woods Harbour" & Depl_Date == "44075" ~ "Shelburne",
+        Waterbody == "Woods Harbour" & Station_Name == "Camerons Cove" & Depl_Date == "2019-02-07" ~ "Shelburne",
+        Waterbody == "Woods Harbour" & Station_Name == "Woods Harbour" & Depl_Date == "2020-09-01" ~ "Shelburne",
         TRUE ~ County
-      ),
-
-      Depl_Date = case_when(
-        Depl_Date == "Current, Waves, Temperature, Pressure" ~ "40522", # December 10, 2010
-        TRUE ~ Depl_Date
       ),
 
       First_Bin_Range = case_when(
         First_Bin_Range == "1..6" ~ "1.6",
-        Station_Name == "Canoe Island" & Depl_Date == "44098" & is.na(First_Bin_Range) ~ "1.62", # from the metadata in the non side-lobe trimmed excel files
-        Station_Name == "Woods Harbour" & Depl_Date == "44075" & is.na(First_Bin_Range) ~ "1",   # from the metadata in the non side-lobe trimmed excel files
+        Station_Name == "Canoe Island" & Depl_Date == "2020-09-24" & is.na(First_Bin_Range) ~ "1.62", # from the metadata in the non side-lobe trimmed excel files
+        Station_Name == "Woods Harbour" & Depl_Date == "2020-09-01" & is.na(First_Bin_Range) ~ "1",   # from the metadata in the non side-lobe trimmed excel files
         TRUE ~ First_Bin_Range
       ),
 
       # fix column types
       Bin_Size = as.numeric(Bin_Size),
       First_Bin_Range = as.numeric(First_Bin_Range),
-      Depl_Date = convert_to_date(as.numeric(Depl_Date))
+      Depl_Date = as_date(Depl_Date)
     ) %>%
     # add in Grand Passage Deployment
     rbind(force_row)
