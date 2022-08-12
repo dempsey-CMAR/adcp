@@ -9,15 +9,14 @@
 #'
 #' @param deployments Vector of deployment IDs to include in the dataset.
 #'
-#' @param path_depl_id Full file path to the Deployment ID spreadsheet,
-#'   including file name and extension
-#'
 #' @param path_export File path to the folder where the Deployment Information
 #'   Dataset should be exported.
 #'
 #' @return Exports csv file named todays-date_Current_Data_Deployment_Info.
 #'
-#' @importFrom dplyr %>% arrange distinct filter left_join rename transmute select
+#' @importFrom dplyr %>% arrange distinct filter left_join rename transmute
+#'   select
+#' @importFrom googlesheets4 read_sheet
 #' @importFrom readr write_csv
 #' @importFrom readxl read_excel
 #' @importFrom stringr str_detect
@@ -34,7 +33,6 @@
 adcp_export_deployment_info <- function(
   deployments,
   path_nsdfa,
-  path_depl_id,
   path_export
 ) {
 
@@ -43,7 +41,13 @@ adcp_export_deployment_info <- function(
   nsdfa <- adcp_read_nsdfa_metadata(path_nsdfa) %>%
     arrange(County, Waterbody, Depl_Date)
 
-  depl_id <- read_excel(path_depl_id)
+  # deployment ID's
+  link <- "https://docs.google.com/spreadsheets/d/1-8gt9FdN-mTApWw_D1xYBhHcvuzhT6-8qH_XXxxpqJ4/edit#gid=0"
+
+  depl_id <- googlesheets4::read_sheet(link, sheet = "Tracking") %>%
+    select(Depl_ID, County, Waterbody, Depl_Date, Station_Name) %>%
+    na.omit()
+
 
   metadata <- nsdfa %>%
     left_join(depl_id, by = c("County", "Waterbody", "Depl_Date", "Station_Name")) %>%
@@ -71,36 +75,6 @@ adcp_export_deployment_info <- function(
       pings_per_ensemble = Current_PingsPerEnsemble
     ) %>%
     arrange(deployment_id)
-
-
-# filter and format columns ----------------------------------------------------------
-
-  # open_data_metadata <- nsdfa %>%
-  #   left_join(reports, by = c("County", "Waterbody", "Depl_Date", "Station_Name")) %>%
-  #   #filter(str_detect(Report_2022, "YES")) %>%
-  #   select(
-  #     County,
-  #     Waterbody,
-  #     Station = Station_Name,
-  #     `Deployment Date` = Depl_Date,
-  #     `Recovery Date` = Recv_Date,
-  #     `Deployment Duration (d)` = Depl_Duration,
-  #     Lease = `Lease#`,
-  #     Latitude = Depl_Lat,
-  #     Longitude = Depl_Lon,
-  #
-  #     `Instrument Model` = Inst_Model,
-  #     `Instrument Serial Number` = Inst_Serial,
-  #     `Instrument Depth` = Depl_Sounding,
-  #     `Instrument Height Above Sea Floor` = Inst_Altitude,
-  #     `First Bin Range (m)` = First_Bin_Range,
-  #     `Bin Size (m)` = Bin_Size,
-  #     `Ensemble Interval (s)` = Current_Ensemble_Interval_s,
-  #     `Averaging Interval (s)` = Current_Averaging_Interval_s,
-  #     `Pings Per Ensemble` = Current_PingsPerEnsemble
-  #   )
-  #
-
 
 # export data -------------------------------------------------------------
 

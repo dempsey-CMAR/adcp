@@ -4,16 +4,13 @@
 \alias{adcp_export_deployment_info}
 \title{Export Current Data Deployment Information Dataset}
 \usage{
-adcp_export_deployment_info(deployments, path_nsdfa, path_depl_id, path_export)
+adcp_export_deployment_info(deployments, path_nsdfa, path_export)
 }
 \arguments{
 \item{deployments}{Vector of deployment IDs to include in the dataset.}
 
 \item{path_nsdfa}{Full file path for the nsdfa tracking sheet, including file
 name and extension.}
-
-\item{path_depl_id}{Full file path to the Deployment ID spreadsheet,
-including file name and extension}
 
 \item{path_export}{File path to the folder where the Deployment Information
 Dataset should be exported.}
