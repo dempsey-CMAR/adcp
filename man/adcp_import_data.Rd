@@ -4,12 +4,7 @@
 \alias{adcp_import_data}
 \title{Import current data from rds files.}
 \usage{
-adcp_import_data(
-  path_input = NULL,
-  county = "all",
-  add_county_col = TRUE,
-  path_nsdfa = NULL
-)
+adcp_import_data(path_input = NULL, county = "all", add_county_col = TRUE)
 }
 \arguments{
 \item{path_input}{Path to the *.rds files to be imported. Default is the
@@ -24,9 +19,6 @@ Defaults to all counties.}
 \item{add_county_col}{Logical argument indicating whether to include a
 "county" column in the output. If \code{TRUE}, the imported data must have
 "waterbody" and "station" columns.}
-
-\item{path_nsdfa}{Full file path for the nsdfa tracking sheet, including file
-name and extension. Must be specified when /code{add_county_col = TRUE}.}
 }
 \description{
 Import current data from rds files.

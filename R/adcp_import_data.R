@@ -13,9 +13,6 @@
 #'   "county" column in the output. If \code{TRUE}, the imported data must have
 #'   "waterbody" and "station" columns.
 #'
-#' @param path_nsdfa Full file path for the nsdfa tracking sheet, including file
-#'   name and extension. Must be specified when /code{add_county_col = TRUE}.
-#'
 #' @importFrom dplyr %>% select left_join everything
 #' @importFrom stringr str_subset
 #' @importFrom purrr map_dfr
@@ -27,12 +24,11 @@
 adcp_import_data <- function(
   path_input = NULL,
   county = "all",
-  add_county_col = TRUE,
-  path_nsdfa = NULL
+  add_county_col = TRUE
 ) {
 
 
-  if (is.null(path_input)){
+  if (is.null(path_input)) {
     # path to Open Data folder
     path_input <- file.path("Y:/Coastal Monitoring Program/ADCP/Open Data/County Datasets")
 
@@ -50,17 +46,16 @@ adcp_import_data <- function(
     purrr::map_dfr(readRDS)
 
   # add county column
-  if(isTRUE(add_county_col)){
+  if(isTRUE(add_county_col)) {
 
     # import county abbrevations from internal data file
-    load("R/sysdata.rda")
+    county_abb <- get0("county_abb", envir = asNamespace("adcp"))
 
     # merge dat and county abbreviation files
     dat <- dat %>%
       separate(col = deployment_id, sep = 2, into = c("abb", NA), remove = FALSE) %>%
       left_join(county_abb, by = "abb") %>%
       select(county, everything(), -abb)
-
   }
 
   dat
