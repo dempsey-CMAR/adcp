@@ -88,7 +88,7 @@ adcp_convert_flag_to_ordered_factor <- function(dat){
 
   flags <- unique(dat$depth_flag)
 
-  auto_flag <- flags[str_detect(flags,"sensor_depth")]
+  auto_flag <- flags[str_detect(flags, "sensor_depth")]
 
   flags_order <- c("good", auto_flag, "manual flag")
 
