@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# adcp: DRAFT README
+# adcp: README
 
 <img src="man/figures/README-adcp-hex.png" width="25%" style="display: block; margin: auto;" />
 
@@ -9,7 +9,7 @@
 
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![](https://img.shields.io/badge/devel%20version-1.0.0-blue.svg)](https://github.com/dempsey-CMAR/adcp)
+[![](https://img.shields.io/badge/devel%20version-1.0.1-blue.svg)](https://github.com/dempsey-CMAR/adcp)
 [![CodeFactor](https://www.codefactor.io/repository/github/dempsey-CMAR/adcp/badge)](https://www.codefactor.io/repository/github/dempsey-CMAR/adcp)
 [![R build
 status](https://github.com/dempsey-CMAR/adcp/workflows/R-CMD-check/badge.svg)](https://github.com/dempsey-CMAR/adcp/actions)
