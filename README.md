@@ -3,7 +3,7 @@
 
 # adcp: README
 
-<img src="man/figures/README-adcp-hex.png" width="25%" style="display: block; margin: auto;" />
+<img src="man/figures/README-adcp-hex.png" width="50%" style="display: block; margin: auto;" />
 
 <!-- badges: start -->
 
