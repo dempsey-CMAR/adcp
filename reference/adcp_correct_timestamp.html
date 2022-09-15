@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">adcp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>dat</dt>
-<dd><p>Dataframe with at least one column <code>timestamp_ns</code> (long or
+<dd><p>Data frame with at least one column <code>timestamp_ns</code> (long or
 wide format).</p></dd>
 
 
@@ -71,16 +71,16 @@ column will be removed.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>For the raw ADCP data, the <code>timestamp</code> column is in the
-  timezone of the deployment date (e.g., "AST" if deployed in November to
-  March and "DST" if deployed in March to November). The <code>timestamp</code>
-  does NOT account for changes in daylight savings time.</p>
-<p><code>adcp_read_text()</code> assigns the <code>timestamp</code> a timezone of "UTC" to
-  avoid <code>NA</code> values during the beginning of daylight savings time (e.g.,
+    <p>For the raw ADCP data, the timestamp column is in the timezone of
+  the deployment date (e.g., "AST" if deployed in November to March and "DST"
+  if deployed in March to November). The timestamp does NOT account for
+  changes in daylight savings time.</p>
+<p><code>adcp_read_text()</code> assigns the timestamp a timezone of "UTC" to avoid
+  <code>NA</code> values during the beginning of daylight savings time (e.g.,
   2019-03-10 02:30:00 is NOT a valid time for the "America/Halifax"
   timezone).</p>
-<p><code>adcp_correct_timestamp()</code> converts each <code>timestamp</code> to true UTC
-  by adding 3 hours if the deployment date was during daylight savings, or 4
+<p><code>adcp_correct_timestamp()</code> converts each timestamp to true UTC by
+  adding 3 hours if the deployment date was during daylight savings, or 4
   hours if the deployment date was during Atlantic Standard Time.</p>
 <p>The earliest timestamp is used to define the original timezone (AST/DST).</p>
     </div>

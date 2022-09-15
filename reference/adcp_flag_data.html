@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">adcp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,18 +59,18 @@
 
 
 <dt>depth_flag_threshold</dt>
-<dd><p>The change in <code>sensor_depth_below_surface_m</code> that will
-trigger a flag (in metres).</p></dd>
+<dd><p>The change in <code>sensor_depth_below_surface_m</code>
+that will trigger a flag (in metres).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>Returns dat with two extra columns for inspection: <code>DIFF</code> =
-  lead(sensor_depth_below_surface_m) - sensor_depth_below_surface_m and</p>
+<p>Returns <code>dat</code> with two extra columns for inspection:</p>
 <p></p>
-<p><code>FLAG</code>.</p>
+<p><code>depth_diff</code> = lead(sensor_depth_below_surface_m) -
+  sensor_depth_below_surface_m and <code>depth_flag</code>.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
