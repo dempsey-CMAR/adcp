@@ -19,7 +19,7 @@ repo <- "dempsey-CMAR/adcp"
 
 # adcp: README
 
-```{r, echo=FALSE, out.width="40%", fig.align='center'}
+```{r, echo=FALSE, out.width="30%", fig.align='center'}
 
 knitr::include_graphics(
   "man/figures/README-adcp-hex.png"
