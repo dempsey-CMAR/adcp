@@ -1,4 +1,4 @@
-#' Assign altitude (height above sea floor) to each bin
+#' @title Assign altitude (height above sea floor) to each bin
 #'
 #' @details The height to the centre of the bins is calculated as:
 #'
@@ -10,10 +10,10 @@
 #'
 #'   And so on.
 #'
-#' @param dat_wide Dataframe of ADCP data, as exported from
+#' @param dat_wide Data frame of ADCP data, as exported from
 #'   \code{adcp_read_txt()}.
 #'
-#' @param metadata Dataframe with metadata information for the deployment in
+#' @param metadata Data frame with metadata information for the deployment in
 #'   \code{dat_wide} (e.g., a row from the NSDFA tracking sheet). Must include
 #'   columns \code{Inst_Altitude}, \code{Bin_Size}, and \code{First_Bin_Range}.
 #'   Option to use default value \code{metadata = NULL} and provide the required
@@ -30,6 +30,8 @@
 #'
 #' @return Returns \code{dat_wide}, with bin columns re-named with corresponding
 #'   altitude (in metres).
+#'
+#' @importFrom dplyr all_of last_col select
 #'
 #' @export
 

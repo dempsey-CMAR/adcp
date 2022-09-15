@@ -7,12 +7,13 @@
 adcp_convert_flag_to_ordered_factor(dat)
 }
 \arguments{
-\item{dat}{Dataframe of ACDP data in long format, as returned by
+\item{dat}{Data frame of ACDP data in long format, as returned by
 \code{adcp_flag_data()}.}
 }
 \value{
-Returns dat, with the depth_flag column as an ordered factor, with levels
-"good" < "SENSOR_DEPTH_BELOW_SURFACE changed by > x m" < "manual flag".
+Returns \code{dat}, with the \code{depth_flag} column as an ordered
+  factor, with levels \code{"good" < "SENSOR_DEPTH_BELOW_SURFACE changed by >
+  x m" < "manual flag"}.
 }
 \description{
 Convert depth_flag column to ordered factor

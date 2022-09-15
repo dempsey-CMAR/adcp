@@ -1,11 +1,12 @@
-#' Plot sensor_depth_below_surface_m colour-coded by depth_flag
+#' Plot sensor_depth_below_surface_m coloured by depth_flag
 #'
-#' @param dat Dataframe of ACDP data in long format, including \code{depth_flag}
-#'   column, \code{adcp_flag_data()}.
+#' @param dat Data frame of ACDP data in long format, including
+#'   \code{depth_flag} column, as exported from \code{adcp_flag_data()}.
 #'
 #' @param title Optional title for the figure.
 #'
-#' @param date_format Format for the date labels. Default is "\%Y-\%b-\%d"
+#' @param date_format Format for the date labels. Default is
+#'   \code{"\%Y-\%b-\%d"}.
 #'
 #' @return ggplot object. Figure shows sensor_depth_below_surface_m over time,
 #'   coloured by the \code{depth_flag} column.
@@ -39,24 +40,22 @@ adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d"){
 
 #' Plot sensor_depth_below_surface_m
 #'
-#' @param dat Dataframe of ACDP data in long format, as returned by
+#' @param dat Data frame of ACDP data in long format, as returned by
 #'   \code{adcp_format_opendata()}.
 #'
 #' @param title Optional title for the figure.
 #'
-#' @param date_format Format for the date labels. Default is "\%Y-\%b-\%d"
+#' @param date_format Format for the date labels. Default is
+#'   \code{"\%Y-\%b-\%d"}.
 #'
 #' @param geom Geom to plot. Options are \code{"point"} or \code{"line"}.
 #'
 #' @return ggplot object. Figure shows sensor_depth_below_surface_m over time.
 #'
-#' @importFrom ggplot2 aes geom_point ggplot labs scale_colour_manual
-#'   scale_x_datetime
-#'
 #' @importFrom dplyr distinct mutate select
+#' @importFrom ggplot2 aes geom_line geom_point ggplot labs scale_colour_manual
+#'   scale_x_datetime theme_light
 #' @importFrom lubridate as_date
-#' @importFrom ggplot2 geom_line geom_point ggplot labs scale_x_datetime
-#'   theme_light
 #'
 #' @export
 

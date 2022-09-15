@@ -16,10 +16,10 @@ name and extension.}
 Dataset should be exported.}
 }
 \value{
-Exports csv file named todays-date_Current_Data_Deployment_Info.
+Exports csv file named todays-date_Current_Data_Deployment_Info.csv.
 }
 \description{
 Imports NSDFA Tracking sheet and Deployment ID tracker and
-  exports the metadata for the NS OpenData Portal. Must be connected to CMAR
-  shared drive.
+  exports the metadata for the Nova Scotia Open Data Portal. User must be
+  connected to CMAR shared drive.
 }

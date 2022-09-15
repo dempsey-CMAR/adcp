@@ -2,22 +2,23 @@
 % Please edit documentation in R/adcp_plot_depth_flags.R
 \name{adcp_plot_depth_flags}
 \alias{adcp_plot_depth_flags}
-\title{Plot sensor_depth_below_surface_m colour-coded by depth_flag}
+\title{Plot sensor_depth_below_surface_m coloured by depth_flag}
 \usage{
 adcp_plot_depth_flags(dat, title = NULL, date_format = "\%Y-\%b-\%d")
 }
 \arguments{
-\item{dat}{Dataframe of ACDP data in long format, including \code{depth_flag}
-column, \code{adcp_flag_data()}.}
+\item{dat}{Data frame of ACDP data in long format, including
+\code{depth_flag} column, as exported from \code{adcp_flag_data()}.}
 
 \item{title}{Optional title for the figure.}
 
-\item{date_format}{Format for the date labels. Default is "\%Y-\%b-\%d"}
+\item{date_format}{Format for the date labels. Default is
+\code{"\%Y-\%b-\%d"}.}
 }
 \value{
 ggplot object. Figure shows sensor_depth_below_surface_m over time,
   coloured by the \code{depth_flag} column.
 }
 \description{
-Plot sensor_depth_below_surface_m colour-coded by depth_flag
+Plot sensor_depth_below_surface_m coloured by depth_flag
 }

@@ -1,7 +1,8 @@
-#' Formats deployment table for summary report
+#' Formats tables for summary report
 #'
-#' @param report_table Deployment metadata from the NSDFA tracking sheet, as
-#'   returned from \code{adcp_write_report_table()}.
+#' @param report_table Table to include in the summary report. Either the
+#'   deployment metadata from the NSDFA tracking sheet (as returned from
+#'   \code{adcp_write_report_table()}, or the document history) .
 #'
 #' @param transpose Logical argument indicating whether to transpose
 #'   \code{report_table} before applying the format. Use the default \code{TRUE}
@@ -19,7 +20,7 @@
 #'   border_inner_v bold font fontsize autofit fit_to_width
 #'
 #' @export
-#'
+
 
 adcp_format_report_table <- function(report_table, transpose = TRUE){
 
@@ -60,5 +61,4 @@ adcp_format_report_table <- function(report_table, transpose = TRUE){
     # fit
     flextable::autofit() %>%
     flextable::fit_to_width(7.5)
-
 }

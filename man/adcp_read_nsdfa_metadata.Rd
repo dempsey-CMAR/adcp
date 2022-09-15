@@ -12,7 +12,8 @@ adcp_read_nsdfa_metadata(
 )
 }
 \arguments{
-\item{path}{Path to the tracking sheet (include file name and extension).}
+\item{path}{Path to the NSDFA tracking sheet (include file name and
+extension).}
 
 \item{sheet}{Sheet to read in. Defaults to the first sheet.}
 
@@ -21,9 +22,14 @@ adcp_read_nsdfa_metadata(
 \item{deployment_date}{Date of deployment for which to return metadata.}
 }
 \value{
-Returns dataframe of NSDFA tracking sheet ADCP metadata. Option to
+Returns data frame of NSDFA tracking sheet ADCP metadata. Option to
   filter for a single deployment.
 }
 \description{
 Import NSDFA tracking sheet and extra deployment metadata
+}
+\details{
+Reads in the NSDFA tracking sheet and corrects known errors (e.g.,
+  standardizes station and waterbody spellings, fixes deployment dates, and
+  etc.).
 }

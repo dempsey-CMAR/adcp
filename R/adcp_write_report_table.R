@@ -31,5 +31,4 @@ adcp_write_report_table <- function(metadata){
         is.na(`Depth Sounding (m)`), "Not recorded", `Depth Sounding (m)`
       )
     )
-
 }

@@ -13,10 +13,10 @@ adcp_add_opendata_cols(
 )
 }
 \arguments{
-\item{dat}{Dataframe of ACDP data in long format, as returned by
+\item{dat}{Data frame of ACDP data in long format, as returned by
 \code{adcp_pivot_longer()}.}
 
-\item{metadata}{Dataframe with metadata information for the deployment in
+\item{metadata}{Data frame with metadata information for the deployment in
 \code{dat} (e.g., a row from the NSDFA tracking sheet). Must include
 columns \code{Depl_ID}, \code{Waterbody}, and \code{Station}. Option to use
 default value \code{metadata = NULL} and provide the required values in the

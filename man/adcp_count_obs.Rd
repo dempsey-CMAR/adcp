@@ -14,7 +14,7 @@ adcp_count_obs(
 )
 }
 \arguments{
-\item{dat}{Dataframe including the column with observations that will be
+\item{dat}{Data frame including the column with observations that will be
 assigned to intervals. The interval size is determined by the range of
 these observations and \code{n_ints}.}
 
@@ -38,7 +38,7 @@ right inclusive. Passed to the \code{include.lowest} argument of
 \code{cut()}.}
 }
 \value{
-Returns a dataframe of lower and upper interval limits (right
+Returns a data frame of lower and upper interval limits (right
   inclusive), and frequency and proportion of observations in each interval.
 }
 \description{
@@ -66,4 +66,8 @@ Assigns intervals to \code{column} using the \code{cut()} function.
   n_digits should be large enough to ensure round(x1, digits = n_digits) <
   xmin. This could also be solved if \code{include.lower} could be set to
   \code{TRUE} in \code{openair::windRose()}.
+
+  NOTE: I submitted a Pull Request to Open Air. I think it was merged. So
+  could update the include.lower call here, but will need to think about
+  this.
 }

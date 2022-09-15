@@ -7,18 +7,18 @@
 #'
 #'   A warning is printed if any bin_depth_below_surface_m are negative.
 #'
-#' @param dat Dataframe of ACDP data in long format, as returned by
+#' @param dat Data frame of ACDP data in long format, as returned by
 #'   \code{adcp_pivot_longer()}.
 #'
-#' @param metadata Dataframe with metadata information for the deployment in
+#' @param metadata Data frame with metadata information for the deployment in
 #'   \code{dat} (e.g., a row from the NSDFA tracking sheet). Must include column
-#'   Inst_Altitude. Option to use default value \code{metadata = NULL} and
-#'   provide the required value in the \code{inst_alt} argument.
+#'   \code{Inst_Altitude}. Option to use default value \code{metadata = NULL}
+#'   and provide the required value in the \code{inst_alt} argument.
 #'
 #' @param inst_alt Height of the instrument above the sea floor (in metres). Not
 #'   used if \code{metadata} argument is specified.
 #'
-#' @importFrom dplyr %>% mutate select
+#' @importFrom dplyr %>% contains mutate select
 #'
 #' @export
 

@@ -7,7 +7,7 @@
 adcp_pivot_longer(dat_wide, rm_NA = TRUE)
 }
 \arguments{
-\item{dat_wide}{Dataframe of ADCP data, as returned from
+\item{dat_wide}{Data frame of ADCP data, as returned from
 \code{adcp_read_txt()} or \code{adcp_assign_alt()}.}
 
 \item{rm_NA}{Logical argument. If \code{rm_NA = TRUE}, rows where

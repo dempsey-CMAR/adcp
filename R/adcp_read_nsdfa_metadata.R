@@ -1,6 +1,11 @@
 #' Import NSDFA tracking sheet and extra deployment metadata
 #'
-#' @param path Path to the tracking sheet (include file name and extension).
+#' @details Reads in the NSDFA tracking sheet and corrects known errors (e.g.,
+#'   standardizes station and waterbody spellings, fixes deployment dates, and
+#'   etc.).
+#'
+#' @param path Path to the NSDFA tracking sheet (include file name and
+#'   extension).
 #'
 #' @param sheet Sheet to read in. Defaults to the first sheet.
 #'
@@ -8,7 +13,7 @@
 #'
 #' @param deployment_date Date of deployment for which to return metadata.
 #'
-#' @return Returns dataframe of NSDFA tracking sheet ADCP metadata. Option to
+#' @return Returns data frame of NSDFA tracking sheet ADCP metadata. Option to
 #'   filter for a single deployment.
 #'
 #' @importFrom readxl read_excel
@@ -57,7 +62,6 @@ adcp_read_nsdfa_metadata <- function(
     Current_PingsPerEnsemble = NA, Waves_Ensemble_Interval_s = NA,
     Waves_Averaging_Interval_s  = NA,	Waves_PingsPerEnsemble = NA,	Notes = NA
   )
-
 
 # Read in and format tracking sheet ---------------------------------------
 

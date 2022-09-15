@@ -22,7 +22,11 @@
 #'   xmin. This could also be solved if \code{include.lower} could be set to
 #'   \code{TRUE} in \code{openair::windRose()}.
 #'
-#' @param dat Dataframe including the column with observations that will be
+#'   NOTE: I submitted a Pull Request to Open Air. I think it was merged. So
+#'   could update the include.lower call here, but will need to think about
+#'   this.
+#'
+#' @param dat Data frame including the column with observations that will be
 #'   assigned to intervals. The interval size is determined by the range of
 #'   these observations and \code{n_ints}.
 #'
@@ -45,7 +49,7 @@
 #' @param label_sep Separator for the interval labels ("lower to upper").
 #'   Default is a new line to save room on plot axis.
 #'
-#' @return Returns a dataframe of lower and upper interval limits (right
+#' @return Returns a data frame of lower and upper interval limits (right
 #'   inclusive), and frequency and proportion of observations in each interval.
 #'
 #' @importFrom dplyr arrange mutate pull select tibble

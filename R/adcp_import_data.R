@@ -1,13 +1,13 @@
 #' @title Import current data from rds files.
 
-#' @param path_input Path to the *.rds files to be imported. Default is the
+#' @param path_input Path to the rds files to be imported. Default is the
 #'   ADCP/Open Data/County Datasets folder on the CMAR Operations shared drive
 #'   (user must be connected to the Perennia VPN).
 #'
-#' @param county Vector of character string(s) indicating which county or
-#' counties for which to import data. The filter is applied to the file path, so
-#' the county name MUST be part of the file path (e.g., the name of the folder).
-#' Defaults to all counties.
+#' @param county Vector of character string(s) indicating the county or counties
+#'   for which to import data. The filter is applied to the file path, so the
+#'   county name MUST be part of the file path (e.g., the name of the folder).
+#'   Defaults to all counties.
 #'
 #' @param add_county_col Logical argument indicating whether to include a
 #'   "county" column in the output. If \code{TRUE}, the imported data must have
@@ -48,7 +48,7 @@ adcp_import_data <- function(
   # add county column
   if(isTRUE(add_county_col)) {
 
-    # import county abbrevations from internal data file
+    # import county abbreviations from internal data file
     county_abb <- get0("county_abb", envir = asNamespace("adcp"))
 
     # merge dat and county abbreviation files

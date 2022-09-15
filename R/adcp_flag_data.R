@@ -3,12 +3,12 @@
 #' @param dat Dataframe of ACDP data in long format, as returned by
 #'   \code{adcp_pivot_longer()}.
 #'
-#' @param depth_flag_threshold The change in \code{sensor_depth_below_surface_m} that will
-#'   trigger a flag (in metres).
+#' @param depth_flag_threshold The change in \code{sensor_depth_below_surface_m}
+#'   that will trigger a flag (in metres).
 #'
-#' @return Returns dat with two extra columns for inspection: \code{DIFF} =
-#'   lead(sensor_depth_below_surface_m) - sensor_depth_below_surface_m and
-#'   \code{FLAG}.
+#' @return Returns \code{dat} with two extra columns for inspection:
+#'   \code{depth_diff} = lead(sensor_depth_below_surface_m) -
+#'   sensor_depth_below_surface_m and \code{depth_flag}.
 #'
 #' @importFrom glue glue
 #' @importFrom dplyr case_when distinct lag lead left_join mutate
@@ -36,5 +36,4 @@ adcp_flag_data <- function(dat, depth_flag_threshold = 1) {
     left_join(sensor_depth, by = c("timestamp_utc", "sensor_depth_below_surface_m"))
 
   dat
-
 }

@@ -1,4 +1,4 @@
-#' Read ADCP .txt file
+#' Read ADCP txt file
 #'
 #' @description Read raw ADCP txt file into R and format. Label each row with
 #'   the appropriate variable name (i.e., "SensorDepth", "WaterSpeed", or
@@ -22,11 +22,11 @@
 #'   Include the ".txt" file extension. Default is \code{file_name = NULL}.
 #'
 #' @param rm_dups Logical argument indicating whether to remove duplicate rows.
-#'   Default is \code{TRUE}. (Note: the \code{Num} colunm is removed before
+#'   Default is \code{TRUE}. (Note: the \code{Num} column is removed before
 #'   checking for duplicate rows.)
 #'
-#' @return Returns a dataframe of the data with a single header row and each row
-#'   labelled as "SensorDepth", "WaterSpeed", or "WaterDirection".
+#' @return Returns a data frame of the data with a single header row and each
+#'   row labelled as "SensorDepth", "WaterSpeed", or "WaterDirection".
 #'
 #' @importFrom data.table fread
 #' @importFrom dplyr %>% across case_when everything filter if_else last_col
@@ -34,7 +34,7 @@
 #' @importFrom glue glue
 #' @importFrom lubridate make_datetime force_tz
 #' @importFrom stringr str_detect
-
+#'
 #' @export
 
 

@@ -7,13 +7,13 @@
 adcp_import_data(path_input = NULL, county = "all", add_county_col = TRUE)
 }
 \arguments{
-\item{path_input}{Path to the *.rds files to be imported. Default is the
+\item{path_input}{Path to the rds files to be imported. Default is the
 ADCP/Open Data/County Datasets folder on the CMAR Operations shared drive
 (user must be connected to the Perennia VPN).}
 
-\item{county}{Vector of character string(s) indicating which county or
-counties for which to import data. The filter is applied to the file path, so
-the county name MUST be part of the file path (e.g., the name of the folder).
+\item{county}{Vector of character string(s) indicating the county or counties
+for which to import data. The filter is applied to the file path, so the
+county name MUST be part of the file path (e.g., the name of the folder).
 Defaults to all counties.}
 
 \item{add_county_col}{Logical argument indicating whether to include a

@@ -1,6 +1,6 @@
 #' Pivot ADCP data from bin height as column names to bin height as observations
 #'
-#' @param dat_wide Dataframe of ADCP data, as returned from
+#' @param dat_wide Data frame of ADCP data, as returned from
 #'   \code{adcp_read_txt()} or \code{adcp_assign_alt()}.
 
 #' @param rm_NA Logical argument. If \code{rm_NA = TRUE}, rows where

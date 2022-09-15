@@ -1,6 +1,6 @@
-#' Check for duplicate TIMESTAMP values
+#' Check for duplicate timestamp values
 #'
-#' @param dat_wide Dataframe of ADCP data, as returned from
+#' @param dat_wide Data frame of ADCP data, as returned from
 #'   \code{adcp_read_txt()}.
 #'
 #' @return If duplicate timestamps are detected, returns a warning and

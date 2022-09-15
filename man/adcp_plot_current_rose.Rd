@@ -12,7 +12,8 @@ adcp_plot_current_rose(
 )
 }
 \arguments{
-\item{dat}{Dataframe that includes columns \code{SPEED} and \code{DIRECTION}.}
+\item{dat}{Data frame with column names that include the strings
+\code{"speed"} and \code{"direction"}.}
 
 \item{breaks}{Number of break points for current speed OR a vector of breaks.
 Lower-inclusive.}

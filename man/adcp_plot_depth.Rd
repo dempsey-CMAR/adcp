@@ -7,12 +7,13 @@
 adcp_plot_depth(dat, title = NULL, date_format = "\%Y-\%b-\%d", geom = "point")
 }
 \arguments{
-\item{dat}{Dataframe of ACDP data in long format, as returned by
+\item{dat}{Data frame of ACDP data in long format, as returned by
 \code{adcp_format_opendata()}.}
 
 \item{title}{Optional title for the figure.}
 
-\item{date_format}{Format for the date labels. Default is "\%Y-\%b-\%d"}
+\item{date_format}{Format for the date labels. Default is
+\code{"\%Y-\%b-\%d"}.}
 
 \item{geom}{Geom to plot. Options are \code{"point"} or \code{"line"}.}
 }

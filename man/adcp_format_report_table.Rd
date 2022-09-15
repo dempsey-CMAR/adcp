@@ -2,13 +2,14 @@
 % Please edit documentation in R/adcp_format_report_table.R
 \name{adcp_format_report_table}
 \alias{adcp_format_report_table}
-\title{Formats deployment table for summary report}
+\title{Formats tables for summary report}
 \usage{
 adcp_format_report_table(report_table, transpose = TRUE)
 }
 \arguments{
-\item{report_table}{Deployment metadata from the NSDFA tracking sheet, as
-returned from \code{adcp_write_report_table()}.}
+\item{report_table}{Table to include in the summary report. Either the
+deployment metadata from the NSDFA tracking sheet (as returned from
+\code{adcp_write_report_table()}, or the document history) .}
 
 \item{transpose}{Logical argument indicating whether to transpose
 \code{report_table} before applying the format. Use the default \code{TRUE}
@@ -22,5 +23,5 @@ Returns a flextable object that will render nicely in the Word
   entries in \code{report_table}.
 }
 \description{
-Formats deployment table for summary report
+Formats tables for summary report
 }

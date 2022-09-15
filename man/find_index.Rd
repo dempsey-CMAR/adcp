@@ -7,10 +7,11 @@
 find_index(dat_wide)
 }
 \arguments{
-\item{dat_wide}{fill this in}
+\item{dat_wide}{Data frame of ADCP data, as exported from
+\code{adcp_read_txt()}.}
 }
 \value{
-Returns the index of the first column with bin data
+Returns the index of the first column with bin data.
 }
 \description{
 Index of first bin column

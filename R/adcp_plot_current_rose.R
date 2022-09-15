@@ -4,7 +4,8 @@
 #'   the \code{openair} package. See help files for \code{openair::windRose} for
 #'   more detail.
 #'
-#' @param dat Dataframe that includes columns \code{SPEED} and \code{DIRECTION}.
+#' @param dat Data frame with column names that include the strings
+#'   \code{"speed"} and \code{"direction"}.
 #'
 #' @param breaks Number of break points for current speed OR a vector of breaks.
 #'   Lower-inclusive.

@@ -1,6 +1,6 @@
 #' Plot histogram of speed observations
 #'
-#' @param dat_hist Dataframe that includes columns \code{bins_plot} (text),
+#' @param dat_hist Data frame that includes columns \code{bins_plot} (text),
 #'   \code{prop}, and \code{freq}.
 #'
 #' @param bar_cols Vector of colours. Must be the same length as the number of
@@ -9,8 +9,7 @@
 #' @param speed_label Title of the current speed legend. Default is "Current
 #'   Speed (cm/s)".
 #'
-#' @return Returns a dataframe of upper and lower bin limits (lower inclusive),
-#'   and frequency and proportion of observations in each bin.
+#' @return Returns a ggplot object.
 #'
 #' @importFrom ggplot2 expansion geom_col geom_text scale_fill_manual scale_x_discrete
 #'   scale_y_continuous theme_light
@@ -27,5 +26,4 @@ adcp_plot_speed_hist <- function(dat_hist, bar_cols,
     scale_x_discrete(speed_label) +
     scale_y_continuous("Percent (%)", expand = expansion(mult = c(0, 0.1))) +
     theme_light()
-
 }

@@ -1,9 +1,9 @@
 #' Add deployment_id, waterbody, and station columns
 #'
-#' @param dat Dataframe of ACDP data in long format, as returned by
+#' @param dat Data frame of ACDP data in long format, as returned by
 #'   \code{adcp_pivot_longer()}.
 #'
-#' @param metadata Dataframe with metadata information for the deployment in
+#' @param metadata Data frame with metadata information for the deployment in
 #'   \code{dat} (e.g., a row from the NSDFA tracking sheet). Must include
 #'   columns \code{Depl_ID}, \code{Waterbody}, and \code{Station}. Option to use
 #'   default value \code{metadata = NULL} and provide the required values in the

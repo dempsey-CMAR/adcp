@@ -13,10 +13,10 @@ adcp_assign_altitude(
 )
 }
 \arguments{
-\item{dat_wide}{Dataframe of ADCP data, as exported from
+\item{dat_wide}{Data frame of ADCP data, as exported from
 \code{adcp_read_txt()}.}
 
-\item{metadata}{Dataframe with metadata information for the deployment in
+\item{metadata}{Data frame with metadata information for the deployment in
 \code{dat_wide} (e.g., a row from the NSDFA tracking sheet). Must include
 columns \code{Inst_Altitude}, \code{Bin_Size}, and \code{First_Bin_Range}.
 Option to use default value \code{metadata = NULL} and provide the required

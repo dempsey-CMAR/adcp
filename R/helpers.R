@@ -1,8 +1,9 @@
 #' Index of first bin column
 #'
-#' @param dat_wide fill this in
+#' @param dat_wide Data frame of ADCP data, as exported from
+#'   \code{adcp_read_txt()}.
 #'
-#' @return Returns the index of the first column with bin data
+#' @return Returns the index of the first column with bin data.
 #'
 #' @importFrom stringr str_match str_remove
 #' @importFrom stats na.omit
@@ -33,7 +34,6 @@ find_index <- function(dat_wide){
   suppressWarnings(
     which(colnames(dat_wide) == min(as.numeric(colnames(dat_wide)), na.rm = TRUE))
   )
-
 }
 
 
@@ -63,21 +63,23 @@ adcp_extract_deployment_info <- function(file_path){
     str_sub(stringi::stri_locate_last(file_path, regex = "/")[1] + 1) %>%
     str_remove(pattern = ".txt|.csv") %>%
     tibble(DEPLOYMENT = .) %>%
-    separate(col = 1, sep = "_",
-             into = c("Depl_Date", "Station_Name"),
-             remove = FALSE) %>%
+    separate(
+      col = 1, sep = "_",
+      into = c("Depl_Date", "Station_Name"),
+      remove = FALSE
+    ) %>%
     mutate(Depl_Date = as_date(Depl_Date))
-
 }
 
 
 #' Convert depth_flag column to ordered factor
 #'
-#' @param dat Dataframe of ACDP data in long format, as returned by
+#' @param dat Data frame of ACDP data in long format, as returned by
 #'   \code{adcp_flag_data()}.
 #'
-#' @return Returns dat, with the depth_flag column as an ordered factor, with levels
-#' "good" < "SENSOR_DEPTH_BELOW_SURFACE changed by > x m" < "manual flag".
+#' @return Returns \code{dat}, with the \code{depth_flag} column as an ordered
+#'   factor, with levels \code{"good" < "SENSOR_DEPTH_BELOW_SURFACE changed by >
+#'   x m" < "manual flag"}.
 #'
 #' @importFrom dplyr mutate
 #' @importFrom stringr str_detect

@@ -1,8 +1,8 @@
 #' Export Current Data Deployment Information Dataset
 #'
 #' @description Imports NSDFA Tracking sheet and Deployment ID tracker and
-#'   exports the metadata for the NS OpenData Portal. Must be connected to CMAR
-#'   shared drive.
+#'   exports the metadata for the Nova Scotia Open Data Portal. User must be
+#'   connected to CMAR shared drive.
 #'
 #' @param path_nsdfa Full file path for the nsdfa tracking sheet, including file
 #'   name and extension.
@@ -12,7 +12,7 @@
 #' @param path_export File path to the folder where the Deployment Information
 #'   Dataset should be exported.
 #'
-#' @return Exports csv file named todays-date_Current_Data_Deployment_Info.
+#' @return Exports csv file named todays-date_Current_Data_Deployment_Info.csv.
 #'
 #' @importFrom dplyr %>% arrange distinct filter left_join rename transmute
 #'   select
@@ -22,12 +22,6 @@
 #' @importFrom stringr str_detect
 #'
 #' @export
-
-
-# path_import <- file.path("Y:/Coastal Monitoring Program/ADCP/Side Lobe Trimmed")
-#
-# path_export <- file.path("Y:/Coastal Monitoring Program/ADCP/Open Data/Submissions")
-
 
 
 adcp_export_deployment_info <- function(
@@ -82,6 +76,4 @@ adcp_export_deployment_info <- function(
     metadata,
     file = glue("{path_export}/{Sys.Date()}_Current_Data_Deployment_Info.csv")
   )
-
-
 }

@@ -7,7 +7,7 @@
 adcp_plot_speed_hist(dat_hist, bar_cols, speed_label = "Current Speed (cm/s)")
 }
 \arguments{
-\item{dat_hist}{Dataframe that includes columns \code{bins_plot} (text),
+\item{dat_hist}{Data frame that includes columns \code{bins_plot} (text),
 \code{prop}, and \code{freq}.}
 
 \item{bar_cols}{Vector of colours. Must be the same length as the number of
@@ -17,8 +17,7 @@ bins to plot.}
 Speed (cm/s)".}
 }
 \value{
-Returns a dataframe of upper and lower bin limits (lower inclusive),
-  and frequency and proportion of observations in each bin.
+Returns a ggplot object.
 }
 \description{
 Plot histogram of speed observations
