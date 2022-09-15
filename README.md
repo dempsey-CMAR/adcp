@@ -9,7 +9,7 @@
 
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![](https://img.shields.io/badge/devel%20version-1.0.1-blue.svg)](https://github.com/dempsey-CMAR/adcp)
+[![](https://img.shields.io/badge/devel%20version-1.0.2-blue.svg)](https://github.com/dempsey-CMAR/adcp)
 [![CodeFactor](https://www.codefactor.io/repository/github/dempsey-CMAR/adcp/badge)](https://www.codefactor.io/repository/github/dempsey-CMAR/adcp)
 [![R build
 status](https://github.com/dempsey-CMAR/adcp/workflows/R-CMD-check/badge.svg)](https://github.com/dempsey-CMAR/adcp/actions)
@@ -197,15 +197,16 @@ dat <- adcp_pivot_longer(dat)
 
 head(dat)
 #> # A tibble: 6 x 5
-#>   timestamp_utc       sensor_depth_below_~ bin_height_above_se~ sea_water_speed~
-#>   <dttm>                             <dbl>                <dbl>            <dbl>
-#> 1 2019-01-17 15:10:00                 26.8                  1.5            0.074
-#> 2 2019-01-17 15:10:00                 26.8                  2.5            0.087
-#> 3 2019-01-17 15:10:00                 26.8                  3.5            0.103
-#> 4 2019-01-17 15:10:00                 26.8                  4.5            0.124
-#> 5 2019-01-17 15:10:00                 26.8                  5.5            0.138
-#> 6 2019-01-17 15:10:00                 26.8                  6.5            0.171
-#> # ... with 1 more variable: sea_water_to_direction_degree <dbl>
+#>   timestamp_utc       sensor_depth_below_surface_m bin_height_~1 sea_w~2 sea_w~3
+#>   <dttm>                                     <dbl>         <dbl>   <dbl>   <dbl>
+#> 1 2019-01-17 15:10:00                         26.8           1.5   0.074    209.
+#> 2 2019-01-17 15:10:00                         26.8           2.5   0.087    208.
+#> 3 2019-01-17 15:10:00                         26.8           3.5   0.103    211.
+#> 4 2019-01-17 15:10:00                         26.8           4.5   0.124    224.
+#> 5 2019-01-17 15:10:00                         26.8           5.5   0.138    221.
+#> 6 2019-01-17 15:10:00                         26.8           6.5   0.171    220.
+#> # ... with abbreviated variable names 1: bin_height_above_sea_floor_m,
+#> #   2: sea_water_speed_m_s, 3: sea_water_to_direction_degree
 ```
 
 `dat` is now in a useful format for analysis.
@@ -221,16 +222,17 @@ dat <- adcp_calculate_bin_depth(dat, metadata = metadata)
 
 head(dat)
 #> # A tibble: 6 x 6
-#>   timestamp_utc       sensor_depth_below~ bin_depth_below_su~ bin_height_above_~
-#>   <dttm>                            <dbl>               <dbl>              <dbl>
-#> 1 2019-01-17 15:10:00                26.8                25.8                1.5
-#> 2 2019-01-17 15:10:00                26.8                24.8                2.5
-#> 3 2019-01-17 15:10:00                26.8                23.8                3.5
-#> 4 2019-01-17 15:10:00                26.8                22.8                4.5
-#> 5 2019-01-17 15:10:00                26.8                21.8                5.5
-#> 6 2019-01-17 15:10:00                26.8                20.8                6.5
-#> # ... with 2 more variables: sea_water_speed_m_s <dbl>,
-#> #   sea_water_to_direction_degree <dbl>
+#>   timestamp_utc       sensor_depth_below_surfa~1 bin_d~2 bin_h~3 sea_w~4 sea_w~5
+#>   <dttm>                                   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
+#> 1 2019-01-17 15:10:00                       26.8    25.8     1.5   0.074    209.
+#> 2 2019-01-17 15:10:00                       26.8    24.8     2.5   0.087    208.
+#> 3 2019-01-17 15:10:00                       26.8    23.8     3.5   0.103    211.
+#> 4 2019-01-17 15:10:00                       26.8    22.8     4.5   0.124    224.
+#> 5 2019-01-17 15:10:00                       26.8    21.8     5.5   0.138    221.
+#> 6 2019-01-17 15:10:00                       26.8    20.8     6.5   0.171    220.
+#> # ... with abbreviated variable names 1: sensor_depth_below_surface_m,
+#> #   2: bin_depth_below_surface_m, 3: bin_height_above_sea_floor_m,
+#> #   4: sea_water_speed_m_s, 5: sea_water_to_direction_degree
 ```
 
 `adcp_add_opendata_cols()` adds `deployment_id`, `waterbody`, and
@@ -241,17 +243,18 @@ dat <- adcp_add_opendata_cols(dat, metadata = metadata)
 
 head(dat)
 #> # A tibble: 6 x 9
-#>   deployment_id waterbody      station    timestamp_utc       sensor_depth_belo~
-#>   <chr>         <chr>          <chr>      <dttm>                           <dbl>
-#> 1 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 2 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 3 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 4 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 5 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 6 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> # ... with 4 more variables: bin_depth_below_surface_m <dbl>,
-#> #   bin_height_above_sea_floor_m <dbl>, sea_water_speed_m_s <dbl>,
-#> #   sea_water_to_direction_degree <dbl>
+#>   deployme~1 water~2 station timestamp_utc       senso~3 bin_d~4 bin_h~5 sea_w~6
+#>   <chr>      <chr>   <chr>   <dttm>                <dbl>   <dbl>   <dbl>   <dbl>
+#> 1 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    25.8     1.5   0.074
+#> 2 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    24.8     2.5   0.087
+#> 3 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    23.8     3.5   0.103
+#> 4 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    22.8     4.5   0.124
+#> 5 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    21.8     5.5   0.138
+#> 6 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    20.8     6.5   0.171
+#> # ... with 1 more variable: sea_water_to_direction_degree <dbl>, and
+#> #   abbreviated variable names 1: deployment_id, 2: waterbody,
+#> #   3: sensor_depth_below_surface_m, 4: bin_depth_below_surface_m,
+#> #   5: bin_height_above_sea_floor_m, 6: sea_water_speed_m_s
 ```
 
 `adcp_flag_data()` flags obervations where
@@ -262,15 +265,17 @@ dat <- adcp_flag_data(dat)
 
 head(dat[, 6:11])
 #> # A tibble: 6 x 6
-#>   bin_depth_below~ bin_height_abov~ sea_water_speed~ sea_water_to_di~ depth_diff
-#>              <dbl>            <dbl>            <dbl>            <dbl>      <dbl>
-#> 1             25.8              1.5            0.074             209.       1.55
-#> 2             24.8              2.5            0.087             208.       1.55
-#> 3             23.8              3.5            0.103             211.       1.55
-#> 4             22.8              4.5            0.124             224.       1.55
-#> 5             21.8              5.5            0.138             221.       1.55
-#> 6             20.8              6.5            0.171             220.       1.55
-#> # ... with 1 more variable: depth_flag <glue>
+#>   bin_depth_below_surface_m bin_height_above_s~1 sea_w~2 sea_w~3 depth~4 depth~5
+#>                       <dbl>                <dbl>   <dbl>   <dbl>   <dbl> <glue> 
+#> 1                      25.8                  1.5   0.074    209.    1.55 sensor~
+#> 2                      24.8                  2.5   0.087    208.    1.55 sensor~
+#> 3                      23.8                  3.5   0.103    211.    1.55 sensor~
+#> 4                      22.8                  4.5   0.124    224.    1.55 sensor~
+#> 5                      21.8                  5.5   0.138    221.    1.55 sensor~
+#> 6                      20.8                  6.5   0.171    220.    1.55 sensor~
+#> # ... with abbreviated variable names 1: bin_height_above_sea_floor_m,
+#> #   2: sea_water_speed_m_s, 3: sea_water_to_direction_degree, 4: depth_diff,
+#> #   5: depth_flag
 ```
 
 All of these steps can be linked using the pipe operator:
@@ -286,17 +291,19 @@ dat <- adcp_read_txt(path, "2019-01-17_Long_Beach.txt") %>%
 
 head(dat)
 #> # A tibble: 6 x 11
-#>   deployment_id waterbody      station    timestamp_utc       sensor_depth_belo~
-#>   <chr>         <chr>          <chr>      <dttm>                           <dbl>
-#> 1 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 2 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 3 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 4 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 5 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> 6 DG009         St. Mary's Bay Long Beach 2019-01-17 15:10:00               26.8
-#> # ... with 6 more variables: bin_depth_below_surface_m <dbl>,
-#> #   bin_height_above_sea_floor_m <dbl>, sea_water_speed_m_s <dbl>,
-#> #   sea_water_to_direction_degree <dbl>, depth_diff <dbl>, depth_flag <glue>
+#>   deployme~1 water~2 station timestamp_utc       senso~3 bin_d~4 bin_h~5 sea_w~6
+#>   <chr>      <chr>   <chr>   <dttm>                <dbl>   <dbl>   <dbl>   <dbl>
+#> 1 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    25.8     1.5   0.074
+#> 2 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    24.8     2.5   0.087
+#> 3 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    23.8     3.5   0.103
+#> 4 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    22.8     4.5   0.124
+#> 5 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    21.8     5.5   0.138
+#> 6 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    20.8     6.5   0.171
+#> # ... with 3 more variables: sea_water_to_direction_degree <dbl>,
+#> #   depth_diff <dbl>, depth_flag <glue>, and abbreviated variable names
+#> #   1: deployment_id, 2: waterbody, 3: sensor_depth_below_surface_m,
+#> #   4: bin_depth_below_surface_m, 5: bin_height_above_sea_floor_m,
+#> #   6: sea_water_speed_m_s
 ```
 
 ### Plot data
