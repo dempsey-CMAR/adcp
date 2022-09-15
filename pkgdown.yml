@@ -3,7 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   cut_function: cut_function.html
-last_built: 2022-09-15T14:46Z
+last_built: 2022-09-15T14:49Z
 urls:
   reference: https://dempsey-cmar.github.io/adcp/reference
   article: https://dempsey-cmar.github.io/adcp/articles
