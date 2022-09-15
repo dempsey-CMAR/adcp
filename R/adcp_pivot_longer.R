@@ -27,7 +27,7 @@
 #' @export
 
 
-adcp_pivot_longer <- function(dat_wide, rm_NA = TRUE){
+adcp_pivot_longer <- function(dat_wide, rm_NA = TRUE) {
 
   # index of first data column
   index <- find_index(dat_wide)
@@ -51,7 +51,7 @@ adcp_pivot_longer <- function(dat_wide, rm_NA = TRUE){
     select(-Num) %>%
     # use index - 1 because dropped the Num column
     pivot_longer(
-      cols = (all_of(index)-1):last_col(),
+      cols = (all_of(index) - 1):last_col(),
       names_to = "bin_id", values_to = "value"
     ) %>%
     pivot_wider(names_from = "variable", values_from = value) %>%
@@ -65,8 +65,7 @@ adcp_pivot_longer <- function(dat_wide, rm_NA = TRUE){
     )
 
   # in case want to use after adcp_assign_altitude (preferred)
-  if(suppressWarnings(!is.na(as.numeric(dat$bin_id[1])))) {
-
+  if (suppressWarnings(!is.na(as.numeric(dat$bin_id[1])))) {
     dat <- dat %>%
       mutate(bin_height_above_sea_floor_m = as.numeric(bin_id)) %>%
       select(
@@ -78,7 +77,7 @@ adcp_pivot_longer <- function(dat_wide, rm_NA = TRUE){
       )
   }
 
-  if(isTRUE(rm_NA)) {
+  if (isTRUE(rm_NA)) {
     dat <- filter(
       dat, !(is.na(sea_water_speed_m_s) | is.na(sea_water_to_direction_degree))
     )
@@ -87,7 +86,6 @@ adcp_pivot_longer <- function(dat_wide, rm_NA = TRUE){
   colnames(dat)[which(colnames(dat) == "timestamp_foo")] <- timestamp_colname
 
   dat
-
 }
 
 
@@ -106,6 +104,3 @@ adcp_pivot_longer <- function(dat_wide, rm_NA = TRUE){
 # filter(x, !(is.na(y) | is.na(z)))
 #
 # filter(x, !is.na(y) & !is.na(z))
-
-
-

@@ -9,7 +9,6 @@ utils::globalVariables(c(
   "Num",
   "V8",
   "V9",
-
   "Year",
   "Month",
   "Day",
@@ -27,7 +26,7 @@ utils::globalVariables(c(
   "sensor_depth",
 
   # adcp_correct_timestamp
-  #"TIMESTAMP",
+  # "TIMESTAMP",
   "timestamp_ns",
   "timestamp_utc",
 
@@ -84,7 +83,7 @@ utils::globalVariables(c(
 
   # import current data
   "Open_Data_Station",
-  '2022 Report (sidelobe trimmed)',
+  "2022 Report (sidelobe trimmed)",
   "Report_2022",
 
   # export_deployment_info
@@ -95,10 +94,4 @@ utils::globalVariables(c(
 
   # import_data
   "abb"
-
 ))
-
-
-
-
-

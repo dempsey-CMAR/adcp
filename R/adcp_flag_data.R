@@ -17,7 +17,6 @@
 
 
 adcp_flag_data <- function(dat, depth_flag_threshold = 1) {
-
   flag_message <- glue("sensor_depth_below_surface_m changed by > {depth_flag_threshold} m")
 
   sensor_depth <- dat %>%
@@ -26,8 +25,8 @@ adcp_flag_data <- function(dat, depth_flag_threshold = 1) {
     mutate(
       depth_diff = lead(sensor_depth_below_surface_m) - sensor_depth_below_surface_m,
       depth_flag = case_when(
-        depth_diff > depth_flag_threshold ~ flag_message,        # when sensor is being lowered
-        lag(depth_diff) < -depth_flag_threshold ~ flag_message,  # when sensor is being retrieved
+        depth_diff > depth_flag_threshold ~ flag_message, # when sensor is being lowered
+        lag(depth_diff) < -depth_flag_threshold ~ flag_message, # when sensor is being retrieved
         TRUE ~ "good"
       )
     )

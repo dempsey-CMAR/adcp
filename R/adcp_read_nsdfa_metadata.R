@@ -24,12 +24,10 @@
 #' @export
 
 
-adcp_read_nsdfa_metadata <- function(
-  path,
-  sheet = NULL,
-  station = NULL,
-  deployment_date = NULL
-) {
+adcp_read_nsdfa_metadata <- function(path,
+                                     sheet = NULL,
+                                     station = NULL,
+                                     deployment_date = NULL) {
 
   # row for Grand Passage deployment (FORCE deployment but we have the data)
   force_row <- tibble(
@@ -52,31 +50,31 @@ adcp_read_nsdfa_metadata <- function(
     Inst_Model = "Sentinel V100",
     Inst_Serial = NA, Inst_Depth = NA,
     Inst_Altitude = 0.5,
-    Inst_Interval = NA,	Depl_Voltage = NA,	Recv_Voltage = NA, Recv_Method = NA,
+    Inst_Interval = NA, Depl_Voltage = NA, Recv_Voltage = NA, Recv_Method = NA,
     Frame = NA,
     Depl_Attendant = "FORCE",
     Recv_Attendant = NA,
-    Bin_Size = 1,	First_Bin_Range = 1,
+    Bin_Size = 1, First_Bin_Range = 1,
     Current_Ensemble_Interval_s = NA,
     Current_Averaging_Interval_s = NA,
     Current_PingsPerEnsemble = NA, Waves_Ensemble_Interval_s = NA,
-    Waves_Averaging_Interval_s  = NA,	Waves_PingsPerEnsemble = NA,	Notes = NA
+    Waves_Averaging_Interval_s = NA, Waves_PingsPerEnsemble = NA, Notes = NA
   )
 
-# Read in and format tracking sheet ---------------------------------------
+  # Read in and format tracking sheet ---------------------------------------
 
   # NSDFA Tracking Sheet
   nsdfa <- read_excel(path, sheet = sheet, na = c("", "n/a", "N/A")) %>%
     select(-contains("Column"))
 
   # to correct mistake in 2022-03-17 version of tracking sheet
-  if(suppressWarnings(is.na(as_date(nsdfa$Depl_Date[1])))) {
-
+  if (suppressWarnings(is.na(as_date(nsdfa$Depl_Date[1])))) {
     nsdfa <- nsdfa %>%
       mutate(
         Depl_Date = case_when(
           Depl_Date == "Current, Waves, Temperature, Pressure" ~ "40522", # December 10, 2010
-          TRUE ~ Depl_Date),
+          TRUE ~ Depl_Date
+        ),
         Depl_Date = janitor::convert_to_date(as.numeric(Depl_Date))
       )
   }
@@ -97,19 +95,16 @@ adcp_read_nsdfa_metadata <- function(
           Station_Name == "Gypsum Mine" ~ "Bras d'Or Lakes",
         Waterbody == "Lennox Passage" & Depl_Date == "2021-09-01" &
           Station_Name == "Walshs Deep Cove" ~ "Carry Passage",
-
         Waterbody == "St Peters Inlet" ~ "St. Peters Inlet",
         TRUE ~ Waterbody
       ),
-
       Station_Name = case_when(
-
         Station_Name == "778" & Depl_Date == "2020-07-08" ~ "St. Peters Inlet",
         Station_Name == "1042 North" & Depl_Date == "2020-10-22" ~ "Cornwallis NE",
         Station_Name == "1042 South" & Depl_Date == "2020-10-22" ~ "Cornwallis SW",
         Station_Name == "1181" & Depl_Date == "2020-09-01" ~ "Woods Harbour",
         Station_Name == "Buoy Test" & Depl_Date == "2019-10-25" ~ "Blue Island",
-        Station_Name == "Dena's Pond" & Depl_Date == "2019-08-13"  ~ "Denas Pond",
+        Station_Name == "Dena's Pond" & Depl_Date == "2019-08-13" ~ "Denas Pond",
         Station_Name == "Eddy Cove C" & Depl_Date == "2014-07-09" ~ "Eddy Cove Center",
         Station_Name == "Inshore" & Depl_Date == "2016-06-30" ~ "Roy Island Inshore",
         Station_Name == "Outside" & Depl_Date == "2016-08-05" ~ "Roy Island Outer",
@@ -119,8 +114,7 @@ adcp_read_nsdfa_metadata <- function(
         Station_Name == "Saddle SW" & Depl_Date == "2015-10-07" ~ "Saddle Island SW",
         Station_Name == "Shut In Island" & Depl_Date == "2020-07-03" ~ "Shut-In Island", # for consistency with strings
         Station_Name == "St Margarets Bay Center" & Depl_Date == "2020-10-06" ~ "St. Margarets Bay Center",
-        Station_Name == "Tor Bay Center" & Depl_Date == "2019-02-05"  ~ "Center Bay",
-
+        Station_Name == "Tor Bay Center" & Depl_Date == "2019-02-05" ~ "Center Bay",
         TRUE ~ Station_Name
       ),
 
@@ -130,11 +124,10 @@ adcp_read_nsdfa_metadata <- function(
         Waterbody == "Woods Harbour" & Station_Name == "Woods Harbour" & Depl_Date == "2020-09-01" ~ "Shelburne",
         TRUE ~ County
       ),
-
       First_Bin_Range = case_when(
         First_Bin_Range == "1..6" ~ "1.6",
         Station_Name == "Canoe Island" & Depl_Date == "2020-09-24" & is.na(First_Bin_Range) ~ "1.62", # from the metadata in the non side-lobe trimmed excel files
-        Station_Name == "Woods Harbour" & Depl_Date == "2020-09-01" & is.na(First_Bin_Range) ~ "1",   # from the metadata in the non side-lobe trimmed excel files
+        Station_Name == "Woods Harbour" & Depl_Date == "2020-09-01" & is.na(First_Bin_Range) ~ "1", # from the metadata in the non side-lobe trimmed excel files
         TRUE ~ First_Bin_Range
       ),
 
@@ -147,16 +140,16 @@ adcp_read_nsdfa_metadata <- function(
     rbind(force_row)
 
   # filter to deployment of interest
-  if(!is.null(station) & !is.null(deployment_date)){
-
+  if (!is.null(station) & !is.null(deployment_date)) {
     nsdfa <- nsdfa %>%
       filter(Station_Name == station, Depl_Date = deployment_date) %>%
-      select(County, Waterbody, Station_Name, `Lease#`,
-             Depl_Date, Depl_Lat, Depl_Lon, Recv_Date,
-             Inst_Model, Inst_Serial, Inst_Depth, Inst_Altitude,
-             Bin_Size, First_Bin_Range, Notes)
+      select(
+        County, Waterbody, Station_Name, `Lease#`,
+        Depl_Date, Depl_Lat, Depl_Lon, Recv_Date,
+        Inst_Model, Inst_Serial, Inst_Depth, Inst_Altitude,
+        Bin_Size, First_Bin_Range, Notes
+      )
   }
 
   nsdfa
-
 }

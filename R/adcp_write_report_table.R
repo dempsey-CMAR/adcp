@@ -9,8 +9,7 @@
 #'
 #' @export
 
-adcp_write_report_table <- function(metadata){
-
+adcp_write_report_table <- function(metadata) {
   metadata %>%
     tibble() %>%
     select(
@@ -24,7 +23,8 @@ adcp_write_report_table <- function(metadata){
       `Averaging Intervals (s)` = Current_Averaging_Interval_s,
       `Pings per Ensemble` = Current_PingsPerEnsemble,
       `Bin Size (m)` = Bin_Size,
-      `First Bin Range (m)` = First_Bin_Range) %>%
+      `First Bin Range (m)` = First_Bin_Range
+    ) %>%
     mutate(
       `Depth Sounding (m)` = as.character(`Depth Sounding (m)`),
       `Depth Sounding (m)` = if_else(

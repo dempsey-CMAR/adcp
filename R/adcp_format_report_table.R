@@ -22,24 +22,21 @@
 #' @export
 
 
-adcp_format_report_table <- function(report_table, transpose = TRUE){
-
-  if(isTRUE(transpose)){
+adcp_format_report_table <- function(report_table, transpose = TRUE) {
+  if (isTRUE(transpose)) {
     # transpose table and make the column names the first column
     report_table <- report_table %>%
       t() %>%
       data.frame() %>%
       mutate(Record = colnames(report_table)) %>%
-      select(Record, 'Deployment Info' = 1)
+      select(Record, "Deployment Info" = 1)
     rownames(report_table) <- NULL
 
     report_table <- report_table %>%
       flextable::flextable() %>%
       flextable::delete_part(part = "header") %>%
       flextable::bold(i = NULL, j = 1, bold = TRUE, part = "body")
-
   } else {
-
     report_table <- report_table %>%
       flextable::flextable() %>%
       flextable::bold(bold = TRUE, part = "header")
@@ -51,10 +48,10 @@ adcp_format_report_table <- function(report_table, transpose = TRUE){
   # format table
   report_table %>%
     # borders
-    flextable::vline(border = small_border, part = "all" )%>%
-    flextable::border_outer(part = "all", border = small_border )%>%
-    flextable::border_inner_h(part = "all", border = small_border )%>%
-    flextable::border_inner_v(part = "all", border = small_border )%>%
+    flextable::vline(border = small_border, part = "all") %>%
+    flextable::border_outer(part = "all", border = small_border) %>%
+    flextable::border_inner_h(part = "all", border = small_border) %>%
+    flextable::border_inner_v(part = "all", border = small_border) %>%
     # font
     flextable::font(part = "all", fontname = "ebrima") %>%
     flextable::fontsize(size = 10, part = "all") %>%

@@ -26,8 +26,7 @@
 
 
 adcp_plot_current_rose <- function(dat, breaks, speed_cols = NULL,
-                                   speed_label = "Current Speed (cm/s)"){
-
+                                   speed_label = "Current Speed (cm/s)") {
   if (is.null(speed_cols)) {
     speed_cols <- viridis(breaks, option = "F", direction = -1)
   }
@@ -47,5 +46,4 @@ adcp_plot_current_rose <- function(dat, breaks, speed_cols = NULL,
     key.footer = "",
     key.position = "right"
   )
-
 }

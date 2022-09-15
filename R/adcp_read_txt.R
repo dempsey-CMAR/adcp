@@ -38,13 +38,12 @@
 #' @export
 
 
-adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE){
-
-  if(!is.null(file_name)) path <- paste0(path, "/", file_name)
+adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE) {
+  if (!is.null(file_name)) path <- paste0(path, "/", file_name)
 
   path <- file.path(path)
 
-  if(!str_detect(path, "txt")) {
+  if (!str_detect(path, "txt")) {
     stop("File extension not found. \nHINT: Include .txt in path or file_name.")
   }
 
@@ -55,11 +54,11 @@ adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE){
   # read in data
   dat_raw <- fread(
     path,
-    sep2 = ",",         # make separate columns for each cell
-    fill = TRUE,        # add NA for cells that do not have data
-    header = TRUE,      # keep header names
-    skip = 2,           # skip first two rows (duplicate header vals)
-    data.table = FALSE  # return a dataframe (instead of data.table)
+    sep2 = ",", # make separate columns for each cell
+    fill = TRUE, # add NA for cells that do not have data
+    header = TRUE, # keep header names
+    skip = 2, # skip first two rows (duplicate header vals)
+    data.table = FALSE # return a dataframe (instead of data.table)
   )
 
   # one column will be named SensorDepth, WaterSpeed, or WaterDirection. Change to V8
@@ -69,23 +68,23 @@ adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE){
 
   # rows alternate between SensorDepth, WaterSpeed, and WaterDirection
   dat <- dat_raw %>%
-    mutate(index = 1:n(),
-           variable = case_when(
-             index %in% seq(1, n(), 3) ~ params[1],
-             index %in% seq(2, n(), 3) ~ params[2],
-             index %in% seq(3, n(), 3) ~ params[3],
-             TRUE ~ NA_character_
-           ),
-           # do not assign tz= "America/Halifax". This will introduce NA values for the skipped hour of DST
-           timestamp_ns = make_datetime(Year, Month, Day, Hour, Min, Sec, tz = "UTC"),
+    mutate(
+      index = 1:n(),
+      variable = case_when(
+        index %in% seq(1, n(), 3) ~ params[1],
+        index %in% seq(2, n(), 3) ~ params[2],
+        index %in% seq(3, n(), 3) ~ params[3],
+        TRUE ~ NA_character_
+      ),
+      # do not assign tz= "America/Halifax". This will introduce NA values for the skipped hour of DST
+      timestamp_ns = make_datetime(Year, Month, Day, Hour, Min, Sec, tz = "UTC"),
     ) %>%
     select(-index) %>%
     select(timestamp_ns, Num, variable, V8:last_col()) %>%
     # change NaN values to NA
-    mutate(across(V8:last_col(), ~if_else(is.nan(.), NA_real_, .)))
+    mutate(across(V8:last_col(), ~ if_else(is.nan(.), NA_real_, .)))
 
-  if(adcp_check_duplicate_timestamp(dat) & rm_dups){
-
+  if (adcp_check_duplicate_timestamp(dat) & rm_dups) {
     dups <- dat %>%
       filter(variable == "SensorDepth")
     dups <- dups[duplicated(dups$timestamp_ns), ]
@@ -96,9 +95,8 @@ adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE){
     dat <- dat %>%
       select(-Num) %>%
       distinct() %>%
-      mutate(Num = sort(rep(1:(n()/3), 3))) %>%
+      mutate(Num = sort(rep(1:(n() / 3), 3))) %>%
       select(timestamp_ns, Num, variable, everything())
-
   }
 
   # QA check ---------------------------------------------------------------
@@ -108,28 +106,11 @@ adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE){
     filter(variable == "SensorDepth") %>%
     select(V9:last_col())
 
-  if(!all(is.na(check))) {
+  if (!all(is.na(check))) {
     warning("More than one SensorDepth found in row. \nHINT: Check labelling code")
   }
 
   # Return dat --------------------------------------------------------------
 
   dat
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

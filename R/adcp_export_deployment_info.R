@@ -24,13 +24,11 @@
 #' @export
 
 
-adcp_export_deployment_info <- function(
-  deployments,
-  path_nsdfa,
-  path_export
-) {
+adcp_export_deployment_info <- function(deployments,
+                                        path_nsdfa,
+                                        path_export) {
 
-# import files ------------------------------------------------------------
+  # import files ------------------------------------------------------------
 
   nsdfa <- adcp_read_nsdfa_metadata(path_nsdfa) %>%
     arrange(County, Waterbody, Depl_Date)
@@ -57,7 +55,6 @@ adcp_export_deployment_info <- function(
       lease = `Lease#`,
       latitude = Depl_Lat,
       longitude = Depl_Lon,
-
       sensor_model = Inst_Model,
       sensor_serial_number = Inst_Serial,
       deployment_sounding_m = Depl_Sounding,
@@ -70,7 +67,7 @@ adcp_export_deployment_info <- function(
     ) %>%
     arrange(deployment_id)
 
-# export data -------------------------------------------------------------
+  # export data -------------------------------------------------------------
 
   write_csv(
     metadata,

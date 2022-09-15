@@ -30,13 +30,13 @@
 #' @export
 
 
-adcp_correct_timestamp <- function(dat, rm = TRUE){
+adcp_correct_timestamp <- function(dat, rm = TRUE) {
 
   # determine whether instrument was deployed during DST
   DST <- dst(force_tz(min(dat$timestamp_ns), tzone = "America/Halifax"))
 
-  if(isTRUE(DST)) UTC_corr <- hours(3)
-  if(isFALSE(DST)) UTC_corr <- hours(4)
+  if (isTRUE(DST)) UTC_corr <- hours(3)
+  if (isFALSE(DST)) UTC_corr <- hours(4)
 
   dat <- dat %>%
     mutate(
@@ -45,8 +45,7 @@ adcp_correct_timestamp <- function(dat, rm = TRUE){
     ) %>%
     select(timestamp_utc, everything())
 
-  if(isTRUE(rm))  dat <- dat %>% select(-timestamp_ns)
+  if (isTRUE(rm)) dat <- dat %>% select(-timestamp_ns)
 
   dat
-
 }

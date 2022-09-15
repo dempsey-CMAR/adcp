@@ -19,8 +19,7 @@
 #' @export
 
 
-adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d"){
-
+adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d") {
   dat %>%
     select(timestamp_utc, sensor_depth_below_surface_m, depth_flag) %>%
     mutate(timestamp_utc = as_datetime(timestamp_utc)) %>%
@@ -29,12 +28,12 @@ adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d"){
     geom_point(alpha = 0.7, size = 1) +
     scale_x_datetime(date_labels = date_format) +
     scale_colour_manual(
-      "Depth Flag", values = c("#66C2A5", "#FC8D62", "#B3B3B3"), drop = TRUE
+      "Depth Flag",
+      values = c("#66C2A5", "#FC8D62", "#B3B3B3"), drop = TRUE
     ) +
     labs(title = title) +
     theme_light() +
     theme(legend.position = "bottom")
-
 }
 
 
@@ -59,14 +58,12 @@ adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d"){
 #'
 #' @export
 
-adcp_plot_depth <- function(dat, title = NULL, date_format = "%Y-%b-%d", geom = "point"){
-
-  if(!(geom %in% c("point", "line"))) {
-
+adcp_plot_depth <- function(dat, title = NULL, date_format = "%Y-%b-%d", geom = "point") {
+  if (!(geom %in% c("point", "line"))) {
     stop("geom must be 'point' or 'line ")
   }
 
-  #"#66C2A5" "#FC8D62" "#8DA0CB"
+  # "#66C2A5" "#FC8D62" "#8DA0CB"
   p <- dat %>%
     select(timestamp_utc, sensor_depth_below_surface_m) %>%
     mutate(timestamp_utc = as_datetime(timestamp_utc)) %>%
@@ -77,10 +74,9 @@ adcp_plot_depth <- function(dat, title = NULL, date_format = "%Y-%b-%d", geom = 
     labs(title = title) +
     theme_light()
 
-  if(geom == "point") p <- p + geom_point(alpha = 0.7, size = 1)
+  if (geom == "point") p <- p + geom_point(alpha = 0.7, size = 1)
 
-  if(geom == "line") p <- p + geom_line(size = 0.25)
+  if (geom == "line") p <- p + geom_line(size = 0.25)
 
   p
-
 }

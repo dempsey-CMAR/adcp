@@ -22,13 +22,10 @@
 #'
 #' @export
 
-adcp_calculate_bin_depth <- function(
-  dat,
-  metadata = NULL,
-  inst_alt = NULL
-){
-
-  if(!is.null(metadata)) inst_alt <- metadata$Inst_Altitude
+adcp_calculate_bin_depth <- function(dat,
+                                     metadata = NULL,
+                                     inst_alt = NULL) {
+  if (!is.null(metadata)) inst_alt <- metadata$Inst_Altitude
 
 
   dat <- dat %>%
@@ -47,10 +44,9 @@ adcp_calculate_bin_depth <- function(
       BIN_DEPTH_CHECK
     )
 
-  if(any(isFALSE(dat$BIN_DEPTH_CHECK))) {
+  if (any(isFALSE(dat$BIN_DEPTH_CHECK))) {
     warning("Negative bin_depth_below_surface_m value(s) detected.")
   }
 
   dat %>% select(-BIN_DEPTH_CHECK)
-
 }

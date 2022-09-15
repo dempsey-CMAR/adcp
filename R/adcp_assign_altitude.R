@@ -35,25 +35,22 @@
 #'
 #' @export
 
-adcp_assign_altitude <- function(
-  dat_wide,
-  metadata = NULL,
-  inst_alt = NULL,
-  bin_size = NULL,
-  first_bin_range = NULL
-){
-
-  if(!is.null(metadata)){
-
+adcp_assign_altitude <- function(dat_wide,
+                                 metadata = NULL,
+                                 inst_alt = NULL,
+                                 bin_size = NULL,
+                                 first_bin_range = NULL) {
+  if (!is.null(metadata)) {
     inst_alt <- metadata$Inst_Altitude
     bin_size <- metadata$Bin_Size
     first_bin_range <- metadata$First_Bin_Range
-
   }
 
   # number of bins to name
   index <- find_index(dat_wide) # index of first bin column
-  n_bins <- dat_wide %>% select(all_of(index):last_col()) %>% ncol()
+  n_bins <- dat_wide %>%
+    select(all_of(index):last_col()) %>%
+    ncol()
 
   # altitude of the first bin
   first_bin <- inst_alt + first_bin_range
@@ -69,5 +66,4 @@ adcp_assign_altitude <- function(
   names(dat_wide) <- colnames_new
 
   dat_wide
-
 }

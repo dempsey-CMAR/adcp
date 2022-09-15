@@ -21,32 +21,29 @@
 #' @export
 
 
-adcp_import_data <- function(
-  path_input = NULL,
-  county = "all",
-  add_county_col = TRUE
-) {
-
-
+adcp_import_data <- function(path_input = NULL,
+                             county = "all",
+                             add_county_col = TRUE) {
   if (is.null(path_input)) {
     # path to Open Data folder
     path_input <- file.path("Y:/Coastal Monitoring Program/ADCP/Open Data/County Datasets")
-
-  } else path_input <- path_input
+  } else {
+    path_input <- path_input
+  }
 
   # list rds files on the path and import -----------------------------------
 
   dat <- list.files(path_input, full.names = TRUE, pattern = ".rds")
 
   # filter for specified county(ies)
-  if(!("all" %in% county)) dat <- dat %>% str_subset(paste(county, collapse = "|"))
+  if (!("all" %in% county)) dat <- dat %>% str_subset(paste(county, collapse = "|"))
 
   # read and bind the rds files
   dat <- dat %>%
     purrr::map_dfr(readRDS)
 
   # add county column
-  if(isTRUE(add_county_col)) {
+  if (isTRUE(add_county_col)) {
 
     # import county abbreviations from internal data file
     county_abb <- get0("county_abb", envir = asNamespace("adcp"))
@@ -59,5 +56,4 @@ adcp_import_data <- function(
   }
 
   dat
-
 }

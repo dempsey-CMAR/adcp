@@ -56,14 +56,12 @@
 #'
 #' @export
 
-adcp_count_obs <- function(
-  dat,
-  column = sea_water_speed_cm_s,
-  n_ints = 12,
-  n_digits = 4,
-  label_sep = "\n",
-  lowest = FALSE
-){
+adcp_count_obs <- function(dat,
+                           column = sea_water_speed_cm_s,
+                           n_ints = 12,
+                           n_digits = 4,
+                           label_sep = "\n",
+                           lowest = FALSE) {
 
 
   # frequency table with n_ints even bins
@@ -72,7 +70,7 @@ adcp_count_obs <- function(
     cut(
       breaks = n_ints,
       dig.lab = n_digits,
-      right = TRUE,            # for consistency with the openair::windRose
+      right = TRUE, # for consistency with the openair::windRose
       include.lowest = lowest
     ) %>%
     table() %>%
@@ -85,18 +83,16 @@ adcp_count_obs <- function(
     )
 
   # to avoid negative intervals and very small start intervals
-  if(min(ints$lower) < 1e-4) {
-
+  if (min(ints$lower) < 1e-4) {
     ints[which(ints$lower == min(ints$lower)), "lower"] <- 0
 
     message("Lower bound of first interval set to 0")
-
   }
 
   # create bin label and calculate proportion
   ints <- ints %>%
     mutate(
-      #ints_label = glue("{round(lower, digits = 1)}{label_sep}to{round(upper, digits = 1)}"),
+      # ints_label = glue("{round(lower, digits = 1)}{label_sep}to{round(upper, digits = 1)}"),
       ints_label = paste(lower, "to", upper, sep = label_sep),
       prop = Freq / sum(Freq) * 100
     ) %>%
@@ -111,5 +107,4 @@ adcp_count_obs <- function(
     mutate(
       ints_label = factor(ints_label, levels = ints_levels)
     )
-
 }

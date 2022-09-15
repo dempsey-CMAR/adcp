@@ -11,8 +11,7 @@
 #' @export
 
 
-adcp_check_duplicate_timestamp <- function(dat_wide){
-
+adcp_check_duplicate_timestamp <- function(dat_wide) {
   depth <- dat_wide %>%
     filter(variable == "SensorDepth") %>%
     select(contains("timestamp"))
@@ -25,15 +24,14 @@ adcp_check_duplicate_timestamp <- function(dat_wide){
     filter(variable == "WaterDirection") %>%
     select(contains("timestamp"))
 
-  if(any(duplicated(depth[,1])) |
-     any(duplicated(speed[,1])) |
-     any(duplicated(direction[,1]))) {
+  if (any(duplicated(depth[, 1])) |
+    any(duplicated(speed[, 1])) |
+    any(duplicated(direction[, 1]))) {
 
-  #  warning("Duplicate TIMESTAMP values found.")
+    #  warning("Duplicate TIMESTAMP values found.")
 
     return(TRUE)
-
-  } else return(FALSE)
-
-
+  } else {
+    return(FALSE)
+  }
 }

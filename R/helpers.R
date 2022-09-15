@@ -10,14 +10,13 @@
 #'
 #' @export
 
-find_index <- function(dat_wide){
+find_index <- function(dat_wide) {
 
   # so can use with output directly from adcp_read_text()
   colnames_numeric <- str_match(colnames(dat_wide), "V\\d*$") %>%
     str_remove("V")
 
-  if(length(na.omit(colnames_numeric)) > 0) {
-
+  if (length(na.omit(colnames_numeric)) > 0) {
     col_start <- which(
       colnames_numeric == min(as.numeric(colnames_numeric), na.rm = TRUE)
     )
@@ -27,7 +26,6 @@ find_index <- function(dat_wide){
     )
 
     colnames(dat_wide)[col_start:col_end] <- colnames_numeric[col_start:col_end]
-
   }
 
   # index of the first measurement column
@@ -57,8 +55,7 @@ find_index <- function(dat_wide){
 #'
 #' @export
 
-adcp_extract_deployment_info <- function(file_path){
-
+adcp_extract_deployment_info <- function(file_path) {
   data.frame(file_path) %>%
     str_sub(stringi::stri_locate_last(file_path, regex = "/")[1] + 1) %>%
     str_remove(pattern = ".txt|.csv") %>%
@@ -86,8 +83,7 @@ adcp_extract_deployment_info <- function(file_path){
 #'
 #' @export
 
-adcp_convert_flag_to_ordered_factor <- function(dat){
-
+adcp_convert_flag_to_ordered_factor <- function(dat) {
   flags <- unique(dat$depth_flag)
 
   auto_flag <- flags[str_detect(flags, "sensor_depth")]
@@ -97,11 +93,6 @@ adcp_convert_flag_to_ordered_factor <- function(dat){
   dat %>%
     mutate(
       depth_flag = as.character(depth_flag),
-      depth_flag =  factor(depth_flag, levels = flags_order, ordered = TRUE)
+      depth_flag = factor(depth_flag, levels = flags_order, ordered = TRUE)
     )
-
 }
-
-
-
-

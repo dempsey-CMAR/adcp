@@ -17,8 +17,7 @@
 #' @export
 
 adcp_plot_speed_hist <- function(dat_hist, bar_cols,
-                                 speed_label = "Current Speed (cm/s)"){
-
+                                 speed_label = "Current Speed (cm/s)") {
   ggplot(dat_hist, aes(ints_label, prop, fill = ints_label)) +
     geom_col(col = 1) +
     geom_text(aes(label = freq), vjust = -0.5, size = 3) +

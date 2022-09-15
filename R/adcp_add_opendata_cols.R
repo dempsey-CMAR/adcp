@@ -24,17 +24,14 @@
 #' @export
 
 adcp_add_opendata_cols <- function(dat,
-                            metadata = NULL,
-                            deployment_id = NULL,
-                            waterbody = NULL,
-                            station = NULL){
-
-  if(!is.null(metadata)){
-
-    deployment_id = metadata$Depl_ID
-    waterbody = metadata$Waterbody
-    station = metadata$Station_Name
-
+                                   metadata = NULL,
+                                   deployment_id = NULL,
+                                   waterbody = NULL,
+                                   station = NULL) {
+  if (!is.null(metadata)) {
+    deployment_id <- metadata$Depl_ID
+    waterbody <- metadata$Waterbody
+    station <- metadata$Station_Name
   }
 
   dat <- dat %>%
@@ -44,6 +41,4 @@ adcp_add_opendata_cols <- function(dat,
       station = station,
     ) %>%
     select(deployment_id:station, everything())
-
-
 }
