@@ -56,6 +56,10 @@ utils::globalVariables(c(
   "Inst_Model", "Inst_Serial", "Inst_Depth", "Inst_Altitude",
   "Bin_Size", "First_Bin_Range", "Notes",
 
+  # export_deployment_info
+  "depl_date",
+  "station",
+
   # write_report_table
   "Current_Averaging_Interval_s",
   "Current_Ensemble_Interval_s",
