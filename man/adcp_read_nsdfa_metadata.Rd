@@ -30,6 +30,6 @@ Import NSDFA tracking sheet and extra deployment metadata
 }
 \details{
 Reads in the NSDFA tracking sheet and corrects known errors (e.g.,
-  standardizes station and waterbody spellings, fixes deployment dates, and
+  standardizes station and waterbody spellings, fixes deployment dates,
   etc.).
 }

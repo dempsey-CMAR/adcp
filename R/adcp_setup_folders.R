@@ -14,11 +14,11 @@
 
 adcp_set_up_folders <- function(path = NULL, folder = NULL) {
   if (is.null(path)) {
-    path <- "Y:/Coastal Monitoring Program/ADCP/Side Lobe Trimmed"
+    path <- "Y:/coastal_monitoring_program/data_branches/current/raw_data"
   }
 
   if (is.null(folder)) {
-    folder <- paste0(Sys.Date(), "_Process")
+    folder <- paste0(Sys.Date(), "_process")
   }
 
   path <- file.path(paste(path, folder, sep = "/"))
@@ -29,5 +29,5 @@ adcp_set_up_folders <- function(path = NULL, folder = NULL) {
   dir.create(paste(path, "figures", sep = "/"))
   dir.create(paste(path, "figures", "flags", sep = "/"))
   dir.create(paste(path, "R", sep = "/"))
-  dir.create(paste(path, "tracking", sep = "/"))
+  #dir.create(paste(path, "tracking", sep = "/"))
 }

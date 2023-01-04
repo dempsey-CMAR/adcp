@@ -8,8 +8,8 @@ adcp_import_data(path_input = NULL, county = "all", add_county_col = TRUE)
 }
 \arguments{
 \item{path_input}{Path to the rds files to be imported. Default is the
-ADCP/Open Data/County Datasets folder on the CMAR Operations shared drive
-(user must be connected to the Perennia VPN).}
+currents/processed_data/assembled_data folder on the CMAR Operations shared
+drive (user must be connected to the Perennia VPN).}
 
 \item{county}{Vector of character string(s) indicating the county or counties
 for which to import data. The filter is applied to the file path, so the

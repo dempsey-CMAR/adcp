@@ -90,7 +90,10 @@ adcp_read_txt <- function(path, file_name = NULL, rm_dups = TRUE) {
     dups <- dups[duplicated(dups$timestamp_ns), ]
     dups <- unique(dups$timestamp_ns)
 
-    message(glue("{length(dups)} duplicate timestamps found and removed: {dups}."))
+    message(paste(
+      length(dups), "duplicate timestamps found and removed:",
+      paste(dups, collapse = ", ")
+    ))
 
     dat <- dat %>%
       select(-Num) %>%

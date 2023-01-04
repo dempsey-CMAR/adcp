@@ -1,8 +1,8 @@
 #' @title Import current data from rds files.
 
 #' @param path_input Path to the rds files to be imported. Default is the
-#'   ADCP/Open Data/County Datasets folder on the CMAR Operations shared drive
-#'   (user must be connected to the Perennia VPN).
+#'   currents/processed_data/assembled_data folder on the CMAR Operations shared
+#'   drive (user must be connected to the Perennia VPN).
 #'
 #' @param county Vector of character string(s) indicating the county or counties
 #'   for which to import data. The filter is applied to the file path, so the
@@ -26,7 +26,9 @@ adcp_import_data <- function(path_input = NULL,
                              add_county_col = TRUE) {
   if (is.null(path_input)) {
     # path to Open Data folder
-    path_input <- file.path("Y:/Coastal Monitoring Program/ADCP/Open Data/County Datasets")
+    path_input <- file.path(
+      "Y:/Coastal_Monitoring_Program/program_branches/currents/processed_data/assembled_data/"
+    )
   } else {
     path_input <- path_input
   }
