@@ -94,6 +94,4 @@ utils::globalVariables(c(
 
   # import_data
   "abb"
-
-
 ))
