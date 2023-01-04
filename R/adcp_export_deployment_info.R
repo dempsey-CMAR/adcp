@@ -34,18 +34,23 @@ adcp_export_deployment_info <- function(deployments,
     arrange(County, Waterbody, Depl_Date)
 
   # deployment ID's
-  link <- "https://docs.google.com/spreadsheets/d/1-8gt9FdN-mTApWw_D1xYBhHcvuzhT6-8qH_XXxxpqJ4/edit#gid=0"
+  link <- "https://docs.google.com/spreadsheets/d/1DVfJbraoWL-BW8-Aiypz8GZh1sDS6-HtYCSrnOSW07U/edit#gid=0"
 
   depl_id <- googlesheets4::read_sheet(link, sheet = "Tracking") %>%
-    select(Depl_ID, County, Waterbody, Depl_Date, Station_Name) %>%
+    select(
+      depl_id,
+      County = county,
+      Waterbody = waterbody,
+      Depl_Date = depl_date,
+      Station_Name = station) %>%
     na.omit()
 
 
   metadata <- nsdfa %>%
     left_join(depl_id, by = c("County", "Waterbody", "Depl_Date", "Station_Name")) %>%
-    filter(Depl_ID %in% deployments) %>%
+    filter(depl_id %in% deployments) %>%
     transmute(
-      deployment_id = Depl_ID,
+      deployment_id = depl_id,
       county = County,
       waterbody = Waterbody,
       station = Station_Name,
