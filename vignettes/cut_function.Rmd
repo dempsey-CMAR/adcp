@@ -33,7 +33,7 @@ First, let's look at the help file for `cut`:
 ```{r, echo=FALSE, results='asis'}
 #cut
 
-Rd <- Rd_fun(help("cut")) 
+Rd <- gbRd::Rd_fun(help("cut")) 
 htmlfile <- tempfile(fileext = ".html")
 tools::Rd2HTML(Rd, htmlfile, package = "", stages = c("install", "render"))
 htmllines <- readLines(htmlfile)
