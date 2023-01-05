@@ -76,6 +76,6 @@ adcp_export_deployment_info <- function(deployments,
 
   write_csv(
     metadata,
-    file = glue("{path_export}/{Sys.Date()}_Current_Data_Deployment_Info.csv")
+    file = glue("{path_export}/{Sys.Date()}_current_data_deployment_info.csv")
   )
 }
