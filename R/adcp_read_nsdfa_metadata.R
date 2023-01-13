@@ -34,6 +34,7 @@ adcp_read_nsdfa_metadata <- function(path,
   force_row <- tibble(
     Station_ID = NA,
     Record_ID = NA,
+    CMAR_ID = "DG012",
     County = "Digby",
     Waterbody = "Grand Passage",
     Station_Name = "Grand Passage",
@@ -65,9 +66,10 @@ adcp_read_nsdfa_metadata <- function(path,
   # Read in and format tracking sheet ---------------------------------------
 
   # NSDFA Tracking Sheet
-  nsdfa <- read_excel(path, sheet = sheet, na = c("", "n/a", "N/A")) %>%
+  nsdfa <- read_excel(path, sheet = sheet, na = c("", "n/a", "N/A", "NA")) %>%
     select(-contains("Column")) %>%
-    separate(Depl_Time, into = c(NA, "Depl_Time"), sep = " ")
+    separate(Depl_Time, into = c(NA, "Depl_Time"), sep = " ") %>%
+    rename(Depl_ID = CMAR_ID)
 
   # to correct mistake in 2022-03-17 version of tracking sheet
   if (suppressWarnings(is.na(as_date(nsdfa$Depl_Date[1])))) {
@@ -83,7 +85,6 @@ adcp_read_nsdfa_metadata <- function(path,
 
   nsdfa <- nsdfa %>%
     mutate(
-     # Depl_Date = as.character(Depl_Date),
       Depl_Date = as_date(Depl_Date),
       Recv_Date = as_date(Recv_Date),
 
@@ -161,8 +162,9 @@ adcp_read_nsdfa_metadata <- function(path,
 
       # fix column types
       Bin_Size = as.numeric(Bin_Size),
-      First_Bin_Range = as.numeric(First_Bin_Range)
-     # Depl_Date = as_date(Depl_Date)
+      First_Bin_Range = as.numeric(First_Bin_Range),
+      Depl_Lat = round(Depl_Lat, digits = 5),
+      Depl_Lon = round(Depl_Lon, digits = 5)
     ) %>%
     # add in Grand Passage Deployment
     rbind(force_row)

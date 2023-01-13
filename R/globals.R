@@ -54,7 +54,7 @@ utils::globalVariables(c(
   "County", "Waterbody", "Station_Name", "Lease#",
   "Depl_Date", "Depl_Lat", "Depl_Lon", "Recv_Date",  "Depl_Time",
   "Inst_Model", "Inst_Serial", "Inst_Depth", "Inst_Altitude",
-  "Bin_Size", "First_Bin_Range", "Notes",
+  "Bin_Size", "First_Bin_Range", "Notes", "CMAR_ID",
 
   # export_deployment_info
   "depl_date",
