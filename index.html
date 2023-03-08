@@ -84,10 +84,12 @@
 <p>The Centre for Marine Applied Research (<a href="https://cmar.ca/" class="external-link">CMAR</a>) coordinates an extensive <a href="https://cmar.ca/coastal-monitoring-program/" class="external-link">Coastal Monitoring Program</a> to measure <a href="https://www.goosocean.org/index.php?option=com_content&amp;view=article&amp;id=14&amp;Itemid=114" class="external-link">Essential Ocean Variables</a> from around the coast of Nova Scotia, Canada. There are three main branches of the program: <em>Water Quality</em>, <em>Currents</em>, and <em>Waves</em>. Processed data for each branch can be viewed and downloaded from several sources, as outlined in the <a href="https://github.com/Centre-for-Marine-Applied-Research/strings/blob/master/man/figures/README-access-cheatsheet.pdf" class="external-link">CMAR Report &amp; Data Access Cheat Sheet</a> (download for clickable links).</p>
 <p>The <code>adcp</code> package is used to format and visualize data from the <em>Current</em> branch of the Coastal Monitoring Program.</p>
 <p><em>Current</em> data is collected with Acoustic Doppler Current Profilers (ADCPs) deployed on the seafloor. An ADCP is a hydroacoustic current meter that measures water velocities over a range of depths. These sensors measure soundwaves scattered back from moving particles in the water column and use the Doppler effect to estimate speed and direction (Figure 1).</p>
-<p><img src="reference/figures/README-fig1.jpg" width="65%" style="display: block; margin: auto;"><br> Figure 1: ADCP diagram (not to scale).</p>
+<p><img src="reference/figures/README-fig1.jpg" width="65%" style="display: block; margin: auto;"></p>
+<p><br> Figure 1: ADCP diagram (not to scale).</p>
 <p><br><br></p>
 <p>Current data is recorded for vertical bins throughout the water column. The <code>adcp</code> package uses data from the sensor configuration to calculate the bin height above sea floor and the bin depth below the surface (Figure 2). Note that the <em>bin height</em> always refers to the same point in space; the same <em>bin depth</em> can refer to different points due to changing tides.</p>
-<p><img src="reference/figures/README-fig2.png" width="100%"> Figure 2: The bin height above the sea floor and the bin depth below the surface are calculated from deployment configurations including the sensor depth, sensor height above the sea floor, first bin range, and bin size.</p>
+<p><img src="reference/figures/README-fig2.png" width="100%"></p>
+<p>Figure 2: The bin height above the sea floor and the bin depth below the surface are calculated from deployment configurations including the sensor depth, sensor height above the sea floor, first bin range, and bin size.</p>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -98,13 +100,15 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/" class="external-link">viridis</a></span><span class="op">)</span></span></code></pre></div>
 <p>Consider an ADCP deployed from January 17, 2019 to March 1, 2019 at Long Beach, St. Mary’s Bay.</p>
 <p>The raw .txt file looks like this:</p>
-<p><img src="reference/figures/README-fig3.png" width="100%" style="display: block; margin: auto;"> Figure 3: Raw ADCP data file for Long Beach.</p>
+<p><img src="reference/figures/README-fig3.png" width="100%" style="display: block; margin: auto;"></p>
+<p>Figure 3: Raw ADCP data file for Long Beach.</p>
 <div class="section level3">
 <h3 id="import-and-format-data">Import and format data<a class="anchor" aria-label="anchor" href="#import-and-format-data"></a>
 </h3>
 <p><code>adcp_read_txt</code> reads in the .txt file and applies some formatting. There is a column for the timestamp, ensemble number, and variable measured. Additional columns, labelled <code>V8</code> to <code>Vn</code> hold the measurements for each bin.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata"</span>, package <span class="op">=</span> <span class="st">"adcp"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata"</span>, package <span class="op">=</span> <span class="st">"adcp"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># deployment metadata from tracking sheet</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
@@ -181,8 +185,8 @@
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/adcp_pivot_longer.html">adcp_pivot_longer</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 5</span></span>
-<span><span class="co">#&gt;   timestamp_utc       sensor_depth_below_surface_m bin_height_~1 sea_w~2 sea_w~3</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 5</span></span>
+<span><span class="co">#&gt;   timestamp_utc       sensor_depth_below_surface_m bin_height_…¹ sea_w…² sea_w…³</span></span>
 <span><span class="co">#&gt;   &lt;dttm&gt;                                     &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 2019-01-17 15:10:00                         26.8           1.5   0.074    209.</span></span>
 <span><span class="co">#&gt; 2 2019-01-17 15:10:00                         26.8           2.5   0.087    208.</span></span>
@@ -190,8 +194,8 @@
 <span><span class="co">#&gt; 4 2019-01-17 15:10:00                         26.8           4.5   0.124    224.</span></span>
 <span><span class="co">#&gt; 5 2019-01-17 15:10:00                         26.8           5.5   0.138    221.</span></span>
 <span><span class="co">#&gt; 6 2019-01-17 15:10:00                         26.8           6.5   0.171    220.</span></span>
-<span><span class="co">#&gt; # ... with abbreviated variable names 1: bin_height_above_sea_floor_m,</span></span>
-<span><span class="co">#&gt; #   2: sea_water_speed_m_s, 3: sea_water_to_direction_degree</span></span></code></pre></div>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​bin_height_above_sea_floor_m,</span></span>
+<span><span class="co">#&gt; #   ²​sea_water_speed_m_s, ³​sea_water_to_direction_degree</span></span></code></pre></div>
 <p><code>dat</code> is now in a useful format for analysis.</p>
 <p>However, for submission to the <a href="https://data.novascotia.ca/" class="external-link">Nova Scotia Open Data Portal</a>, several additional steps are required.</p>
 <p><code><a href="reference/adcp_calculate_bin_depth.html">adcp_calculate_bin_depth()</a></code> adds column <code>bin_depth_below_surface_m</code>:</p>
@@ -199,8 +203,8 @@
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/adcp_calculate_bin_depth.html">adcp_calculate_bin_depth</a></span><span class="op">(</span><span class="va">dat</span>, metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 6</span></span>
-<span><span class="co">#&gt;   timestamp_utc       sensor_depth_below_surfa~1 bin_d~2 bin_h~3 sea_w~4 sea_w~5</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 6</span></span>
+<span><span class="co">#&gt;   timestamp_utc       sensor_depth_below_surfa…¹ bin_d…² bin_h…³ sea_w…⁴ sea_w…⁵</span></span>
 <span><span class="co">#&gt;   &lt;dttm&gt;                                   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 2019-01-17 15:10:00                       26.8    25.8     1.5   0.074    209.</span></span>
 <span><span class="co">#&gt; 2 2019-01-17 15:10:00                       26.8    24.8     2.5   0.087    208.</span></span>
@@ -208,44 +212,44 @@
 <span><span class="co">#&gt; 4 2019-01-17 15:10:00                       26.8    22.8     4.5   0.124    224.</span></span>
 <span><span class="co">#&gt; 5 2019-01-17 15:10:00                       26.8    21.8     5.5   0.138    221.</span></span>
 <span><span class="co">#&gt; 6 2019-01-17 15:10:00                       26.8    20.8     6.5   0.171    220.</span></span>
-<span><span class="co">#&gt; # ... with abbreviated variable names 1: sensor_depth_below_surface_m,</span></span>
-<span><span class="co">#&gt; #   2: bin_depth_below_surface_m, 3: bin_height_above_sea_floor_m,</span></span>
-<span><span class="co">#&gt; #   4: sea_water_speed_m_s, 5: sea_water_to_direction_degree</span></span></code></pre></div>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​sensor_depth_below_surface_m,</span></span>
+<span><span class="co">#&gt; #   ²​bin_depth_below_surface_m, ³​bin_height_above_sea_floor_m,</span></span>
+<span><span class="co">#&gt; #   ⁴​sea_water_speed_m_s, ⁵​sea_water_to_direction_degree</span></span></code></pre></div>
 <p><code><a href="reference/adcp_add_opendata_cols.html">adcp_add_opendata_cols()</a></code> adds <code>deployment_id</code>, <code>waterbody</code>, and <code>station</code> columns so the data can be compiled with other deployments.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/adcp_add_opendata_cols.html">adcp_add_opendata_cols</a></span><span class="op">(</span><span class="va">dat</span>, metadata <span class="op">=</span> <span class="va">metadata</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 9</span></span>
-<span><span class="co">#&gt;   deployme~1 water~2 station timestamp_utc       senso~3 bin_d~4 bin_h~5 sea_w~6</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
+<span><span class="co">#&gt;   deployme…¹ water…² station timestamp_utc       senso…³ bin_d…⁴ bin_h…⁵ sea_w…⁶</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;                &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    25.8     1.5   0.074</span></span>
-<span><span class="co">#&gt; 2 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    24.8     2.5   0.087</span></span>
-<span><span class="co">#&gt; 3 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    23.8     3.5   0.103</span></span>
-<span><span class="co">#&gt; 4 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    22.8     4.5   0.124</span></span>
-<span><span class="co">#&gt; 5 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    21.8     5.5   0.138</span></span>
-<span><span class="co">#&gt; 6 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    20.8     6.5   0.171</span></span>
-<span><span class="co">#&gt; # ... with 1 more variable: sea_water_to_direction_degree &lt;dbl&gt;, and</span></span>
-<span><span class="co">#&gt; #   abbreviated variable names 1: deployment_id, 2: waterbody,</span></span>
-<span><span class="co">#&gt; #   3: sensor_depth_below_surface_m, 4: bin_depth_below_surface_m,</span></span>
-<span><span class="co">#&gt; #   5: bin_height_above_sea_floor_m, 6: sea_water_speed_m_s</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    25.8     1.5   0.074</span></span>
+<span><span class="co">#&gt; 2 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    24.8     2.5   0.087</span></span>
+<span><span class="co">#&gt; 3 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    23.8     3.5   0.103</span></span>
+<span><span class="co">#&gt; 4 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    22.8     4.5   0.124</span></span>
+<span><span class="co">#&gt; 5 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    21.8     5.5   0.138</span></span>
+<span><span class="co">#&gt; 6 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    20.8     6.5   0.171</span></span>
+<span><span class="co">#&gt; # … with 1 more variable: sea_water_to_direction_degree &lt;dbl&gt;, and abbreviated</span></span>
+<span><span class="co">#&gt; #   variable names ¹​deployment_id, ²​waterbody, ³​sensor_depth_below_surface_m,</span></span>
+<span><span class="co">#&gt; #   ⁴​bin_depth_below_surface_m, ⁵​bin_height_above_sea_floor_m,</span></span>
+<span><span class="co">#&gt; #   ⁶​sea_water_speed_m_s</span></span></code></pre></div>
 <p><code><a href="reference/adcp_flag_data.html">adcp_flag_data()</a></code> flags obervations where <code>sensor_depth_below_surface_m</code> changes faster than expected.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/adcp_flag_data.html">adcp_flag_data</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[</span>, <span class="fl">6</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 6</span></span>
-<span><span class="co">#&gt;   bin_depth_below_surface_m bin_height_above_s~1 sea_w~2 sea_w~3 depth~4 depth~5</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 6</span></span>
+<span><span class="co">#&gt;   bin_depth_below_surface_m bin_height_above_s…¹ sea_w…² sea_w…³ depth…⁴ depth…⁵</span></span>
 <span><span class="co">#&gt;                       &lt;dbl&gt;                &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;glue&gt; </span></span>
-<span><span class="co">#&gt; 1                      25.8                  1.5   0.074    209.    1.55 sensor~</span></span>
-<span><span class="co">#&gt; 2                      24.8                  2.5   0.087    208.    1.55 sensor~</span></span>
-<span><span class="co">#&gt; 3                      23.8                  3.5   0.103    211.    1.55 sensor~</span></span>
-<span><span class="co">#&gt; 4                      22.8                  4.5   0.124    224.    1.55 sensor~</span></span>
-<span><span class="co">#&gt; 5                      21.8                  5.5   0.138    221.    1.55 sensor~</span></span>
-<span><span class="co">#&gt; 6                      20.8                  6.5   0.171    220.    1.55 sensor~</span></span>
-<span><span class="co">#&gt; # ... with abbreviated variable names 1: bin_height_above_sea_floor_m,</span></span>
-<span><span class="co">#&gt; #   2: sea_water_speed_m_s, 3: sea_water_to_direction_degree, 4: depth_diff,</span></span>
-<span><span class="co">#&gt; #   5: depth_flag</span></span></code></pre></div>
+<span><span class="co">#&gt; 1                      25.8                  1.5   0.074    209.    1.55 sensor…</span></span>
+<span><span class="co">#&gt; 2                      24.8                  2.5   0.087    208.    1.55 sensor…</span></span>
+<span><span class="co">#&gt; 3                      23.8                  3.5   0.103    211.    1.55 sensor…</span></span>
+<span><span class="co">#&gt; 4                      22.8                  4.5   0.124    224.    1.55 sensor…</span></span>
+<span><span class="co">#&gt; 5                      21.8                  5.5   0.138    221.    1.55 sensor…</span></span>
+<span><span class="co">#&gt; 6                      20.8                  6.5   0.171    220.    1.55 sensor…</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​bin_height_above_sea_floor_m,</span></span>
+<span><span class="co">#&gt; #   ²​sea_water_speed_m_s, ³​sea_water_to_direction_degree, ⁴​depth_diff,</span></span>
+<span><span class="co">#&gt; #   ⁵​depth_flag</span></span></code></pre></div>
 <p>All of these steps can be linked using the pipe operator:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/adcp_read_txt.html">adcp_read_txt</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"2019-01-17_Long_Beach.txt"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -257,20 +261,20 @@
 <span>  <span class="fu"><a href="reference/adcp_flag_data.html">adcp_flag_data</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 11</span></span>
-<span><span class="co">#&gt;   deployme~1 water~2 station timestamp_utc       senso~3 bin_d~4 bin_h~5 sea_w~6</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 11</span></span>
+<span><span class="co">#&gt;   deployme…¹ water…² station timestamp_utc       senso…³ bin_d…⁴ bin_h…⁵ sea_w…⁶</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;                &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    25.8     1.5   0.074</span></span>
-<span><span class="co">#&gt; 2 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    24.8     2.5   0.087</span></span>
-<span><span class="co">#&gt; 3 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    23.8     3.5   0.103</span></span>
-<span><span class="co">#&gt; 4 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    22.8     4.5   0.124</span></span>
-<span><span class="co">#&gt; 5 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    21.8     5.5   0.138</span></span>
-<span><span class="co">#&gt; 6 DG009      St. Ma~ Long B~ 2019-01-17 15:10:00    26.8    20.8     6.5   0.171</span></span>
-<span><span class="co">#&gt; # ... with 3 more variables: sea_water_to_direction_degree &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; 1 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    25.8     1.5   0.074</span></span>
+<span><span class="co">#&gt; 2 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    24.8     2.5   0.087</span></span>
+<span><span class="co">#&gt; 3 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    23.8     3.5   0.103</span></span>
+<span><span class="co">#&gt; 4 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    22.8     4.5   0.124</span></span>
+<span><span class="co">#&gt; 5 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    21.8     5.5   0.138</span></span>
+<span><span class="co">#&gt; 6 DG009      St. Ma… Long B… 2019-01-17 15:10:00    26.8    20.8     6.5   0.171</span></span>
+<span><span class="co">#&gt; # … with 3 more variables: sea_water_to_direction_degree &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   depth_diff &lt;dbl&gt;, depth_flag &lt;glue&gt;, and abbreviated variable names</span></span>
-<span><span class="co">#&gt; #   1: deployment_id, 2: waterbody, 3: sensor_depth_below_surface_m,</span></span>
-<span><span class="co">#&gt; #   4: bin_depth_below_surface_m, 5: bin_height_above_sea_floor_m,</span></span>
-<span><span class="co">#&gt; #   6: sea_water_speed_m_s</span></span></code></pre></div>
+<span><span class="co">#&gt; #   ¹​deployment_id, ²​waterbody, ³​sensor_depth_below_surface_m,</span></span>
+<span><span class="co">#&gt; #   ⁴​bin_depth_below_surface_m, ⁵​bin_height_above_sea_floor_m,</span></span>
+<span><span class="co">#&gt; #   ⁶​sea_water_speed_m_s</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plot-data">Plot data<a class="anchor" aria-label="anchor" href="#plot-data"></a>
@@ -278,15 +282,18 @@
 <p>Plot the sensor depth to determine if any observations should be trimmed.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/adcp_plot_depth_flags.html">adcp_plot_depth_flags</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-fig4-1.png" width="100%"> Filter data to keep “good” obsevations.</p>
+<p><img src="reference/figures/README-fig4-1.png" width="100%"></p>
+<p>Filter data to keep “good” obsevations.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">depth_flag</span> <span class="op">==</span> <span class="st">"good"</span><span class="op">)</span></span></code></pre></div>
 <p>Plot sensor depth:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/adcp_plot_depth.html">adcp_plot_depth</a></span><span class="op">(</span><span class="va">dat</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-fig5-1.png" width="100%"> Plot current rose:</p>
+<p><img src="reference/figures/README-fig5-1.png" width="100%"></p>
+<p>Plot current rose:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">viridis</a></span><span class="op">(</span><span class="fl">12</span>, option <span class="op">=</span> <span class="st">"F"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">viridis</a></span><span class="op">(</span><span class="fl">12</span>, option <span class="op">=</span> <span class="st">"F"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ints</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/adcp_count_obs.html">adcp_count_obs</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">sea_water_speed_m_s</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Lower bound of first interval set to 0</span></span>
@@ -299,7 +306,8 @@
 <span>  speed_cols <span class="op">=</span> <span class="va">cols</span>,</span>
 <span>  speed_label <span class="op">=</span> <span class="st">"Current Speed (m/s)"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-fig6-1.png" width="100%"> Plot current speed histogram.</p>
+<p><img src="reference/figures/README-fig6-1.png" width="100%"></p>
+<p>Plot current speed histogram.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="fu"><a href="reference/adcp_plot_speed_hist.html">adcp_plot_speed_hist</a></span><span class="op">(</span><span class="va">ints</span>, bar_cols <span class="op">=</span> <span class="va">cols</span>, speed_label <span class="op">=</span> <span class="st">"Current Speed (m/s)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-fig7-1.png" width="100%"></p>
@@ -336,6 +344,7 @@
 <li><a href="https://github.com/dempsey-CMAR/adcp" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.0.2-blue.svg"></a></li>
 <li><a href="https://www.codefactor.io/repository/github/dempsey-CMAR/adcp" class="external-link"><img src="https://www.codefactor.io/repository/github/dempsey-CMAR/adcp/badge" alt="CodeFactor"></a></li>
 <li><a href="https://github.com/dempsey-CMAR/adcp/actions" class="external-link"><img src="https://github.com/dempsey-CMAR/adcp/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/dempsey-CMAR/adcp/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/dempsey-CMAR/adcp/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
