@@ -11,8 +11,6 @@
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![](https://img.shields.io/badge/devel%20version-1.0.2-blue.svg)](https://github.com/dempsey-CMAR/adcp)
 [![CodeFactor](https://www.codefactor.io/repository/github/dempsey-CMAR/adcp/badge)](https://www.codefactor.io/repository/github/dempsey-CMAR/adcp)
-[![R build
-status](https://github.com/dempsey-CMAR/adcp/workflows/R-CMD-check/badge.svg)](https://github.com/dempsey-CMAR/adcp/actions)
 [![R-CMD-check](https://github.com/dempsey-CMAR/adcp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dempsey-CMAR/adcp/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->

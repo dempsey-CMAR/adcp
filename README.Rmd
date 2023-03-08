@@ -29,7 +29,7 @@ knitr::include_graphics(
 
 <!-- badges: start -->
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) `r badge_devel(repo, "blue")` `r badge_codefactor(repo)` `r badge_github_actions(repo)` [![R-CMD-check](https://github.com/dempsey-CMAR/adcp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dempsey-CMAR/adcp/actions/workflows/R-CMD-check.yaml)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) `r badge_devel(repo, "blue")` `r badge_codefactor(repo)` [![R-CMD-check](https://github.com/dempsey-CMAR/adcp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dempsey-CMAR/adcp/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
 
