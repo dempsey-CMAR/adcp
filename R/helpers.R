@@ -62,7 +62,7 @@ adcp_extract_deployment_info <- function(file_path) {
     tibble(DEPLOYMENT = .) %>%
     separate(
       col = 1, sep = "_",
-      into = c("Depl_Date", "Station_Name"),
+      into = c("Depl_Date", "Station_Name"), #, "Depl_ID"),
       remove = FALSE
     ) %>%
     mutate(Depl_Date = as_date(Depl_Date))
