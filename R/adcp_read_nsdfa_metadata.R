@@ -34,7 +34,7 @@ adcp_read_nsdfa_metadata <- function(path,
   force_row <- tibble(
     Station_ID = NA,
     Record_ID = NA,
-    CMAR_ID = "DG012",
+    Depl_ID = "DG012",
     County = "Digby",
     Waterbody = "Grand Passage",
     Station_Name = "Grand Passage",
