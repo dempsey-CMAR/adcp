@@ -122,9 +122,9 @@ Arguments
 <a class="anchor" aria-label="anchor" href="#cut-function-4"></a>
 </h3>
 <table class="table">
-<tr style="vertical-align: top;">
+<tr>
 <td>
-<code>x</code>
+<code id="cut_:_x">x</code>
 </td>
 <td>
 <p>
@@ -132,9 +132,9 @@ a numeric vector which is to be converted to a factor by cutting.
 </p>
 </td>
 </tr>
-<tr style="vertical-align: top;">
+<tr>
 <td>
-<code>breaks</code>
+<code id="cut_:_breaks">breaks</code>
 </td>
 <td>
 <p>
@@ -144,9 +144,9 @@ which <code>x</code> is to be cut.
 </p>
 </td>
 </tr>
-<tr style="vertical-align: top;">
+<tr>
 <td>
-<code>labels</code>
+<code id="cut_:_labels">labels</code>
 </td>
 <td>
 <p>
@@ -157,9 +157,9 @@ of a factor.
 </p>
 </td>
 </tr>
-<tr style="vertical-align: top;">
+<tr>
 <td>
-<code>include.lowest</code>
+<code id="cut_:_include.lowest">include.lowest</code>
 </td>
 <td>
 <p>
@@ -168,9 +168,9 @@ logical, indicating if an ‘x[i]’ equal to the lowest (or highest, for
 </p>
 </td>
 </tr>
-<tr style="vertical-align: top;">
+<tr>
 <td>
-<code>right</code>
+<code id="cut_:_right">right</code>
 </td>
 <td>
 <p>
@@ -179,9 +179,9 @@ open on the left) or vice versa.
 </p>
 </td>
 </tr>
-<tr style="vertical-align: top;">
+<tr>
 <td>
-<code>dig.lab</code>
+<code id="cut_:_dig.lab">dig.lab</code>
 </td>
 <td>
 <p>
@@ -190,9 +190,9 @@ number of digits used in formatting the break numbers.
 </p>
 </td>
 </tr>
-<tr style="vertical-align: top;">
+<tr>
 <td>
-<code>ordered_result</code>
+<code id="cut_:_ordered_result">ordered_result</code>
 </td>
 <td>
 <p>
@@ -200,9 +200,9 @@ logical: should the result be an ordered factor?
 </p>
 </td>
 </tr>
-<tr style="vertical-align: top;">
+<tr>
 <td>
-<code>…</code>
+<code id="cut_:_...">…</code>
 </td>
 <td>
 <p>
@@ -241,8 +241,8 @@ but other methods are not required to and <code>labels</code> will
 correspond to the intervals after sorting.
 </p>
 <p>
-As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
-3.2.0, <code>getOption(“OutDec”)</code> is consulted when labels are
+As from <span class="rlang"><b>R</b></span> 3.2.0,
+<code>getOption(“OutDec”)</code> is consulted when labels are
 constructed for <code>labels = NULL</code>.
 </p>
 <h3 id="cut-function-6">
