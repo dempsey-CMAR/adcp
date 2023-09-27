@@ -91,6 +91,8 @@ adcp_read_nsdfa_metadata <- function(path,
       # Fix incorrect entries
       Waterbody = case_when(
         Waterbody == "Dena's Pond" ~ "Denas Pond",
+        Waterbody == "Owl's Head Bay" ~ "Owls Head Bay",
+
         Waterbody == "St.Ann's Harbour" ~ "St. Anns Harbour",
         Waterbody == "St Margarets Bay" ~ "St. Margarets Bay",
         Waterbody == "Straight of Canso" ~ "Strait of Canso",
@@ -128,6 +130,10 @@ adcp_read_nsdfa_metadata <- function(path,
           Depl_Date == as_date("2016-08-05") ~ "Roy Island Outer",
         Station_Name == "Outer Island" &
           Depl_Date == as_date("2019-02-07") ~ "Camerons Cove",
+
+        Station_Name == "Owl's Head" &
+          Depl_Date == as_date("2009-12-08") ~ "Owls Head",
+
         Station_Name == "Ram Island S" &
           Depl_Date == as_date("2018-10-05") ~ "Ram Island",
         Station_Name == "Saddle NE" &
