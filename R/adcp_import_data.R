@@ -27,7 +27,7 @@ adcp_import_data <- function(path_input = NULL,
   if (is.null(path_input)) {
     # path to Open Data folder
     path_input <- file.path(
-      "Y:/coastal_monitoring_program/data_branches/current/processed_data/assembled_data/"
+      "R:/data_branches/current/processed_data/assembled_data/"
     )
   } else {
     path_input <- path_input

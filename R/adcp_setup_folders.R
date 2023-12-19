@@ -14,7 +14,7 @@
 
 adcp_set_up_folders <- function(path = NULL, folder = NULL) {
   if (is.null(path)) {
-    path <- "Y:/coastal_monitoring_program/data_branches/current/raw_data"
+    path <- "R:/data_branches/current/raw_data"
   }
 
   if (is.null(folder)) {
