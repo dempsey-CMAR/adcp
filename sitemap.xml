@@ -1,93 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/404.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/articles/cut_function.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/index.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_add_opendata_cols.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_assign_altitude.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_calculate_bin_depth.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_check_duplicate_timestamp.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_convert_flag_to_ordered_factor.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_correct_timestamp.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_count_obs.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_export_deployment_info.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_extract_deployment_info.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_flag_data.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_format_report_table.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_import_data.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_pivot_longer.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_rose.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_speed_time.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_depth.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_depth_flags.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_speed_hist.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_read_nsdfa_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_read_txt.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_set_up_folders.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/adcp_write_report_table.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/find_index.html</loc>
-  </url>
-  <url>
-    <loc>https://dempsey-cmar.github.io/adcp/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://dempsey-cmar.github.io/adcp/404.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/LICENSE.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/articles/cut_function.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/articles/index.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/authors.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/index.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_add_opendata_cols.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_assign_altitude.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_calculate_bin_depth.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_check_duplicate_timestamp.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_convert_flag_to_ordered_factor.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_correct_timestamp.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_count_obs.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_export_deployment_info.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_extract_deployment_info.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_flag_data.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_format_report_table.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_import_data.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_pivot_longer.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_rose.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_speed_time.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_depth.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_depth_flags.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_speed_hist.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_read_nsdfa_metadata.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_read_txt.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_set_up_folders.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_write_report_table.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/find_index.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/index.html</loc></url>
 </urlset>
+
