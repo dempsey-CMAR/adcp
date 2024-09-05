@@ -6,7 +6,7 @@
 #'   \code{adcp_plot_current_rose()}). This means intervals are right-inclusive,
 #'   i.e., a value of 4 is assigned to the interval (1,4].
 #'
-#'   NOTE: The \code{openair::windRose()} function  has the \code{cut()}
+#'   NOTE: The \code{openair::windRose()} function has the \code{cut()}
 #'   argument \code{include.lower} hard-coded to \code{FALSE}. This causes an
 #'   issue with the intervals extracted from \code{adcp_count_obs()} being
 #'   passed to \code{adcp_plot_current_rose()} (which passes all arguments to

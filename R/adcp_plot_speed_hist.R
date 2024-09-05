@@ -9,18 +9,23 @@
 #' @param speed_label Title of the current speed legend. Default is "Current
 #'   Speed (cm/s)".
 #'
+#' @param text_size Size of the text annotating the number of observations in
+#'   each bin.
+#'
 #' @return Returns a ggplot object.
 #'
-#' @importFrom ggplot2 expansion geom_col geom_text scale_fill_manual scale_x_discrete
-#'   scale_y_continuous theme_light
+#' @importFrom ggplot2 expansion geom_col geom_text scale_fill_manual
+#'   scale_x_discrete scale_y_continuous theme_light
 #'
 #' @export
 
-adcp_plot_speed_hist <- function(dat_hist, bar_cols,
-                                 speed_label = "Current Speed (cm/s)") {
+adcp_plot_speed_hist <- function(
+    dat_hist, bar_cols, text_size = 3,
+    speed_label = "Current Speed (cm/s)"
+    ) {
   ggplot(dat_hist, aes(ints_label, prop, fill = ints_label)) +
     geom_col(col = 1) +
-    geom_text(aes(label = freq), vjust = -0.5, size = 3) +
+    geom_text(aes(label = freq), vjust = -0.5, size = text_size) +
     scale_fill_manual(values = bar_cols, guide = "none") +
     scale_x_discrete(speed_label) +
     scale_y_continuous("Percent (%)", expand = expansion(mult = c(0, 0.1))) +
