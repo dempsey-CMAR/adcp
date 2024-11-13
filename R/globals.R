@@ -82,6 +82,9 @@ utils::globalVariables(c(
   # plot_speed_hist
   "freq",
 
+  # plot_current_rose
+  "SPEED",
+
   # count_obs()
   "sea_water_speed_cm_s",
 

@@ -7,8 +7,11 @@
 adcp_plot_current_rose(
   dat,
   breaks,
-  speed_cols = NULL,
-  speed_label = "Current Speed (cm/s)"
+  speed_column,
+  direction_column,
+  speed_colors = NULL,
+  speed_label = "Current Speed (cm/s)",
+  add_direction_labs = TRUE
 )
 }
 \arguments{
@@ -18,11 +21,20 @@ adcp_plot_current_rose(
 \item{breaks}{Number of break points for current speed OR a vector of breaks.
 Lower-inclusive.}
 
-\item{speed_cols}{Vector of colours. Must be the same length as
+\item{speed_column}{Column name of the current speed (or wave height) column
+(i.e., the length of the petals).}
+
+\item{direction_column}{Column name of the current (or wave ) direction
+column (i.e., the direction of the petals).}
+
+\item{speed_colors}{Vector of colours. Must be the same length as
 \code{breaks}.}
 
 \item{speed_label}{Title of the current speed legend. Default is "Current
 Speed (cm/s)".}
+
+\item{add_direction_labs}{Logical argument indicating whether to add cardinal
+direction labels to figure.}
 }
 \value{
 Returns an "openair" object, a rose plot of current speed and
@@ -35,4 +47,6 @@ Generate current rose
 Generates a current rose using the \code{windRose()} function from
   the \code{openair} package. See help files for \code{openair::windRose} for
   more detail.
+
+  For wave roses, replace "current speed" with "wave height".
 }
