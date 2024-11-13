@@ -24,9 +24,6 @@
 #' @param speed_label Title of the current speed legend. Default is "Current
 #'   Speed (cm/s)".
 #'
-#' @param add_direction_labs Logical argument indicating whether to add cardinal
-#'   direction labels to figure.
-#'
 #' @return Returns an "openair" object, a rose plot of current speed and
 #'   direction.
 #'
@@ -43,8 +40,8 @@ adcp_plot_current_rose <- function(
     breaks,
     speed_column, direction_column,
     speed_colors = NULL,
-    speed_label = "Current Speed (cm/s)",
-    add_direction_labs = TRUE
+    speed_label = "Current Speed (cm/s)"
+  #  add_direction_labs = TRUE,
 ) {
   if (is.null(speed_colors)) {
     speed_colors <- viridis(breaks, option = "F", direction = -1)
@@ -67,25 +64,29 @@ adcp_plot_current_rose <- function(
     plot = FALSE
   )
 
-  if(isTRUE(add_direction_labs)) {
-
-    ints <- adcp::adcp_count_obs(dat, SPEED, n_ints = length(breaks))
-    #dir_cor <- round(max(ints$prop)) # non-standard evaluation so this doesn't work
-
-    p <- p$plot +
-      latticeExtra::layer(
-        lattice::ltext(0, round(max(ints$prop)), "N", cex = 0.75, col = "darkgrey")
-      ) +
-    latticeExtra::layer(
-      lattice::ltext(round(max(ints$prop)), 0, "E", cex = 0.75, col = "darkgrey")
-    ) +
-    latticeExtra::layer(
-      lattice::ltext(-round(max(ints$prop)), 0, "W", cex = 0.75, col = "darkgrey")
-    ) +
-    latticeExtra::layer(
-      lattice::ltext(0, -round(max(ints$prop)), "S", cex = 0.75, col = "darkgrey")
-    )
-  }
+#   if(isTRUE(add_direction_labs)) {
+#
+# #    browser()
+#
+#     direction_label_placement <- direction_label_placement
+#
+#     #ints <- adcp::adcp_count_obs(dat, SPEED, n_ints = length(breaks))
+#     #dir_cor <- round(max(ints$prop)) # non-standard evaluation so this doesn't work
+#
+#     p <- p$plot +
+#       latticeExtra::layer(
+#         lattice::ltext(0, direction_label_placement, "N", cex = 0.75, col = "darkgrey")
+#       ) +
+#     latticeExtra::layer(
+#       lattice::ltext(round(max(ints$prop)), 0, "E", cex = 0.75, col = "darkgrey")
+#     ) +
+#     latticeExtra::layer(
+#       lattice::ltext(-round(max(ints$prop)), 0, "W", cex = 0.75, col = "darkgrey")
+#     ) +
+#     latticeExtra::layer(
+#       lattice::ltext(0, -round(max(ints$prop)), "S", cex = 0.75, col = "darkgrey")
+#     )
+#   }
 
   p
 
