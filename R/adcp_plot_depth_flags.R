@@ -69,7 +69,7 @@ adcp_plot_depth <- function(dat, title = NULL, date_format = "%Y-%b-%d", geom = 
     mutate(timestamp_utc = as_datetime(timestamp_utc)) %>%
     distinct() %>%
     ggplot(aes(timestamp_utc, sensor_depth_below_surface_m), col = "#66C2A5") +
-    scale_x_datetime("Date", date_labels = "%Y-%b-%d") +
+    scale_x_datetime("Date", date_labels = "%Y-%m-%d") +
     scale_y_continuous("Sensor Depth Below Surface (m)") +
     labs(title = title) +
     theme_light()
