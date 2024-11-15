@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">adcp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,8 +44,11 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">adcp_plot_current_rose</span><span class="op">(</span></span>
 <span>  <span class="va">dat</span>,</span>
 <span>  <span class="va">breaks</span>,</span>
-<span>  speed_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  speed_label <span class="op">=</span> <span class="st">"Current Speed (cm/s)"</span></span>
+<span>  <span class="va">speed_column</span>,</span>
+<span>  <span class="va">direction_column</span>,</span>
+<span>  speed_colors <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  speed_label <span class="op">=</span> <span class="st">"Current Speed (cm/s)"</span>,</span>
+<span>  add_dir_labs <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -63,7 +66,17 @@
 Lower-inclusive.</p></dd>
 
 
-<dt id="arg-speed-cols">speed_cols<a class="anchor" aria-label="anchor" href="#arg-speed-cols"></a></dt>
+<dt id="arg-speed-column">speed_column<a class="anchor" aria-label="anchor" href="#arg-speed-column"></a></dt>
+<dd><p>Column name of the current speed (or wave height) column
+(i.e., the length of the petals).</p></dd>
+
+
+<dt id="arg-direction-column">direction_column<a class="anchor" aria-label="anchor" href="#arg-direction-column"></a></dt>
+<dd><p>Column name of the current (or wave ) direction
+column (i.e., the direction of the petals).</p></dd>
+
+
+<dt id="arg-speed-colors">speed_colors<a class="anchor" aria-label="anchor" href="#arg-speed-colors"></a></dt>
 <dd><p>Vector of colours. Must be the same length as
 <code>breaks</code>.</p></dd>
 
@@ -71,6 +84,10 @@ Lower-inclusive.</p></dd>
 <dt id="arg-speed-label">speed_label<a class="anchor" aria-label="anchor" href="#arg-speed-label"></a></dt>
 <dd><p>Title of the current speed legend. Default is "Current
 Speed (cm/s)".</p></dd>
+
+
+<dt id="arg-add-dir-labs">add_dir_labs<a class="anchor" aria-label="anchor" href="#arg-add-dir-labs"></a></dt>
+<dd><p>placeholder</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -83,6 +100,7 @@ Speed (cm/s)".</p></dd>
     <p>Generates a current rose using the <code>windRose()</code> function from
   the <code>openair</code> package. See help files for <code><a href="https://davidcarslaw.github.io/openair/reference/windRose.html" class="external-link">openair::windRose</a></code> for
   more detail.</p>
+<p>For wave roses, replace "current speed" with "wave height".</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -94,7 +112,7 @@ Speed (cm/s)".</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
