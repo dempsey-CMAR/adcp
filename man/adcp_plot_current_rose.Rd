@@ -10,7 +10,8 @@ adcp_plot_current_rose(
   speed_column,
   direction_column,
   speed_colors = NULL,
-  speed_label = "Current Speed (cm/s)"
+  speed_label = "Current Speed (cm/s)",
+  add_dir_labs = TRUE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ column (i.e., the direction of the petals).}
 
 \item{speed_label}{Title of the current speed legend. Default is "Current
 Speed (cm/s)".}
+
+\item{add_dir_labs}{placeholder}
 }
 \value{
 Returns an "openair" object, a rose plot of current speed and
