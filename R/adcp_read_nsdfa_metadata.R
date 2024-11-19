@@ -151,6 +151,9 @@ adcp_read_nsdfa_metadata <- function(path,
 
       # needs to go here because uses fixed Station names
       County = case_when(
+        Waterbody == "Aspotogan Harbour" & Station_Name == "Saddle Island" &
+          Depl_Date == as_date("2023-05-10") ~ "Lunenburg",
+
         Waterbody == "Woods Harbour" & Station_Name == "Camerons Cove" &
           Depl_Date == as_date("2019-02-07") ~ "Shelburne",
         Waterbody == "Woods Harbour" & Station_Name == "Woods Harbour" &
@@ -164,6 +167,10 @@ adcp_read_nsdfa_metadata <- function(path,
         Station_Name == "Woods Harbour" & Depl_Date == as_date("2020-09-01") &
           is.na(First_Bin_Range) ~ "1", # from the metadata in the non side-lobe trimmed excel files
         TRUE ~ First_Bin_Range
+      ),
+
+      Inst_Model = case_when(
+        Inst_Model == "Sentinel V100" ~ "Sentinel_V100", TRUE ~ Inst_model
       ),
 
       # fix column types
