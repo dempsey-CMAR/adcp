@@ -49,7 +49,7 @@ adcp_read_nsdfa_metadata <- function(path,
     Recv_Date = "2020-11-28",
     Recv_Time = NA, Recv_Lat = NA, Recv_Lon = NA,
     Depl_Duration = 93,
-    Inst_Model = "Sentinel V100",
+    Inst_Model = "Sentinel_V100",
     Inst_Serial = NA, Inst_Depth = NA,
     Inst_Altitude = 0.5,
     Inst_Interval = NA, Depl_Voltage = NA, Recv_Voltage = NA, Recv_Method = NA,
@@ -169,9 +169,9 @@ adcp_read_nsdfa_metadata <- function(path,
         TRUE ~ First_Bin_Range
       ),
 
-      Inst_Model = case_when(
-        Inst_Model == "Sentinel V100" ~ "Sentinel_V100", TRUE ~ Inst_Model
-      ),
+      # Inst_Model = case_when(
+      #   Inst_Model == "Sentinel V100" ~ "Sentinel_V100", TRUE ~ Inst_Model
+      # ),
 
       # fix column types
       Bin_Size = as.numeric(Bin_Size),
