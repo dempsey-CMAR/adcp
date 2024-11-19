@@ -170,7 +170,7 @@ adcp_read_nsdfa_metadata <- function(path,
       ),
 
       Inst_Model = case_when(
-        Inst_Model == "Sentinel V100" ~ "Sentinel_V100", TRUE ~ Inst_model
+        Inst_Model == "Sentinel V100" ~ "Sentinel_V100", TRUE ~ Inst_Model
       ),
 
       # fix column types
