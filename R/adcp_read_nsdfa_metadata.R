@@ -169,9 +169,12 @@ adcp_read_nsdfa_metadata <- function(path,
         TRUE ~ First_Bin_Range
       ),
 
-      # Inst_Model = case_when(
-      #   Inst_Model == "Sentinel V100" ~ "Sentinel_V100", TRUE ~ Inst_Model
-      # ),
+      Waves_Ensemble_Interval_s = case_when(
+        Station_Name == "Sober Island Outlet" &
+          Depl_Date == as_date("2019-08-29") ~
+          600,
+        TRUE ~ Waves_Ensemble_Interval_s
+      ),
 
       # fix column types
       Bin_Size = as.numeric(Bin_Size),
