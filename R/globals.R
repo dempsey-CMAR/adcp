@@ -99,6 +99,10 @@ utils::globalVariables(c(
   "county",
   "waterbody",
 
+  "Waves_Averaging_Interval_s",
+  "Waves_Ensemble_Interval_s",
+  "Waves_PingsPerEnsemble",
+
   # import_data
   "abb"
 ))

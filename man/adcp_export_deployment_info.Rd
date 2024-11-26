@@ -19,7 +19,11 @@ Dataset should be exported.}
 Exports csv file named todays-date_Current_Data_Deployment_Info.csv.
 }
 \description{
-Imports NSDFA Tracking sheet and Deployment ID tracker and
-  exports the metadata for the Nova Scotia Open Data Portal. User must be
-  connected to CMAR shared drive.
+This function has been deprecated. Please use
+`adcp_compile_deployment_info()`, which includes the wave columns, instead.
+}
+\details{
+Imports NSDFA Tracking sheet and Deployment ID tracker and exports the
+metadata for the Nova Scotia Open Data Portal. User must be connected to CMAR
+shared drive.
 }
