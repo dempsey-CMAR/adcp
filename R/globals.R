@@ -30,7 +30,7 @@ utils::globalVariables(c(
   "timestamp_ns",
   "timestamp_utc",
 
-  # adcp_pivot_longer
+  # wv_pivot_longer
   "timestamp_foo",
   "WaterDirection",
   "WaterSpeed",
@@ -105,4 +105,5 @@ utils::globalVariables(c(
 
   # import_data
   "abb"
+
 ))
