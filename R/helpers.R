@@ -100,3 +100,34 @@ adcp_convert_flag_to_ordered_factor <- function(dat) {
       depth_flag = factor(depth_flag, levels = flags_order, ordered = TRUE)
     )
 }
+
+
+#' Check if there are files in the specified folder
+#'
+#' @param path Path to the folder to check.
+#'
+#' @param pattern Character string indicating what file type to check for.
+#'
+#' @returns Returns a Warning if there are files in the folder. Returns a
+#'   message if not.
+#'
+#' @export
+
+adcp_check_new_folder <- function(path, pattern = "csv") {
+
+  dat_new <- list.files(path, pattern = "csv")
+
+  if(length(dat_new) > 0) {
+    warning(paste0("There are ", length(dat_new), " files in ", path,
+                   ".\nMove these to the county folder to assemble"))
+  } else {
+    message("No files found in ", path)
+  }
+}
+
+
+
+
+
+
+
