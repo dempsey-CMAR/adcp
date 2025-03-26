@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">adcp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">adcp_read_tracking</span><span class="op">(</span>link <span class="op">=</span> <span class="cn">NULL</span>, sheet <span class="op">=</span> <span class="st">"details"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">adcp_read_tracking</span><span class="op">(</span>link <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -49,21 +49,13 @@
 
 
 <dl><dt id="arg-link">link<a class="anchor" aria-label="anchor" href="#arg-link"></a></dt>
-<dd><p>Link to the adcp tracking sheet on Google Drive.</p></dd>
-
-
-<dt id="arg-sheet">sheet<a class="anchor" aria-label="anchor" href="#arg-sheet"></a></dt>
-<dd><p>Character string with the name of the sheet to read in or an
-abbreviation of the sheet name. <code>sheet = "details"</code> will read in the
-sheet "Deployment Details", <code>sheet = "current"</code> will read in sheet
-"Current Tracking", and <code>sheet = "wave"</code> will read in sheet
-"Wave Tracking", .</p></dd>
+<dd><p>Link to the Current &amp; Wave Tracking Deployment Details sheet on
+Google Drive.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Returns a data frame of the calval tracking sheet. Deployment and
-  retrieval datetimes are appended in "Canada/Atlantic" and "UTC" timezones.</p>
+    <p>Returns a data frame of the Deployment Details sheet.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
