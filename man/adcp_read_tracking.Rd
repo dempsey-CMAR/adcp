@@ -4,20 +4,14 @@
 \alias{adcp_read_tracking}
 \title{Read deployment details from CMAR tracking sheet}
 \usage{
-adcp_read_tracking(link = NULL, sheet = "details")
+adcp_read_tracking(link = NULL)
 }
 \arguments{
-\item{link}{Link to the adcp tracking sheet on Google Drive.}
-
-\item{sheet}{Character string with the name of the sheet to read in or an
-abbreviation of the sheet name. \code{sheet = "details"} will read in the
-sheet "Deployment Details", \code{sheet = "current"} will read in sheet
-"Current Tracking", and \code{sheet = "wave"} will read in sheet
-"Wave Tracking", .}
+\item{link}{Link to the Current & Wave Tracking Deployment Details sheet on
+Google Drive.}
 }
 \value{
-Returns a data frame of the calval tracking sheet. Deployment and
-  retrieval datetimes are appended in "Canada/Atlantic" and "UTC" timezones.
+Returns a data frame of the Deployment Details sheet.
 }
 \description{
 Read deployment details from CMAR tracking sheet
