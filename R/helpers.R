@@ -127,6 +127,54 @@ adcp_check_new_folder <- function(path, pattern = "csv") {
 
 
 
+#' Add a column of current variables in title case
+#'
+#' @param dat Data frame of current data in long format. Flag columns will be
+#'   dropped.
+#'
+#' @param convert_to_ordered_factor Logical variable indicating whether the new
+#'   \code{variable_title} column should be converted to an ordered factor.
+#'   Default is \code{TRUE}.
+#'
+#' @return Returns \code{dat} with an additional \code{variable_title} column
+#'   for use in faceted figures.
+#'
+#' @importFrom dplyr case_when mutate
+#' @importFrom stringr str_detect
+#'
+#' @export
+#'
+
+adcp_convert_vars_to_title <- function(dat, convert_to_ordered_factor = TRUE) {
+
+  dat <- dat %>%
+    mutate(
+      variable_title = case_when(
+
+        variable == "sensor_depth_below_surface_m" ~ "Sensor Depth Below Surface",
+        variable == "sea_water_speed_m_s" ~ "Sea Water Speed",
+        variable == "sea_water_to_direction_degree" ~
+          "Direction Sea Water is Travelling To",
+
+        TRUE ~ NA_character_
+      )
+    )
+
+  if(isTRUE(convert_to_ordered_factor)) {
+    dat <- dat %>%
+      mutate(
+        variable_title = ordered(
+          variable_title,
+          levels = c(
+            "Sea Water Speed",
+            "Direction Sea Water is Travelling To",
+            "Sensor Depth Below Surface"))
+      )
+  }
+
+  dat
+}
+
 
 
 

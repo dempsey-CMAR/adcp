@@ -28,7 +28,6 @@ adcp_plot_current_speed_time <- function(dat) {
 
   }
 
-
   ggplot(dat, aes(timestamp_utc, sea_water_speed_cm_s)) +
     geom_line() +
     scale_y_continuous("Current Speed (cm / s)") +

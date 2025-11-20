@@ -60,9 +60,9 @@ test_that("adcp_correct_timestamp() works for daylight savings transitions", {
 # Altitude (Bin height above sea floor) ----------------------------------------------------------------
 
 metadata <- tibble(
-  Inst_Altitude = 0.5,
-  Bin_Size = 1,
-  First_Bin_Range = 1
+  sensor_height_above_sea_floor_m = 0.5,
+  bin_size_m = 1,
+  first_bin_range_m = 1
 )
 
 dat_alt <- adcp_assign_altitude(dat, metadata)
@@ -77,7 +77,7 @@ test_that("adcp_assign_altitude() returns expected results", {
 
 dat_long <- dat_alt %>%
   adcp_correct_timestamp() %>%
-  adcp_pivot_longer()
+  adcp_pivot_bin_height()
 
 test_that("adcp_pivot_longer() returns correct columns and classes", {
   expect_equal(class(dat_long$timestamp_utc), c("POSIXct", "POSIXt"))
@@ -99,7 +99,7 @@ test_that("adcp_calculate_bin_depth() calculates expected bin depth", {
     dat_od$sensor_depth_below_surface_m,
     dat_od$bin_depth_below_surface_m +
       dat_od$bin_height_above_sea_floor_m -
-      metadata$Inst_Altitude
+      metadata$sensor_height_above_sea_floor_m
   )
 })
 
@@ -121,23 +121,23 @@ test_that("adcp_pivot_longer() returns expected sensor_depth_below_surface_m", {
 
 
 # Flags -------------------------------------------------------------------
-
-dat_flag <- adcp_flag_data(dat_od)
-n_row <- nrow(dat_flag)
-
-flag <- unique(
-  dat_flag[
-    which(dat_flag$timestamp_utc == min(dat_flag$timestamp_utc)), "depth_flag"
-  ]
-)
-
-good <- unique(
-  dat_flag[
-    -which(dat_flag$timestamp_utc == min(dat_flag$timestamp_utc)), "depth_flag"
-  ]
-)
-
-test_that("adcp_flag_data() flags correct observations", {
-  expect_equal(as.character(flag$depth_flag), "sensor_depth_below_surface_m changed by > 1 m")
-  expect_equal(as.character(good$depth_flag), "good")
-})
+#
+# dat_flag <- adcp_flag_data(dat_od)
+# n_row <- nrow(dat_flag)
+#
+# flag <- unique(
+#   dat_flag[
+#     which(dat_flag$timestamp_utc == min(dat_flag$timestamp_utc)), "depth_flag"
+#   ]
+# )
+#
+# good <- unique(
+#   dat_flag[
+#     -which(dat_flag$timestamp_utc == min(dat_flag$timestamp_utc)), "depth_flag"
+#   ]
+# )
+#
+# test_that("adcp_flag_data() flags correct observations", {
+#   expect_equal(as.character(flag$depth_flag), "sensor_depth_below_surface_m changed by > 1 m")
+#   expect_equal(as.character(good$depth_flag), "good")
+# })

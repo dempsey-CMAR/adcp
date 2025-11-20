@@ -103,7 +103,23 @@ utils::globalVariables(c(
   "Waves_Ensemble_Interval_s",
   "Waves_PingsPerEnsemble",
 
+  # grossrange test
+  "gr_max",
+  "gr_min",
+  "grossrange_flag",
+  "user_max",
+  "user_min",
+  "qc_test",
+
+  # convert variable to title
+  "variable_title",
+
+  # start_end_obs_to_trim
+  "trim_obs",
+  "group",
+
   # import_data
-  "abb"
+  "abb",
+  "current_thresholds"
 
 ))

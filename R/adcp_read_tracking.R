@@ -27,7 +27,7 @@ adcp_read_tracking <- function(link = NULL) {
   googlesheets4::read_sheet(
     link,
     sheet = "Deployment Details",
-    col_types = "cccccTTnnncnnnnnnnnnnnc",
+    col_types = "cccccTTnnncncnnnnnnnnnc",
     na = c("", "NA")
   )
 }

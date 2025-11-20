@@ -7,13 +7,14 @@
 adcp_calculate_bin_depth(dat, metadata = NULL, inst_alt = NULL)
 }
 \arguments{
-\item{dat}{Data frame of ACDP data in long format, as returned by
+\item{dat}{Data frame of ADCP data in long format, as returned by
 \code{adcp_pivot_longer()}.}
 
 \item{metadata}{Data frame with metadata information for the deployment in
-\code{dat} (e.g., a row from the NSDFA tracking sheet). Must include column
-\code{Inst_Altitude}. Option to use default value \code{metadata = NULL}
-and provide the required value in the \code{inst_alt} argument.}
+\code{dat} (e.g., a row from CURRENT & WAVE TRACKING). Must include column
+\code{sensor_height_above_sea_floor_m} (formerly Inst_Alt). Option to use
+default value \code{metadata = NULL} and provide the required value in the
+\code{inst_alt} argument.}
 
 \item{inst_alt}{Height of the instrument above the sea floor (in metres). Not
 used if \code{metadata} argument is specified.}
