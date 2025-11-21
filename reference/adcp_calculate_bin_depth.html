@@ -49,15 +49,16 @@
 
 
 <dl><dt id="arg-dat">dat<a class="anchor" aria-label="anchor" href="#arg-dat"></a></dt>
-<dd><p>Data frame of ACDP data in long format, as returned by
-<code><a href="adcp_pivot_longer.html">adcp_pivot_longer()</a></code>.</p></dd>
+<dd><p>Data frame of ADCP data in long format, as returned by
+<code>adcp_pivot_longer()</code>.</p></dd>
 
 
 <dt id="arg-metadata">metadata<a class="anchor" aria-label="anchor" href="#arg-metadata"></a></dt>
 <dd><p>Data frame with metadata information for the deployment in
-<code>dat</code> (e.g., a row from the NSDFA tracking sheet). Must include column
-<code>Inst_Altitude</code>. Option to use default value <code>metadata = NULL</code>
-and provide the required value in the <code>inst_alt</code> argument.</p></dd>
+<code>dat</code> (e.g., a row from CURRENT &amp; WAVE TRACKING). Must include column
+<code>sensor_height_above_sea_floor_m</code> (formerly Inst_Alt). Option to use
+default value <code>metadata = NULL</code> and provide the required value in the
+<code>inst_alt</code> argument.</p></dd>
 
 
 <dt id="arg-inst-alt">inst_alt<a class="anchor" aria-label="anchor" href="#arg-inst-alt"></a></dt>
@@ -82,7 +83,7 @@ used if <code>metadata</code> argument is specified.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
