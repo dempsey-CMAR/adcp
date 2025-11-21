@@ -17,8 +17,8 @@ adcp_add_opendata_cols(
 \code{adcp_pivot_longer()}.}
 
 \item{metadata}{Data frame with metadata information for the deployment in
-\code{dat} (e.g., a row from the NSDFA tracking sheet). Must include
-columns \code{Depl_ID}, \code{Waterbody}, and \code{Station}. Option to use
+\code{dat} (e.g., a row from ADCP TRACKING). Must include
+columns \code{depl_id}, \code{waterbody}, and \code{station}. Option to use
 default value \code{metadata = NULL} and provide the required values in the
 remaining arguments.}
 

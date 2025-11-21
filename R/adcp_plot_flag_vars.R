@@ -53,6 +53,15 @@ adcp_plot_flags <- function(
 
   if (is.null(n_col)) n_col <- length(unique(dat$variable))
 
+  levels_height <- sort(
+    unique(dat$bin_height_above_sea_floor_m), decreasing = TRUE
+  )
+  dat <- dat %>%
+    mutate(
+      bin_height_above_sea_floor_m =
+        ordered(bin_height_above_sea_floor_m, levels = levels_height)
+    )
+
   # plot for each test
   for (j in seq_along(qc_tests)) {
     qc_test_j <- qc_tests[j]
@@ -106,7 +115,7 @@ adcp_ggplot_flags <- function(
   p <- dat %>%
     adcp_convert_vars_to_title() %>%
     ggplot(aes(timestamp_utc, value, col = !!sym(flag_column))) +
-    geom_point(show.legend = TRUE) +
+    geom_point(show.legend = TRUE, size = 0.5) +
     scale_x_datetime("Date", date_labels = "%Y-%m-%d") +
     scale_colour_manual("Flag Value", values = flag_colours, drop = FALSE) +
     theme_light() +
@@ -114,12 +123,23 @@ adcp_ggplot_flags <- function(
       strip.placement = "outside",
       strip.background = element_rect(colour = "grey80", fill = NA),
       strip.text = element_text(colour = "grey30", size = 10)
-    ) +
-    facet_wrap(
-      ~bin_height_above_sea_floor_m + variable_title,
-      ncol = n_col,
-      scales = "free_y"
     )
+
+  if(length(unique(dat$variable)) == 1) {
+    p <- p +
+      facet_wrap(
+        ~bin_height_above_sea_floor_m,
+        ncol = n_col,
+        scales = "fixed"
+      )
+  } else {
+    p <- p +
+      facet_wrap(
+        ~bin_height_above_sea_floor_m + variable_title,
+        ncol = n_col,
+        scales = "free_y"
+      )
+  }
 
   if(isFALSE(plotly_friendly)) {
     p <- p + guides(color = guide_legend(override.aes = list(size = 4)))

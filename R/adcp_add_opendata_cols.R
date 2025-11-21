@@ -4,8 +4,8 @@
 #'   \code{adcp_pivot_longer()}.
 #'
 #' @param metadata Data frame with metadata information for the deployment in
-#'   \code{dat} (e.g., a row from the NSDFA tracking sheet). Must include
-#'   columns \code{Depl_ID}, \code{Waterbody}, and \code{Station}. Option to use
+#'   \code{dat} (e.g., a row from ADCP TRACKING). Must include
+#'   columns \code{depl_id}, \code{waterbody}, and \code{station}. Option to use
 #'   default value \code{metadata = NULL} and provide the required values in the
 #'   remaining arguments.
 #'
@@ -29,16 +29,16 @@ adcp_add_opendata_cols <- function(dat,
                                    waterbody = NULL,
                                    station = NULL) {
   if (!is.null(metadata)) {
-    deployment_id <- metadata$Depl_ID
-    waterbody <- metadata$Waterbody
-    station <- metadata$Station_Name
+    deployment_id <- metadata$depl_id
+    waterbody <- metadata$waterbody
+    station <- metadata$station
   }
 
   dat <- dat %>%
     mutate(
       deployment_id = deployment_id,
       waterbody = waterbody,
-      station = station,
+      station = station
     ) %>%
     select(deployment_id:station, everything())
 }

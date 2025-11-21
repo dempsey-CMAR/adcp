@@ -4,13 +4,14 @@
 #' \code{depth_threshold} at the beginning or end of the deployment will trigger
 #' a flag of 4. This assumes that the sensor was recording before or after the
 #' ADCP was deployed. Observations of all variables at this timestamp should be
-#' filtered out of the dataset.
+#' filtered out of the data set.
 #'
-#' @param dat Data frame of wave data for a single deployment in wide format.
+#' Only looks at the first three and last three observations.
+#'
+#' @param dat Data frame of current data for a single deployment in wide format.
 #'
 #' @param depth_threshold The change in \code{sensor_depth_below_surface_m} that
-#'   will trigger a flag of 4 (in metres). Default is 1.0 m, the q95 of all
-#'   depth data.
+#'   will trigger a flag of 4 (in metres). Default is 1.0 m.
 #'
 #' @param return_depth_diff Logical argument indicating whether to return the
 #'   column of \code{depth_diff} = abs(lead(sensor_depth_below_surface_m) -
@@ -20,7 +21,7 @@
 #'   \code{trim_flag_sensor_depth_below_surface_m} (and optionally
 #'   \code{depth_diff}.
 #'
-#' @importFrom dplyr group_by lag lead mutate n row_number slice_head
+#' @importFrom dplyr anti_join group_by lag lead mutate n row_number slice_head
 #'   slice_tail ungroup
 #'
 #' @export
@@ -37,14 +38,19 @@ adcp_start_end_obs_to_trim <- function(
   join_cols <- colnames(dat_og)
 
   dat_trim <- dat %>%
+    group_by(bin_height_above_sea_floor_m) %>%
+    arrange(timestamp_utc, .by_group = TRUE) %>%
     slice_head(n = 3) %>%
     mutate(group = "start") %>%
     rbind(
       dat %>%
+        group_by(bin_height_above_sea_floor_m) %>%
+        arrange(timestamp_utc, .by_group = TRUE) %>%
         slice_tail(n = 3) %>%
         mutate(group = "end")
     ) %>%
-    group_by(group) %>%
+    ungroup() %>%
+    group_by(bin_height_above_sea_floor_m, group) %>%
     mutate(
       depth_diff = abs(
         lead(sensor_depth_below_surface_m) - sensor_depth_below_surface_m),
@@ -59,7 +65,6 @@ adcp_start_end_obs_to_trim <- function(
     ) %>%
     ungroup() %>%
     select(-group)
-
 
   dat_out <- dat_og %>%
     left_join(dat_trim, by = join_cols) %>%

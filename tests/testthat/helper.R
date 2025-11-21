@@ -1,4 +1,4 @@
-#' @importFrom dplyr bind_rows
+#' @importFrom dplyr anti_join bind_rows
 
 path <- system.file("testdata", package = "adcp")
 
@@ -128,4 +128,49 @@ spike_1 <- dat_spike %>%
     by = dplyr::join_by(
       timestamp_utc, day_utc, variable, value, spike_flag_value
     ))
+
+# wv_test_all -------------------------------------------------------------
+
+dat_all <- dat_rolling_sd %>%
+  select(-c(rolling_sd_flag_value, day_utc)) %>%
+  pivot_wider(values_from = "value", names_from = "variable")
+
+dat_all_qc <- dat_all %>%
+  adcp_test_all(county = "Yarmouth")
+
+
+# Assign max flag ---------------------------------------------------------
+
+dat_max_flag <- data.frame(
+  timestamp_utc = c("a", "b", "c", "d", "e"),
+  variable = "sea_water_speed_m_s",
+  value = round(c(runif(5)), digits = 2),
+  grossrange_flag_value = c(1, 0, 2, 3, 1),
+  rolling_sd_flag_value = c(0, 2, 1, 3, 1),
+  spike_flag_value = c(1, 1, 3, 4, 4)
+) %>%
+  adcp_assign_max_flag()
+
+# trim depth --------------------------------------------------------------
+
+# export dat_qc from wv_test_Data_grossrange
+dat_trim <- readRDS(paste0(path, "/current_test_data_grossrange.RDS")) %>%
+  adcp_start_end_obs_to_trim(return_depth_diff = TRUE) %>%
+  arrange(bin_height_above_sea_floor_m, timestamp_utc)
+
+dat_trim_4 <- dat_trim %>%
+  group_by(bin_height_above_sea_floor_m) %>%
+  dplyr::filter(row_number() %in% c(1, n() - 1, n() - 2,  n())) %>%
+  ungroup()
+
+dat_trim_1 <- dat_trim %>%
+  dplyr::anti_join(
+    dat_trim_4,
+    by = join_by(
+      timestamp_utc, bin_depth_below_surface_m,
+      bin_height_above_sea_floor_m, county, day_utc,
+      sensor_depth_below_surface_m,
+      sea_water_speed_m_s, sea_water_to_direction_degree, depth_diff, trim_obs)
+  )
+
 

@@ -47,7 +47,7 @@ find_index <- function(dat_wide) {
 #' @return Returns a tibble with three columns: \code{DEPLOYMENT},
 #'   \code{Depl_Date}, and \code{Station_Name}.
 #'
-#' @importFrom dplyr mutate tibble
+#' @importFrom dplyr mutate
 #' @importFrom lubridate as_date
 #' @importFrom stringi stri_locate
 #' @importFrom stringr str_remove str_replace_all str_sub str_trim
@@ -59,16 +59,16 @@ adcp_extract_deployment_info <- function(file_path) {
   data.frame(file_path) %>%
     str_sub(stringi::stri_locate_last(file_path, regex = "/")[1] + 1) %>%
     str_remove(pattern = ".txt|.csv") %>%
-    tibble(DEPLOYMENT = .) %>%
+    data.frame(deployment = .) %>%
     separate(
       col = 1, sep = 10, # separate after the date so will work for station names with more than one word
-      into = c("Depl_Date", "Station_Name"), #, "Depl_ID"),
+      into = c("depl_date", "station"), #, "Depl_ID"),
       remove = FALSE
     ) %>%
     mutate(
-      Station_Name = str_replace_all(Station_Name, "_", " "),
-      Station_Name = str_trim(Station_Name),
-      Depl_Date = as_date(Depl_Date)
+      station = str_replace_all(station, "_", " "),
+      station = str_trim(station),
+      depl_date = as_date(depl_date)
     )
 }
 

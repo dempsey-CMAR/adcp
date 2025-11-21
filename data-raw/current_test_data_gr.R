@@ -19,8 +19,8 @@ path <- here("inst/testdata")
 tracking <- adcp_read_tracking() %>%
   filter(depl_id == "YR009")
 
-dat_raw <- adcp_read_txt(path, "2022-09-29_western_shoal.txt")%>%
-  adcp_assign_altitude(tracking)%>%
+dat_raw <- adcp_read_txt(path, "2022-09-29_western_shoal.txt") %>%
+  adcp_assign_altitude(tracking) %>%
   adcp_correct_timestamp() %>%
   adcp_pivot_bin_height() %>%
   adcp_calculate_bin_depth(tracking) %>%
@@ -28,19 +28,26 @@ dat_raw <- adcp_read_txt(path, "2022-09-29_western_shoal.txt")%>%
     row_number() %% 10 == 0,
     bin_height_above_sea_floor_m %in% c(2.61, 3.61),
     timestamp_utc >= as_datetime("2022-10-01"),
-    timestamp_utc <= as_datetime("2022-10-07")
+    timestamp_utc <= as_datetime("2022-10-07 12:00:00")
   ) %>%
-  mutate(county = "Yarmouth")
+  group_by(bin_height_above_sea_floor_m) %>%
+  mutate(
+    county = "Yarmouth",
+    # for the sensor_depth_to_trim test
+    sensor_depth_below_surface_m = case_when(
+      row_number() == 1 ~ 14.1,
+      row_number() == 2 ~ 13,
+      row_number() == (max(row_number()) - 1) ~ 13.5,
+      row_number() == max(row_number()) ~ 15,
+      TRUE ~sensor_depth_below_surface_m
+    )
+  ) %>%
+  ungroup() %>%
+  arrange(bin_height_above_sea_floor_m, timestamp_utc)
 
-ggplot(dat_raw, aes(timestamp_utc, sea_water_speed_m_s)) +
+ggplot(dat_raw, aes(timestamp_utc, sensor_depth_below_surface_m)) +
   geom_point() +
   facet_wrap(~bin_height_above_sea_floor_m, ncol = 1)
-
-# for the sensor_depth_to_trim test
-dat_raw[1, "sensor_depth_below_surface_m"] <- 14.1
-dat_raw[2, "sensor_depth_below_surface_m"] <- 13
-dat_raw[nrow(dat_raw) - 1, "sensor_depth_below_surface_m"] <- 13.5
-dat_raw[nrow(dat_raw), "sensor_depth_below_surface_m"] <- 15
 
 dat_raw <- dat_raw %>%
   adcp_pivot_vars_longer()
@@ -75,5 +82,5 @@ dat_qc <- dat %>%
 adcp_plot_flags(dat_qc, qc_tests = "grossrange")
 
 # Export rds file
-#saveRDS(dat, file = here("inst/testdata/current_test_data_grossrange.RDS"))
+saveRDS(dat, file = here("inst/testdata/current_test_data_grossrange.RDS"))
 

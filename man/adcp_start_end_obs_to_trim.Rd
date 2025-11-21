@@ -7,11 +7,10 @@
 adcp_start_end_obs_to_trim(dat, depth_threshold = 1, return_depth_diff = FALSE)
 }
 \arguments{
-\item{dat}{Data frame of wave data for a single deployment in wide format.}
+\item{dat}{Data frame of current data for a single deployment in wide format.}
 
 \item{depth_threshold}{The change in \code{sensor_depth_below_surface_m} that
-will trigger a flag of 4 (in metres). Default is 1.0 m, the q95 of all
-depth data.}
+will trigger a flag of 4 (in metres). Default is 1.0 m.}
 
 \item{return_depth_diff}{Logical argument indicating whether to return the
 column of \code{depth_diff} = abs(lead(sensor_depth_below_surface_m) -
@@ -27,5 +26,8 @@ A change in \code{sensor_depth_below_surface_m} greater than
 \code{depth_threshold} at the beginning or end of the deployment will trigger
 a flag of 4. This assumes that the sensor was recording before or after the
 ADCP was deployed. Observations of all variables at this timestamp should be
-filtered out of the dataset.
+filtered out of the data set.
+}
+\details{
+Only looks at the first three and last three observations.
 }

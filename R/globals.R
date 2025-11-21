@@ -135,6 +135,15 @@ utils::globalVariables(c(
   "trim_obs",
   "group",
 
+  # assign max flag
+  "col_name",
+  "qc_col",
+
+  # summarise flags
+  "flag_value",
+  "n_fl",
+  "n_obs",
+
   # import_data
   "abb",
   "current_thresholds"
