@@ -51,7 +51,7 @@ adcp_plot_flags <- function(
 
   if (isTRUE(labels)) dat <- dat %>% qaqcmar::qc_assign_flag_labels()
 
-  if (is.null(n_col)) n_col <- 2
+  if (is.null(n_col)) n_col <- length(unique(dat$variable))
 
   # plot for each test
   for (j in seq_along(qc_tests)) {
@@ -101,6 +101,8 @@ adcp_ggplot_flags <- function(
 
   flag_column <- paste0(qc_test, "_flag_value")
 
+# if(is.null(n_col)) n_col <- length(unique(dat$variable_title))
+
   p <- dat %>%
     adcp_convert_vars_to_title() %>%
     ggplot(aes(timestamp_utc, value, col = !!sym(flag_column))) +
@@ -113,7 +115,11 @@ adcp_ggplot_flags <- function(
       strip.background = element_rect(colour = "grey80", fill = NA),
       strip.text = element_text(colour = "grey30", size = 10)
     ) +
-    facet_wrap(~variable_title, ncol = n_col, scales = "free_y")
+    facet_wrap(
+      ~bin_height_above_sea_floor_m + variable_title,
+      ncol = n_col,
+      scales = "free_y"
+    )
 
   if(isFALSE(plotly_friendly)) {
     p <- p + guides(color = guide_legend(override.aes = list(size = 4)))
