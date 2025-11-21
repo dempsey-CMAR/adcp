@@ -1,6 +1,6 @@
+#' @importFrom dplyr bind_rows
 
 path <- system.file("testdata", package = "adcp")
-
 
 # grossrange test ---------------------------------------------------------
 
@@ -32,3 +32,100 @@ gr_1 <- dat_gr %>%
     by = dplyr::join_by(
       timestamp_utc, day_utc, variable, value, grossrange_flag_value
     ))
+
+
+# rolling_sd --------------------------------------------------------------
+dat_rolling_sd <- readRDS(paste0(path, "/current_test_data_rolling_sd.RDS")) %>%
+  adcp_test_rolling_sd(county = "Yarmouth") %>%
+  adcp_pivot_flags_longer(qc_tests = "rolling_sd")
+
+rolling_sd_3 <- dat_rolling_sd %>%
+  filter(
+    variable == "sea_water_speed_m_s",
+    timestamp_utc >= as_datetime("2023-01-02 21:20:00"),
+    timestamp_utc <= as_datetime("2023-01-04 04:10:00")
+  ) %>%
+  dplyr::bind_rows(
+    dat_rolling_sd %>%
+      filter(
+        variable == "sea_water_to_direction_degree",
+        timestamp_utc >= as_datetime("2023-01-02 23:00:00"),
+        timestamp_utc <= as_datetime("2023-01-04 03:20:00")
+      )
+  ) %>%
+  dplyr::bind_rows(
+    dat_rolling_sd %>%
+      filter(
+        variable == "sensor_depth_below_surface_m" &
+          (timestamp_utc >= as_datetime("2023-01-02 20:50:00") &
+             timestamp_utc <= as_datetime("2023-01-04 04:30:00"))
+      )
+  )
+
+
+rolling_sd_2 <- dat_rolling_sd %>%
+  filter(
+    timestamp_utc <= as_datetime("2023-01-01 17:40:00") |
+      timestamp_utc >= as_datetime("2023-01-07 06:10:00")
+  )
+
+rolling_sd_1 <- dat_rolling_sd %>%
+  dplyr::anti_join(
+    rolling_sd_3,
+    by = dplyr::join_by(
+      timestamp_utc, day_utc, variable, value, rolling_sd_flag_value
+    )
+  ) %>%
+  dplyr::anti_join(
+    rolling_sd_2,
+    by = dplyr::join_by(
+      timestamp_utc, day_utc, variable, value, rolling_sd_flag_value
+    )
+  )
+
+
+# spike -------------------------------------------------------------------
+
+dat_spike <- readRDS(paste0(path, "/current_test_data_spike.RDS")) %>%
+  adcp_test_spike(county = "Yarmouth") %>%
+  adcp_pivot_flags_longer(qc_tests = "spike")
+
+spike_2 <- dat_spike %>%
+  group_by(variable, bin_height_above_sea_floor_m) %>%
+  filter(row_number() == 1 | row_number() == n())
+
+spike_3 <- dat_spike %>%
+  filter(
+    (day_utc == 3 & hour_utc == 0) |
+      (day_utc == 3 & hour_utc == 12) |
+      (day_utc == 4 & hour_utc == 23) |
+      (day_utc == 5 & hour_utc == 1) |
+      (day_utc == 5 & hour_utc == 11) |
+      (day_utc == 5 & hour_utc == 13)
+  )
+
+spike_4 <- dat_spike %>%
+  filter(
+    (day_utc == 5 & hour_utc == 0) |
+      (day_utc == 5 & hour_utc == 12)
+  )
+
+spike_1 <- dat_spike %>%
+  dplyr::anti_join(
+    spike_2,
+    by = dplyr::join_by(
+      timestamp_utc, day_utc, variable, value, spike_flag_value
+    )
+  ) %>%
+  dplyr::anti_join(
+    spike_3,
+    by = dplyr::join_by(
+      timestamp_utc, day_utc, variable, value, spike_flag_value
+    )
+  ) %>%
+  dplyr::anti_join(
+    spike_4,
+    by = dplyr::join_by(
+      timestamp_utc, day_utc, variable, value, spike_flag_value
+    ))
+
