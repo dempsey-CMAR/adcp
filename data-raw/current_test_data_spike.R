@@ -88,7 +88,7 @@ p <- dat_qc %>%
   adcp_plot_flags(qc_tests = "spike")
 
 
-ggplotly(p$spike)
+#ggplotly(p$spike)
 
 # Export rds file
 saveRDS(dat, file = here("inst/testdata/current_test_data_spike.RDS"))

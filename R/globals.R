@@ -111,15 +111,17 @@ utils::globalVariables(c(
   "user_min",
   "qc_test",
 
-  # spike test
-  "int_sample",
-  "lag_value",
-  "lead_value",
+  # rolling sd test
   "n_sample",
   "n_sample_effective",
   "rolling_sd_flag",
   "rolling_sd_max",
   "sd_roll",
+
+  # spike test
+  "int_sample",
+  "lag_value",
+  "lead_value",
   "spike_flag",
   "spike_high",
   "spike_low",
