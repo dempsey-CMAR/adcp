@@ -37,6 +37,9 @@ adcp_start_end_obs_to_trim <- function(
 
   join_cols <- colnames(dat_og)
 
+  # this will flag the sensor depth in each bin, even though it is the same
+  # depth recording for each bin
+  # might be more straightforward to distinct(timestamp, sensor_depth instead)
   dat_trim <- dat %>%
     group_by(bin_height_above_sea_floor_m) %>%
     arrange(timestamp_utc, .by_group = TRUE) %>%
@@ -49,6 +52,12 @@ adcp_start_end_obs_to_trim <- function(
         slice_tail(n = 3) %>%
         mutate(group = "end")
     ) %>%
+    ungroup() %>%
+    # the bind_rows() will add duplicate rows if the number of observations
+    # in the bin is < 3. Remove them here
+    group_by(timestamp_utc, bin_height_above_sea_floor_m) %>%
+    mutate(n = n()) %>%
+    filter(n == 1) %>%
     ungroup() %>%
     group_by(bin_height_above_sea_floor_m, group) %>%
     mutate(
