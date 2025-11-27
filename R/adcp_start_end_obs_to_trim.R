@@ -35,31 +35,21 @@ adcp_start_end_obs_to_trim <- function(
 
   dat_og <- dat
 
-  join_cols <- colnames(dat_og)
+  join_cols <- c("timestamp_utc", "sensor_depth_below_surface_m")
 
-  # this will flag the sensor depth in each bin, even though it is the same
-  # depth recording for each bin
-  # might be more straightforward to distinct(timestamp, sensor_depth instead)
-  dat_trim <- dat %>%
-    group_by(bin_height_above_sea_floor_m) %>%
-    arrange(timestamp_utc, .by_group = TRUE) %>%
+  dat_depth <-  dat %>%
+    distinct(timestamp_utc, sensor_depth_below_surface_m) %>%
+    arrange(timestamp_utc)
+
+  dat_trim <- dat_depth %>%
     slice_head(n = 3) %>%
     mutate(group = "start") %>%
     rbind(
-      dat %>%
-        group_by(bin_height_above_sea_floor_m) %>%
-        arrange(timestamp_utc, .by_group = TRUE) %>%
+      dat_depth %>%
         slice_tail(n = 3) %>%
         mutate(group = "end")
     ) %>%
-    ungroup() %>%
-    # the bind_rows() will add duplicate rows if the number of observations
-    # in the bin is < 3. Remove them here
-    group_by(timestamp_utc, bin_height_above_sea_floor_m) %>%
-    mutate(n = n()) %>%
-    filter(n == 1) %>%
-    ungroup() %>%
-    group_by(bin_height_above_sea_floor_m, group) %>%
+    group_by(group) %>%
     mutate(
       depth_diff = abs(
         lead(sensor_depth_below_surface_m) - sensor_depth_below_surface_m),
@@ -78,7 +68,7 @@ adcp_start_end_obs_to_trim <- function(
   dat_out <- dat_og %>%
     left_join(dat_trim, by = join_cols) %>%
     mutate(
-      trim_obs = if_else(is.na(trim_obs), 1, trim_obs),
+      trim_obs = if_else(is.na(trim_obs), 2, trim_obs),
       trim_obs = ordered(trim_obs, levels = 1:4) # for plotting
     )
 
