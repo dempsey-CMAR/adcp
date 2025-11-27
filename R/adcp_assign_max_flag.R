@@ -4,7 +4,8 @@
 #'   quality control tests.
 #'
 #' @param qc_tests Quality control tests included in \code{dat}. Default is
-#'   \code{qc_tests = c("grossrange", "rolling_sd", "spike")}.
+#'   \code{qc_tests = c("tidal_bin_height" ,"grossrange")}. Will also work for
+#'   "rolling_sd" and "spike".
 #'
 #' @param return_all Logical value indicating whether to return all quality
 #'   control flag columns or only the summary columns. If \code{TRUE}, all flag
@@ -25,7 +26,7 @@
 adcp_assign_max_flag <- function(dat, qc_tests = NULL, return_all = TRUE) {
 
   if(is.null(qc_tests)) {
-    qc_tests = c("grossrange", "rolling_sd", "spike")
+    qc_tests = c("tidal_bin_height", "grossrange")
   }
 
   # use for the join and to order columns in output
@@ -38,7 +39,6 @@ adcp_assign_max_flag <- function(dat, qc_tests = NULL, return_all = TRUE) {
     "longitude" ,
     "deployment_id",
     "timestamp_utc",
-    # "depth_trim_flag",
     "bin_height_above_sea_floor_m",
     "bin_depth_below_surface_m",
     "trim_obs"

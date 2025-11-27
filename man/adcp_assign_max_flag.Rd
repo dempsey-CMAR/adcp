@@ -11,7 +11,8 @@ adcp_assign_max_flag(dat, qc_tests = NULL, return_all = TRUE)
 quality control tests.}
 
 \item{qc_tests}{Quality control tests included in \code{dat}. Default is
-\code{qc_tests = c("grossrange", "rolling_sd", "spike")}.}
+\code{qc_tests = c("tidal_bin_height" ,"grossrange")}. Will also work for
+"rolling_sd" and "spike".}
 
 \item{return_all}{Logical value indicating whether to return all quality
 control flag columns or only the summary columns. If \code{TRUE}, all flag

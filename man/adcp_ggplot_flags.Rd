@@ -9,7 +9,8 @@ adcp_ggplot_flags(
   qc_test,
   n_col = NULL,
   flag_title = TRUE,
-  plotly_friendly = FALSE
+  plotly_friendly = FALSE,
+  legend_position = "right"
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ the qc test and variable plotted.}
 \item{plotly_friendly}{Logical argument. If \code{TRUE}, the legend will be
 plotted when \code{plotly::ggplotly} is called on \code{p}. Default is
 \code{FALSE}, which makes the legend look better in a static figure.}
+
+\item{legend_position}{Legend position. Default is "right".}
 }
 \value{
 Returns a ggplot object; a figure for \code{qc_test}.

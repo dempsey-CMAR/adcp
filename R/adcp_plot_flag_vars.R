@@ -7,7 +7,8 @@
 #'   "all"}, which will make a plot for each recognized variable in \code{dat}.
 #'
 #' @param qc_tests Character string of QC tests to plot. Default is
-#'   \code{qc_tests = c("grossrange", "rolling_sd", "spike")}.
+#'   \code{qc_tests = c("tidal_bin_height", "grossrange", "qc")}. Will also work
+#'   for "rolling_sd" and "spike".
 #'
 #' @param labels Logical argument indicating whether to convert numeric flag
 #'   values to text labels for the legend.
@@ -21,6 +22,8 @@
 #'   plotted when \code{plotly::ggplotly} is called on \code{p}. Default is
 #'   \code{FALSE}, which makes the legend look better in a static figure.
 #'
+#' @param legend_position Legend position. Default is "right".
+#'
 #' @return Returns a list of ggplot objects; one figure for each test in
 #'   \code{qc_tests} and variable in \code{vars}. Points are coloured by the
 #'   flag value and panels are faceted by depth and sensor. faceted by depth and
@@ -33,12 +36,13 @@
 
 adcp_plot_flags <- function(
     dat,
-    qc_tests = c("grossrange", "rolling_sd", "spike", "qc"),
+    qc_tests = c("tidal_bin_height", "grossrange", "qc"),
     vars = "all",
     labels = TRUE,
     n_col = NULL,
     flag_title = TRUE,
-    plotly_friendly = FALSE
+    plotly_friendly = FALSE,
+    legend_position = "right"
 ) {
 
   p_out <- list()
@@ -53,14 +57,14 @@ adcp_plot_flags <- function(
 
   if (is.null(n_col)) n_col <- length(unique(dat$variable))
 
-  levels_height <- sort(
-    unique(dat$bin_height_above_sea_floor_m), decreasing = TRUE
-  )
-  dat <- dat %>%
-    mutate(
-      bin_height_above_sea_floor_m =
-        ordered(bin_height_above_sea_floor_m, levels = levels_height)
-    )
+  # levels_height <- sort(
+  #   unique(dat$bin_height_above_sea_floor_m), decreasing = TRUE
+  # )
+  # dat <- dat %>%
+  #   mutate(
+  #     bin_height_above_sea_floor_m =
+  #       ordered(bin_height_above_sea_floor_m, levels = levels_height)
+  #   )
 
   # plot for each test
   for (j in seq_along(qc_tests)) {
@@ -71,7 +75,8 @@ adcp_plot_flags <- function(
       qc_test = qc_test_j,
       n_col = n_col,
       plotly_friendly = plotly_friendly,
-      flag_title = flag_title
+      flag_title = flag_title,
+      legend_position = legend_position
     )
   }
 
@@ -103,7 +108,8 @@ adcp_ggplot_flags <- function(
     qc_test,
     n_col = NULL,
     flag_title = TRUE,
-    plotly_friendly = FALSE
+    plotly_friendly = FALSE,
+    legend_position = "right"
 ) {
   # https://www.visualisingdata.com/2019/08/five-ways-to-design-for-red-green-colour-blindness/
   flag_colours <- c("chartreuse4", "grey24", "#EDA247", "#DB4325")
@@ -122,7 +128,8 @@ adcp_ggplot_flags <- function(
     theme(
       strip.placement = "outside",
       strip.background = element_rect(colour = "grey80", fill = NA),
-      strip.text = element_text(colour = "grey30", size = 10)
+      strip.text = element_text(colour = "grey30", size = 10),
+      legend.position = legend_position
     )
 
   if(length(unique(dat$variable)) == 1) {

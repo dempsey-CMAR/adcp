@@ -6,12 +6,13 @@
 \usage{
 adcp_plot_flags(
   dat,
-  qc_tests = c("grossrange", "rolling_sd", "spike", "qc"),
+  qc_tests = c("tidal_bin_height", "grossrange", "qc"),
   vars = "all",
   labels = TRUE,
   n_col = NULL,
   flag_title = TRUE,
-  plotly_friendly = FALSE
+  plotly_friendly = FALSE,
+  legend_position = "right"
 )
 }
 \arguments{
@@ -19,7 +20,8 @@ adcp_plot_flags(
 include at least one column name with the string "_flag_variable".}
 
 \item{qc_tests}{Character string of QC tests to plot. Default is
-\code{qc_tests = c("grossrange", "rolling_sd", "spike")}.}
+\code{qc_tests = c("tidal_bin_height", "grossrange", "qc")}. Will also work
+for "rolling_sd" and "spike".}
 
 \item{vars}{Character vector of variables to plot. Default is \code{vars =
 "all"}, which will make a plot for each recognized variable in \code{dat}.}
@@ -35,6 +37,8 @@ the qc test and variable plotted.}
 \item{plotly_friendly}{Logical argument. If \code{TRUE}, the legend will be
 plotted when \code{plotly::ggplotly} is called on \code{p}. Default is
 \code{FALSE}, which makes the legend look better in a static figure.}
+
+\item{legend_position}{Legend position. Default is "right".}
 }
 \value{
 Returns a list of ggplot objects; one figure for each test in

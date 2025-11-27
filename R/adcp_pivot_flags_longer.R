@@ -6,8 +6,10 @@
 #'   Default is all variables. Only required if variables in \code{dat} are in a
 #'   wide format.
 #'
-#' @param qc_tests Quality control tests included in \code{dat_wide}. If
-#'   \code{dat_wide} only includes the max flag, use \code{qc_tests = "qc"}.
+#' @param qc_tests Quality control tests included in \code{dat_wide}. Default is
+#'   \code{qc_tests = c("tidal_bin_height", "grossrange", "qc")}. Will also work for
+#'   "rolling_sd" and "spike". If \code{dat_wide} only includes the max flag,
+#'   use \code{qc_tests = "qc"}.
 #'
 #' @return Returns \code{dat_wide}, with variables and flags pivoted to a long
 #'   format.
@@ -21,9 +23,8 @@ adcp_pivot_flags_longer <- function(dat, qc_tests = NULL, vars = NULL) {
 
   if (is.null(qc_tests)) {
     qc_tests <- c(
+      "tidal_bin_height",
       "grossrange",
-      "rolling_sd",
-      "spike",
       "qc"
     )
   }
@@ -32,6 +33,15 @@ adcp_pivot_flags_longer <- function(dat, qc_tests = NULL, vars = NULL) {
 
   if(!("variable" %in% colnames(dat))) {
     dat <- adcp_pivot_vars_longer(dat, vars = vars)
+  }
+
+  # tidal bin height test does not depend on the variable, so do not need to pivot
+  if ("tidal_bin_height" %in% qc_tests) {
+    dat <- dat %>%
+      relocate(
+        tidal_bin_height_flag_value = tidal_bin_height_flag,
+        .after = last_col()
+      )
   }
 
   # pivot the flags indicated
@@ -78,7 +88,7 @@ adcp_pivot_single_test_longer <- function(dat_wide, qc_test) {
 
   col_name <- paste0(qc_test, "_flag_variable")
 
-  dat_wide %>%
+   dat_wide %>%
     pivot_longer(
       cols = contains(qc_test),
       names_to = paste0(qc_test, "_flag_variable"),
