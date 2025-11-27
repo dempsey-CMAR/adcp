@@ -10,6 +10,8 @@
   : Assign altitude (height above sea floor) to each bin
 - [`adcp_assign_altitude_old()`](https://dempsey-cmar.github.io/adcp/reference/adcp_assign_altitude_old.md)
   : Assign altitude (height above sea floor) to each bin
+- [`adcp_assign_max_flag()`](https://dempsey-cmar.github.io/adcp/reference/adcp_assign_max_flag.md)
+  : Assign each observation the maximum flag from applied QC tests.
 - [`adcp_calculate_bin_depth()`](https://dempsey-cmar.github.io/adcp/reference/adcp_calculate_bin_depth.md)
   : Calculate the bin depth below the surface
 - [`adcp_calculate_bin_depth_old()`](https://dempsey-cmar.github.io/adcp/reference/adcp_calculate_bin_depth_old.md)
@@ -32,8 +34,6 @@
   : Export Current Data Deployment Information Dataset
 - [`adcp_extract_deployment_info()`](https://dempsey-cmar.github.io/adcp/reference/adcp_extract_deployment_info.md)
   : Extract deployment date and station name from file path
-- [`adcp_flag_data()`](https://dempsey-cmar.github.io/adcp/reference/adcp_flag_data.md)
-  : Flag ensembles with suspect sensor_depth_below_surface_m recordings
 - [`adcp_format_report_table()`](https://dempsey-cmar.github.io/adcp/reference/adcp_format_report_table.md)
   : Formats tables for summary report
 - [`adcp_ggplot_flags()`](https://dempsey-cmar.github.io/adcp/reference/adcp_ggplot_flags.md)
@@ -72,12 +72,18 @@
 - [`adcp_start_end_obs_to_trim()`](https://dempsey-cmar.github.io/adcp/reference/adcp_start_end_obs_to_trim.md)
   : Flag observations that should be trimmed from beginning and end of
   deployment
+- [`adcp_summarise_flags()`](https://dempsey-cmar.github.io/adcp/reference/adcp_summarise_flags.md)
+  : Generate summary table of flags
+- [`adcp_test_all()`](https://dempsey-cmar.github.io/adcp/reference/adcp_test_all.md)
+  : Apply multiple quality control tests to current data
 - [`adcp_test_grossrange()`](https://dempsey-cmar.github.io/adcp/reference/adcp_test_grossrange.md)
   : Apply grossrange test to current variables
 - [`adcp_test_rolling_sd()`](https://dempsey-cmar.github.io/adcp/reference/adcp_test_rolling_sd.md)
   : Apply the rolling standard deviation test to current variables
 - [`adcp_test_spike()`](https://dempsey-cmar.github.io/adcp/reference/adcp_test_spike.md)
   : Apply the spike test to current parameters
+- [`adcp_test_tidal_bin_height()`](https://dempsey-cmar.github.io/adcp/reference/adcp_test_tidal_bin_height.md)
+  : Apply tidal bin height test to adcp data
 - [`adcp_write_report_table()`](https://dempsey-cmar.github.io/adcp/reference/adcp_write_report_table.md)
   : Writes deployment table for summary report
 - [`current_thresholds`](https://dempsey-cmar.github.io/adcp/reference/current_thresholds.md)

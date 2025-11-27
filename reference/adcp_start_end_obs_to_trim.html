@@ -3,11 +3,11 @@
 depth_threshold at the beginning or end of the deployment will trigger
 a flag of 4. This assumes that the sensor was recording before or after the
 ADCP was deployed. Observations of all variables at this timestamp should be
-filtered out of the dataset."><meta property="og:description" content="A change in sensor_depth_below_surface_m greater than
+filtered out of the data set."><meta property="og:description" content="A change in sensor_depth_below_surface_m greater than
 depth_threshold at the beginning or end of the deployment will trigger
 a flag of 4. This assumes that the sensor was recording before or after the
 ADCP was deployed. Observations of all variables at this timestamp should be
-filtered out of the dataset."></head><body>
+filtered out of the data set."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -15,7 +15,7 @@ filtered out of the dataset."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">adcp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@ filtered out of the dataset."></head><body>
 <code>depth_threshold</code> at the beginning or end of the deployment will trigger
 a flag of 4. This assumes that the sensor was recording before or after the
 ADCP was deployed. Observations of all variables at this timestamp should be
-filtered out of the dataset.</p>
+filtered out of the data set.</p>
     </div>
 
     <div class="section level2">
@@ -61,13 +61,12 @@ filtered out of the dataset.</p>
 
 
 <dl><dt id="arg-dat">dat<a class="anchor" aria-label="anchor" href="#arg-dat"></a></dt>
-<dd><p>Data frame of wave data for a single deployment in wide format.</p></dd>
+<dd><p>Data frame of current data for a single deployment in wide format.</p></dd>
 
 
 <dt id="arg-depth-threshold">depth_threshold<a class="anchor" aria-label="anchor" href="#arg-depth-threshold"></a></dt>
 <dd><p>The change in <code>sensor_depth_below_surface_m</code> that
-will trigger a flag of 4 (in metres). Default is 1.0 m, the q95 of all
-depth data.</p></dd>
+will trigger a flag of 4 (in metres). Default is 1.0 m.</p></dd>
 
 
 <dt id="arg-return-depth-diff">return_depth_diff<a class="anchor" aria-label="anchor" href="#arg-return-depth-diff"></a></dt>
@@ -81,6 +80,10 @@ sensor_depth_below_surface_m).</p></dd>
     <p>Returns <code>dat</code> with the flag column
   <code>trim_flag_sensor_depth_below_surface_m</code> (and optionally
   <code>depth_diff</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Only looks at the first three and last three observations.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -7,12 +7,12 @@
 ## Citation
 
 Dempsey D (2025). *adcp: Format and Visualize ADCP data*. R package
-version 4.0.0, <https://dempsey-cmar.github.io/adcp/>.
+version 4.0.2, <https://dempsey-cmar.github.io/adcp/>.
 
     @Manual{,
       title = {adcp: Format and Visualize ADCP data},
       author = {Danielle Dempsey},
       year = {2025},
-      note = {R package version 4.0.0},
+      note = {R package version 4.0.2},
       url = {https://dempsey-cmar.github.io/adcp/},
     }

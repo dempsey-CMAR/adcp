@@ -13,7 +13,7 @@ adcp_convert_flag_to_ordered_factor(dat)
 - dat:
 
   Data frame of ACDP data in long format, as returned by
-  [`adcp_flag_data()`](https://dempsey-cmar.github.io/adcp/reference/adcp_flag_data.md).
+  `adcp_flag_data()`.
 
 ## Value
 

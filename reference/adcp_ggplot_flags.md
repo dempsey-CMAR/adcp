@@ -10,7 +10,8 @@ adcp_ggplot_flags(
   qc_test,
   n_col = NULL,
   flag_title = TRUE,
-  plotly_friendly = FALSE
+  plotly_friendly = FALSE,
+  legend_position = "right"
 )
 ```
 
@@ -40,6 +41,10 @@ adcp_ggplot_flags(
   [`plotly::ggplotly`](https://rdrr.io/pkg/plotly/man/ggplotly.html) is
   called on `p`. Default is `FALSE`, which makes the legend look better
   in a static figure.
+
+- legend_position:
+
+  Legend position. Default is "right".
 
 ## Value
 

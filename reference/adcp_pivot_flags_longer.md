@@ -16,8 +16,10 @@ adcp_pivot_flags_longer(dat, qc_tests = NULL, vars = NULL)
 
 - qc_tests:
 
-  Quality control tests included in `dat_wide`. If `dat_wide` only
-  includes the max flag, use `qc_tests = "qc"`.
+  Quality control tests included in `dat_wide`. Default is
+  `qc_tests = c("tidal_bin_height", "grossrange", "qc")`. Will also work
+  for "rolling_sd" and "spike". If `dat_wide` only includes the max
+  flag, use `qc_tests = "qc"`.
 
 - vars:
 

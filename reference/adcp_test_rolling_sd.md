@@ -1,7 +1,7 @@
 # Apply the rolling standard deviation test to current variables
 
-The rolling standard deviation is calculated using the following
-algorithm:
+This function has been deprecated. It is not applied to the current data
+prior to publication.
 
 ## Usage
 
@@ -79,6 +79,9 @@ Returns `dat` in a wide format, with rolling standard deviation flag
 columns for each variable in the form "rolling_sd_flag_variable".
 
 ## Details
+
+The rolling standard deviation is calculated using the following
+algorithm:
 
 1\. Calculate the interval between the current and previous observation
 (`int_sample`; in minutes).

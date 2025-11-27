@@ -24,8 +24,8 @@ adcp_add_opendata_cols(
 - metadata:
 
   Data frame with metadata information for the deployment in `dat`
-  (e.g., a row from the NSDFA tracking sheet). Must include columns
-  `Depl_ID`, `Waterbody`, and `Station`. Option to use default value
+  (e.g., a row from ADCP TRACKING). Must include columns `depl_id`,
+  `waterbody`, and `station`. Option to use default value
   `metadata = NULL` and provide the required values in the remaining
   arguments.
 

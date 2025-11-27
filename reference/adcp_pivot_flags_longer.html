@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">adcp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,8 +53,10 @@
 
 
 <dt id="arg-qc-tests">qc_tests<a class="anchor" aria-label="anchor" href="#arg-qc-tests"></a></dt>
-<dd><p>Quality control tests included in <code>dat_wide</code>. If
-<code>dat_wide</code> only includes the max flag, use <code>qc_tests = "qc"</code>.</p></dd>
+<dd><p>Quality control tests included in <code>dat_wide</code>. Default is
+<code>qc_tests = c("tidal_bin_height", "grossrange", "qc")</code>. Will also work for
+"rolling_sd" and "spike". If <code>dat_wide</code> only includes the max flag,
+use <code>qc_tests = "qc"</code>.</p></dd>
 
 
 <dt id="arg-vars">vars<a class="anchor" aria-label="anchor" href="#arg-vars"></a></dt>

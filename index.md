@@ -253,9 +253,8 @@ head(dat)
 #> #   ⁶​sea_water_speed_m_s
 ```
 
-[`adcp_flag_data()`](https://dempsey-cmar.github.io/adcp/reference/adcp_flag_data.md)
-flags obervations where `sensor_depth_below_surface_m` changes faster
-than expected.
+`adcp_flag_data()` flags obervations where
+`sensor_depth_below_surface_m` changes faster than expected.
 
 ``` r
 dat <- adcp_flag_data(dat)

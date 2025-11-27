@@ -1,6 +1,7 @@
 # Apply the spike test to current parameters
 
-Apply the spike test to current parameters
+This function has been deprecated. It is not applied to the current data
+prior to publication.
 
 ## Usage
 

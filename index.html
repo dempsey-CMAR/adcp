@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">adcp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -221,9 +221,9 @@
 <span><span class="co">#&gt; #   variable names ¹​deployment_id, ²​waterbody, ³​sensor_depth_below_surface_m,</span></span>
 <span><span class="co">#&gt; #   ⁴​bin_depth_below_surface_m, ⁵​bin_height_above_sea_floor_m,</span></span>
 <span><span class="co">#&gt; #   ⁶​sea_water_speed_m_s</span></span></code></pre></div>
-<p><code><a href="reference/adcp_flag_data.html">adcp_flag_data()</a></code> flags obervations where <code>sensor_depth_below_surface_m</code> changes faster than expected.</p>
+<p><code>adcp_flag_data()</code> flags obervations where <code>sensor_depth_below_surface_m</code> changes faster than expected.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/adcp_flag_data.html">adcp_flag_data</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">adcp_flag_data</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[</span>, <span class="fl">6</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 6</span></span>
@@ -246,7 +246,7 @@
 <span>  <span class="fu">adcp_pivot_longer</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/adcp_calculate_bin_depth.html">adcp_calculate_bin_depth</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/adcp_add_opendata_cols.html">adcp_add_opendata_cols</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/adcp_flag_data.html">adcp_flag_data</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu">adcp_flag_data</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 11</span></span>

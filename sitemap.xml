@@ -9,6 +9,7 @@
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_add_sensor_frequency.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_assign_altitude.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_assign_altitude_old.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_assign_max_flag.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_calculate_bin_depth.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_calculate_bin_depth_old.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_check_duplicate_timestamp.html</loc></url>
@@ -20,7 +21,6 @@
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_count_obs.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_export_deployment_info.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_extract_deployment_info.html</loc></url>
-<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_flag_data.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_format_report_table.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_ggplot_flags.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_import_data.html</loc></url>
@@ -39,9 +39,12 @@
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_read_txt.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_set_up_folders.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_start_end_obs_to_trim.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_summarise_flags.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_test_all.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_test_grossrange.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_test_rolling_sd.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_test_spike.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_test_tidal_bin_height.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_write_report_table.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/current_thresholds.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/find_index.html</loc></url>

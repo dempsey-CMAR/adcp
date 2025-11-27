@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">adcp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,6 +70,13 @@
 
         </dt>
         <dd>Assign altitude (height above sea floor) to each bin</dd>
+
+        <dt>
+
+          <code><a href="adcp_assign_max_flag.html">adcp_assign_max_flag()</a></code>
+
+        </dt>
+        <dd>Assign each observation the maximum flag from applied QC tests.</dd>
 
         <dt>
 
@@ -147,13 +154,6 @@
 
         </dt>
         <dd>Extract deployment date and station name from file path</dd>
-
-        <dt>
-
-          <code><a href="adcp_flag_data.html">adcp_flag_data()</a></code>
-
-        </dt>
-        <dd>Flag ensembles with suspect sensor_depth_below_surface_m recordings</dd>
 
         <dt>
 
@@ -283,6 +283,20 @@
 
         <dt>
 
+          <code><a href="adcp_summarise_flags.html">adcp_summarise_flags()</a></code>
+
+        </dt>
+        <dd>Generate summary table of flags</dd>
+
+        <dt>
+
+          <code><a href="adcp_test_all.html">adcp_test_all()</a></code>
+
+        </dt>
+        <dd>Apply multiple quality control tests to current data</dd>
+
+        <dt>
+
           <code><a href="adcp_test_grossrange.html">adcp_test_grossrange()</a></code>
 
         </dt>
@@ -301,6 +315,13 @@
 
         </dt>
         <dd>Apply the spike test to current parameters</dd>
+
+        <dt>
+
+          <code><a href="adcp_test_tidal_bin_height.html">adcp_test_tidal_bin_height()</a></code>
+
+        </dt>
+        <dd>Apply tidal bin height test to adcp data</dd>
 
         <dt>
 
