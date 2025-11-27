@@ -103,6 +103,10 @@ utils::globalVariables(c(
   "Waves_Ensemble_Interval_s",
   "Waves_PingsPerEnsemble",
 
+  # bin height test
+  "prop_obs",
+  "tidal_bin_height_flag",
+
   # grossrange test
   "gr_max",
   "gr_min",
