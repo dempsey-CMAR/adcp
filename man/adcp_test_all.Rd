@@ -81,5 +81,6 @@ produce the spike value are returned in \code{dat}. Default is
 Returns \code{dat} with additional quality control flag columns.
 }
 \description{
-Apply multiple quality control tests to current data
+This function has been deprecated. The rolling_sd and spike tests are not
+applied to the current data prior to publication.
 }

@@ -1,5 +1,8 @@
 #' Apply the spike test to current parameters
 #'
+#' This function has been deprecated. It is not applied to the current data
+#' prior to publication.
+#'
 #' @param dat Data frame of current data in wide format.
 #'
 #' @param current_spike_table Data frame with at least 3 columns:

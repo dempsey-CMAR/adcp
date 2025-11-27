@@ -1,5 +1,8 @@
 #' Apply multiple quality control tests to current data
 #'
+#' This function has been deprecated. The rolling_sd and spike tests are not
+#' applied to the current data prior to publication.
+#'
 #' @param dat Data frame of wave data in a wide format.
 #'
 #' @param qc_tests Character vector of quality control tests to apply to

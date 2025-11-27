@@ -59,9 +59,12 @@ Returns \code{dat} in a wide format, with rolling standard deviation
   flag columns for each variable in the form "rolling_sd_flag_variable".
 }
 \description{
-The rolling standard deviation is calculated using the following algorithm:
+This function has been deprecated. It is not applied to the current data
+prior to publication.
 }
 \details{
+The rolling standard deviation is calculated using the following algorithm:
+
 1. Calculate the interval between the current and previous observation
 (\code{int_sample}; in minutes).
 

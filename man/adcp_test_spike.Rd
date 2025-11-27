@@ -36,7 +36,8 @@ Returns \code{dat} in a wide format, with spike flag columns for each
   variable in the form "spike_flag_variable".
 }
 \description{
-Apply the spike test to current parameters
+This function has been deprecated. It is not applied to the current data
+prior to publication.
 }
 \seealso{
 Other tests: 

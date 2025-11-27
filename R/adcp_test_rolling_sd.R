@@ -1,5 +1,8 @@
 #' Apply the rolling standard deviation test to current variables
 #'
+#' This function has been deprecated. It is not applied to the current data
+#' prior to publication.
+#'
 #' The rolling standard deviation is calculated using the following algorithm:
 #'
 #' 1. Calculate the interval between the current and previous observation
