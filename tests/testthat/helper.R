@@ -2,11 +2,33 @@
 
 path <- system.file("testdata", package = "adcp")
 
+# tidal bin height --------------------------------------------------------
+
+dat_bh <- readRDS(paste0(path, "/current_test_data_tidal_bin_height.RDS"))
+
+dat_bh <- dat_bh %>%
+  adcp_test_tidal_bin_height(
+    sensor_height_above_sea_floor_m = 0.6,
+    bin_height_m = 1,
+    beam_angle = 20
+  ) %>%
+  adcp_pivot_flags_longer(qc_tests = "tidal_bin_height")
+
+bh_4 <- dat_bh %>%
+  filter(bin_height_above_sea_floor_m == 10.61)
+
+bh_3 <- dat_bh %>%
+  filter(bin_height_above_sea_floor_m == 9.61)
+
+bh_1 <- dat_bh %>%
+  filter(bin_height_above_sea_floor_m == 8.61)
+
+
 # grossrange test ---------------------------------------------------------
 
-dat <- readRDS(paste0(path, "/current_test_data_grossrange.RDS"))
+dat_gr <- readRDS(paste0(path, "/current_test_data_grossrange.RDS"))
 
-dat_gr <- dat %>%
+dat_gr <- dat_gr %>%
   adcp_test_grossrange(county = "Yarmouth") %>%
   adcp_pivot_flags_longer(qc_tests = "grossrange")
 
@@ -129,7 +151,7 @@ spike_1 <- dat_spike %>%
       timestamp_utc, day_utc, variable, value, spike_flag_value
     ))
 
-# wv_test_all -------------------------------------------------------------
+# adcp_test_all -------------------------------------------------------------
 
 dat_all <- dat_rolling_sd %>%
   select(-c(rolling_sd_flag_value, day_utc)) %>%
@@ -147,7 +169,7 @@ dat_max_flag <- data.frame(
   value = round(c(runif(5)), digits = 2),
   grossrange_flag_value = c(1, 0, 2, 3, 1),
   rolling_sd_flag_value = c(0, 2, 1, 3, 1),
-  spike_flag_value = c(1, 1, 3, 4, 4)
+  tidal_bin_height_flag_value = c(1, 1, 3, 4, 4)
 ) %>%
   adcp_assign_max_flag()
 
@@ -158,12 +180,18 @@ dat_trim <- readRDS(paste0(path, "/current_test_data_grossrange.RDS")) %>%
   adcp_start_end_obs_to_trim(return_depth_diff = TRUE) %>%
   arrange(bin_height_above_sea_floor_m, timestamp_utc)
 
+# p <- ggplot(dat_trim, aes(timestamp_utc, sensor_depth_below_surface_m, col = trim_obs)) +
+#   geom_point() +
+#   facet_wrap(~bin_height_above_sea_floor_m, ncol = 1)
+#
+# ggplotly(p)
+
 dat_trim_4 <- dat_trim %>%
   group_by(bin_height_above_sea_floor_m) %>%
-  dplyr::filter(row_number() %in% c(1, n() - 1, n() - 2,  n())) %>%
+  dplyr::filter(row_number() %in% c(1, 2, n() - 1, n() - 2,  n())) %>%
   ungroup()
 
-dat_trim_1 <- dat_trim %>%
+dat_trim_2 <- dat_trim %>%
   dplyr::anti_join(
     dat_trim_4,
     by = join_by(

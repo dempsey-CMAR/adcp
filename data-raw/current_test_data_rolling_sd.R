@@ -75,6 +75,16 @@ for (i in seq_along(vars)) {
 dat_sd <- map_df(dat_test, .f = bind_rows) %>%
   select(-threshold_value) %>%
   pivot_wider(names_from = "variable", values_from = "value") %>%
+  bind_rows(
+    data.frame(
+      timestamp_utc = as_datetime("2023-01-01 12:00:00"),
+      day_utc = 1,
+      bin_height_above_sea_floor_m = 3.61,
+      sea_water_to_direction_degree = 90,
+      sensor_depth_below_surface_m = 10,
+      sea_water_speed_m_s = 0.1
+    )
+  ) %>%
   mutate(
     county = "Yarmouth",
     station = "Western Shoal",
@@ -85,18 +95,6 @@ dat_sd <- map_df(dat_test, .f = bind_rows) %>%
 # ggplot(dat_sd, aes(timestamp_utc, sea_water_speed_m_s)) +
 #   geom_point() +
 #   facet_wrap(~bin_height_above_sea_floor_m)
-#
-
-dat_qc <- dat_sd %>%
-  adcp_test_rolling_sd(county = "Yarmouth", period_hours = 12) %>%
-  adcp_pivot_flags_longer(qc_tests = "rolling_sd")
-
-p <- adcp_plot_flags(dat_qc, qc_tests = "rolling_sd")
-ggplotly(p$rolling_sd)
-
-
-
-
 
 # Export rds file
 saveRDS(dat_sd, file = here("inst/testdata/current_test_data_rolling_sd.RDS"))

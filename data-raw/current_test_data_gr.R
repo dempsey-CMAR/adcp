@@ -25,11 +25,12 @@ dat_raw <- adcp_read_txt(path, "2022-09-29_western_shoal.txt") %>%
   adcp_pivot_bin_height() %>%
   adcp_calculate_bin_depth(tracking) %>%
   filter(
-    row_number() %% 10 == 0,
     bin_height_above_sea_floor_m %in% c(2.61, 3.61),
     timestamp_utc >= as_datetime("2022-10-01"),
     timestamp_utc <= as_datetime("2022-10-07 12:00:00")
   ) %>%
+  group_by(bin_height_above_sea_floor_m) %>%
+  filter(row_number() %% 10 == 0) %>%
   group_by(bin_height_above_sea_floor_m) %>%
   mutate(
     county = "Yarmouth",
@@ -52,7 +53,7 @@ ggplot(dat_raw, aes(timestamp_utc, sensor_depth_below_surface_m)) +
 dat_raw <- dat_raw %>%
   adcp_pivot_vars_longer()
 
-dat <- dat_raw %>%
+dat_gr <- dat_raw %>%
   mutate(
     day_utc = day(timestamp_utc),
     value = case_when(
@@ -75,12 +76,12 @@ dat <- dat_raw %>%
   ) %>%
   pivot_wider(names_from = variable, values_from = value)
 
-dat_qc <- dat %>%
+dat_qc <- dat_gr %>%
   adcp_test_grossrange(county = "Yarmouth") %>%
   adcp_pivot_flags_longer(qc_tests = "grossrange")
 
 adcp_plot_flags(dat_qc, qc_tests = "grossrange")
 
 # Export rds file
-saveRDS(dat, file = here("inst/testdata/current_test_data_grossrange.RDS"))
+saveRDS(dat_gr, file = here("inst/testdata/current_test_data_grossrange.RDS"))
 
