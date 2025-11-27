@@ -3,10 +3,9 @@
 #' @param dat Data frame of ACDP data in long format, including
 #'   \code{depth_flag} column, as exported from \code{adcp_flag_data()}.
 #'
-#' @param title Optional title for the figure.
-#'
-#' @param date_format Format for the date labels. Default is
-#'   \code{"\%Y-\%b-\%d"}.
+#' @param plotly_friendly Logical argument. If \code{TRUE}, the legend will be
+#'   plotted when \code{plotly::ggplotly} is called on \code{p}. Default is
+#'   \code{FALSE}, which makes the legend look better in a static figure.
 #'
 #' @return ggplot object. Figure shows sensor_depth_below_surface_m over time,
 #'   coloured by the \code{depth_flag} column.
@@ -14,26 +13,38 @@
 #' @importFrom ggplot2 aes geom_point ggplot labs scale_colour_manual
 #'   scale_x_datetime theme theme_light
 #' @importFrom dplyr distinct mutate select
-#' @importFrom lubridate as_date
 #'
 #' @export
 
+adcp_plot_depth_flags <- function(dat, plotly_friendly = FALSE) {
 
-adcp_plot_depth_flags <- function(dat, title = NULL, date_format = "%Y-%b-%d") {
-  dat %>%
-    select(timestamp_utc, sensor_depth_below_surface_m, depth_flag) %>%
-    mutate(timestamp_utc = as_datetime(timestamp_utc)) %>%
+  flag_colours <- c("chartreuse4", "grey24", "#EDA247", "#DB4325")
+
+  p <- dat %>%
+    select(
+      timestamp_utc,
+      sensor_depth_below_surface_m,
+      trim_obs
+    ) %>%
     distinct() %>%
-    ggplot(aes(timestamp_utc, sensor_depth_below_surface_m, col = depth_flag)) +
-    geom_point(alpha = 0.7, size = 1) +
-    scale_x_datetime(date_labels = date_format) +
-    scale_colour_manual(
-      "Depth Flag",
-      values = c("#66C2A5", "#FC8D62", "#B3B3B3"), drop = TRUE
-    ) +
-    labs(title = title) +
+    qaqcmar::qc_assign_flag_labels() %>%
+    ggplot(
+      aes(timestamp_utc, sensor_depth_below_surface_m, colour = trim_obs)) +
+    geom_point(show.legend = TRUE, size = 0.5) +
+    scale_x_datetime("Date", date_labels = "%Y-%m-%d") +
+    scale_colour_manual("Flag Value", values = flag_colours, drop = FALSE) +
     theme_light() +
-    theme(legend.position = "bottom")
+    theme(
+      strip.text = element_text(colour = "black", size = 10),
+      strip.background = element_rect(fill = "white", colour = "darkgrey")
+    )
+
+  if(isFALSE(plotly_friendly)) {
+    p <- p + guides(color = guide_legend(override.aes = list(size = 4)))
+  }
+
+  p
+
 }
 
 

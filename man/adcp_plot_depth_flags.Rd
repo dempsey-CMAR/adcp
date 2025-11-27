@@ -4,16 +4,15 @@
 \alias{adcp_plot_depth_flags}
 \title{Plot sensor_depth_below_surface_m coloured by depth_flag}
 \usage{
-adcp_plot_depth_flags(dat, title = NULL, date_format = "\%Y-\%b-\%d")
+adcp_plot_depth_flags(dat, plotly_friendly = FALSE)
 }
 \arguments{
 \item{dat}{Data frame of ACDP data in long format, including
 \code{depth_flag} column, as exported from \code{adcp_flag_data()}.}
 
-\item{title}{Optional title for the figure.}
-
-\item{date_format}{Format for the date labels. Default is
-\code{"\%Y-\%b-\%d"}.}
+\item{plotly_friendly}{Logical argument. If \code{TRUE}, the legend will be
+plotted when \code{plotly::ggplotly} is called on \code{p}. Default is
+\code{FALSE}, which makes the legend look better in a static figure.}
 }
 \value{
 ggplot object. Figure shows sensor_depth_below_surface_m over time,
