@@ -21,3 +21,6 @@ Exports data frame of wave deployment information.
 Imports NSDFA Tracking sheet and ADCP TRACKING and exports the
   metadata for the Nova Scotia Open Data Portal.
 }
+\details{
+TO DO: re-write this with new tracking sheet
+}
