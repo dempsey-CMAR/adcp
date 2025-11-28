@@ -7,7 +7,7 @@
 adcp_test_tidal_bin_height(
   dat,
   sensor_model = NULL,
-  sensor_height_above_sea_floor_m = NULL,
+  inst_alt_m = NULL,
   bin_height_m = NULL,
   beam_angle = NULL,
   min_prop_obs = 0.25
@@ -21,7 +21,7 @@ beam angle. Must be one of "Sentinel_V20", "Sentinel_V50", "Sentinel_V100",
 or "Workhorse Sentinel 600 kHz". Not required if \code{beam_angle} argument
 is supplied.}
 
-\item{sensor_height_above_sea_floor_m}{Height of the ADCP transducer above
+\item{inst_alt_m}{Height of the ADCP transducer above
 the sea floor, in metres.}
 
 \item{bin_height_m}{Height of each measurement bin in metres.}

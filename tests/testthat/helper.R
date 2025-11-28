@@ -8,7 +8,7 @@ dat_bh <- readRDS(paste0(path, "/current_test_data_tidal_bin_height.RDS"))
 
 dat_bh <- dat_bh %>%
   adcp_test_tidal_bin_height(
-    sensor_height_above_sea_floor_m = 0.6,
+    inst_alt_m = 0.6,
     bin_height_m = 1,
     beam_angle = 20
   ) %>%

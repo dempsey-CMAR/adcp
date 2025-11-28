@@ -1,7 +1,5 @@
 #' Apply tidal bin height test to adcp data
 #'
-#' TODO need to account for the sensor height above the sea floor
-#'
 #' ADCP data from bins near the surface can be contaminated by "side-lobe
 #' interference." These observations were automatically removed from the data
 #' output by the ADCP software.
@@ -39,7 +37,7 @@
 #'   or "Workhorse Sentinel 600 kHz". Not required if \code{beam_angle} argument
 #'   is supplied.
 #'
-#' @param sensor_height_above_sea_floor_m Height of the ADCP transducer above
+#' @param inst_alt_m Height of the ADCP transducer above
 #'   the sea floor, in metres.
 #'
 #' @param bin_height_m Height of each measurement bin in metres.
@@ -63,7 +61,7 @@
 adcp_test_tidal_bin_height <- function(
     dat,
     sensor_model = NULL,
-    sensor_height_above_sea_floor_m = NULL,
+    inst_alt_m = NULL,
     bin_height_m = NULL,
     beam_angle = NULL,
     min_prop_obs = 0.25
@@ -106,7 +104,7 @@ adcp_test_tidal_bin_height <- function(
   max_bin_height <- round(
     min_sensor_depth * cos(beam_angle * pi / 180), digits = 2
   ) +
-    sensor_height_above_sea_floor_m - bin_height_m
+    inst_alt_m - bin_height_m
 
   dat %>%
     left_join(n_obs, by = join_by(bin_height_above_sea_floor_m)) %>%
