@@ -44,17 +44,21 @@ utils::globalVariables(c(
   "BIN_DEPTH_CHECK",
 
   # adcp_plot_depth_flags
-  "depth_flag",
+  # "depth_flag",
   "depth_diff",
 
   # helpers
-  "DEPLOYMENT",
+  # "DEPLOYMENT",
 
-  # read_nsdfa_tracking
-  "County", "Waterbody", "Station_Name", "Lease#",
-  "Depl_Date", "Depl_Lat", "Depl_Lon", "Recv_Date",  "Depl_Time",
-  "Inst_Model", "Inst_Serial", "Inst_Depth", "Inst_Altitude",
-  "Bin_Size", "First_Bin_Range", "Notes", "CMAR_ID",
+  # awrite_report_table
+  "Station_Name",
+  "Depl_Date",
+  "Depl_Lat",
+  "Depl_Lon",
+  "Recv_Date",
+  "Inst_Model",
+  "Bin_Size",
+  "First_Bin_Range",
 
   # export_deployment_info
   "depl_date",
