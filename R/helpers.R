@@ -73,34 +73,6 @@ adcp_extract_deployment_info <- function(file_path) {
 }
 
 
-#' Convert depth_flag column to ordered factor
-#'
-#' @param dat Data frame of ACDP data in long format, as returned by
-#'   \code{adcp_flag_data()}.
-#'
-#' @return Returns \code{dat}, with the \code{depth_flag} column as an ordered
-#'   factor, with levels \code{"good" < "SENSOR_DEPTH_BELOW_SURFACE changed by >
-#'   x m" < "manual flag"}.
-#'
-#' @importFrom dplyr mutate
-#' @importFrom stringr str_detect
-#'
-#' @export
-
-adcp_convert_flag_to_ordered_factor <- function(dat) {
-  flags <- unique(dat$depth_flag)
-
-  auto_flag <- flags[str_detect(flags, "sensor_depth")]
-
-  flags_order <- c("good", auto_flag, "manual flag")
-
-  dat %>%
-    mutate(
-      depth_flag = as.character(depth_flag),
-      depth_flag = factor(depth_flag, levels = flags_order, ordered = TRUE)
-    )
-}
-
 
 #' Check if there are files in the specified folder
 #'
@@ -176,6 +148,30 @@ adcp_convert_vars_to_title <- function(dat, convert_to_ordered_factor = TRUE) {
 }
 
 
+#' Convert bin_height_above_sea_floor_m column to ordered factor
+#'
+#' Depths are assigned levels in descending order so that figures will have
+#' shallowest bins at the top and deepest bins at the bottom of the figure.
+#'
+#' @param dat Data frame that includes the column
+#'   \code{bin_height_above_sea_floor_m}.
+#'
+#' @returns Returns data with \code{bin_height_above_sea_floor_m} as an ordered
+#'   factor.
+#' @export
+
+adcp_convert_bin_height_to_ordered_factor <- function(dat) {
+
+  bin_heights <- sort(
+    unique(dat$bin_height_above_sea_floor_m), decreasing = TRUE
+  )
+
+  dat %>%
+    mutate(
+      bin_height_above_sea_floor_m =
+        ordered(bin_height_above_sea_floor_m, levels = bin_heights)
+    )
+}
 
 
 
