@@ -12,9 +12,8 @@ adcp_write_report_table(metadata)
 
 - metadata:
 
-  Deployment metadata from the NSDFA tracking sheet.
+  Deployment metadata from the ADCP TRACKING sheet.
 
 ## Value
 
-Returns a tibble with three columns: `DEPLOYMENT`, `Depl_Date`, and
-`Station_Name`.
+Returns a data frame with columns for the report table.

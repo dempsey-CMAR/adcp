@@ -5,7 +5,13 @@ Plot sensor_depth_below_surface_m
 ## Usage
 
 ``` r
-adcp_plot_depth(dat, title = NULL, date_format = "%Y-%b-%d", geom = "point")
+adcp_plot_depth(
+  dat,
+  title = NULL,
+  date_format = "%Y-%b-%d",
+  geom = "point",
+  pal = "#000000"
+)
 ```
 
 ## Arguments
@@ -26,6 +32,10 @@ adcp_plot_depth(dat, title = NULL, date_format = "%Y-%b-%d", geom = "point")
 - geom:
 
   Geom to plot. Options are `"point"` or `"line"`.
+
+- pal:
+
+  Character or numeric value indicating colour to plot depth.
 
 ## Value
 

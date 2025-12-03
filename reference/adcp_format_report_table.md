@@ -1,6 +1,6 @@
-# Formats tables for summary report
+# Formats tables for typst summary report
 
-Formats tables for summary report
+Formats tables for typst summary report
 
 ## Usage
 
@@ -12,10 +12,7 @@ adcp_format_report_table(report_table, transpose = TRUE)
 
 - report_table:
 
-  Table to include in the summary report. Either the deployment metadata
-  from the NSDFA tracking sheet (as returned from
-  [`adcp_write_report_table()`](https://dempsey-cmar.github.io/adcp/reference/adcp_write_report_table.md),
-  or the document history) .
+  Table to include in the summary report.
 
 - transpose:
 
@@ -25,7 +22,6 @@ adcp_format_report_table(report_table, transpose = TRUE)
 
 ## Value
 
-Returns a flextable object that will render nicely in the Word report. A
-table with two columns: the first column (bold) is the column names of
-`report_table`; the second column is the corresponding entries in
-`report_table`.
+Returns a data frame that will render nicely in the typst report. Every
+cell is converted to text inside square brackets and separated with ",",
+as expected by the typst table function.

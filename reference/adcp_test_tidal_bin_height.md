@@ -1,6 +1,8 @@
 # Apply tidal bin height test to adcp data
 
-TODO need to account for the sensor height above the sea floor
+ADCP data from bins near the surface can be contaminated by "side-lobe
+interference." These observations were automatically removed from the
+data output by the ADCP software.
 
 ## Usage
 
@@ -8,7 +10,7 @@ TODO need to account for the sensor height above the sea floor
 adcp_test_tidal_bin_height(
   dat,
   sensor_model = NULL,
-  sensor_height_above_sea_floor_m = NULL,
+  inst_alt_m = NULL,
   bin_height_m = NULL,
   beam_angle = NULL,
   min_prop_obs = 0.25
@@ -28,7 +30,7 @@ adcp_test_tidal_bin_height(
   "Workhorse Sentinel 600 kHz". Not required if `beam_angle` argument is
   supplied.
 
-- sensor_height_above_sea_floor_m:
+- inst_alt_m:
 
   Height of the ADCP transducer above the sea floor, in metres.
 
@@ -52,10 +54,6 @@ adcp_test_tidal_bin_height(
 Returns `dat` with additional column `bin_heigh_flag_value`.
 
 ## Details
-
-ADCP data from bins near the surface can be contaminated by "side-lobe
-interference." These observations were automatically removed from the
-data output by the ADCP software.
 
 The tide can substantially impact the depth of the ADCP. At high tide,
 there may be more "good" bins further from the sensor than at low tide.

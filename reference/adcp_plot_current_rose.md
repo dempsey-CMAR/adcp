@@ -1,18 +1,19 @@
 # Generate current rose
 
-Generate current rose
+The direction of the petal indicates the direction the current is
+flowing to. The colour indicates the current speed. The length of the
+petal shows the number of observations for each current speed and
+direction bin.
 
 ## Usage
 
 ``` r
 adcp_plot_current_rose(
   dat,
-  breaks,
-  speed_column,
-  direction_column,
-  speed_colors = NULL,
-  speed_label = "Current Speed (cm/s)",
-  add_dir_labs = TRUE
+  pal = NULL,
+  speed_col = sea_water_speed_cm_s_labels,
+  direction_col = sea_water_to_direction_degree_labels,
+  speed_label = "Current Speed (cm/s)"
 )
 ```
 
@@ -20,45 +21,28 @@ adcp_plot_current_rose(
 
 - dat:
 
-  Data frame with column names that include the strings `"speed"` and
-  `"direction"`.
+  Data frame with at least 3 columns: an ordered factor of direction
+  groups, a factor of speed groups, and `n_prop`, the proportion of
+  observations in the corresponding direction and speed groups. The
+  proportion is automatically converted to percent for the figure.
 
-- breaks:
+- pal:
 
-  Number of break points for current speed OR a vector of breaks.
-  Lower-inclusive.
+  Vector of colours. Must be the same length as the number of speed
+  factor levels.
 
-- speed_column:
+- speed_col:
 
-  Column name of the current speed (or wave height) column (i.e., the
-  length of the petals).
+  The column in `dat` that holds the speed groups (NOT QUOTED).
 
-- direction_column:
+- direction_col:
 
-  Column name of the current (or wave ) direction column (i.e., the
-  direction of the petals).
-
-- speed_colors:
-
-  Vector of colours. Must be the same length as `breaks`.
+  The column in `dat` that holds the direction groups (NOT QUOTED).
 
 - speed_label:
 
   Title of the current speed legend. Default is "Current Speed (cm/s)".
 
-- add_dir_labs:
-
-  placeholder
-
 ## Value
 
-Returns an "openair" object, a rose plot of current speed and direction.
-
-## Details
-
-Generates a current rose using the `windRose()` function from the
-`openair` package. See help files for
-[`openair::windRose`](https://openair-project.github.io/openair/reference/windRose.html)
-for more detail.
-
-For wave roses, replace "current speed" with "wave height".
+Returns a ggplot object, a rose plot of current speed and direction.

@@ -366,13 +366,9 @@ Plot current speed histogram.
   : Add column of ADCP frequency
 - [`adcp_assign_altitude()`](https://dempsey-cmar.github.io/adcp/reference/adcp_assign_altitude.md)
   : Assign altitude (height above sea floor) to each bin
-- [`adcp_assign_altitude_old()`](https://dempsey-cmar.github.io/adcp/reference/adcp_assign_altitude_old.md)
-  : Assign altitude (height above sea floor) to each bin
 - [`adcp_assign_max_flag()`](https://dempsey-cmar.github.io/adcp/reference/adcp_assign_max_flag.md)
   : Assign each observation the maximum flag from applied QC tests.
 - [`adcp_calculate_bin_depth()`](https://dempsey-cmar.github.io/adcp/reference/adcp_calculate_bin_depth.md)
-  : Calculate the bin depth below the surface
-- [`adcp_calculate_bin_depth_old()`](https://dempsey-cmar.github.io/adcp/reference/adcp_calculate_bin_depth_old.md)
   : Calculate the bin depth below the surface
 - [`adcp_check_duplicate_timestamp()`](https://dempsey-cmar.github.io/adcp/reference/adcp_check_duplicate_timestamp.md)
   : Check for duplicate timestamp values
@@ -380,24 +376,26 @@ Plot current speed histogram.
   : Check if there are files in the specified folder
 - [`adcp_compile_deployment_info()`](https://dempsey-cmar.github.io/adcp/reference/adcp_compile_deployment_info.md)
   : Export ADCP Data Deployment Information Dataset
-- [`adcp_convert_flag_to_ordered_factor()`](https://dempsey-cmar.github.io/adcp/reference/adcp_convert_flag_to_ordered_factor.md)
-  : Convert depth_flag column to ordered factor
+- [`adcp_convert_bin_height_to_ordered_factor()`](https://dempsey-cmar.github.io/adcp/reference/adcp_convert_bin_height_to_ordered_factor.md)
+  : Convert bin_height_above_sea_floor_m column to ordered factor
 - [`adcp_convert_vars_to_title()`](https://dempsey-cmar.github.io/adcp/reference/adcp_convert_vars_to_title.md)
   : Add a column of current variables in title case
 - [`adcp_correct_timestamp()`](https://dempsey-cmar.github.io/adcp/reference/adcp_correct_timestamp.md)
   : Convert timestamp to UTC from AST or DST
 - [`adcp_count_obs()`](https://dempsey-cmar.github.io/adcp/reference/adcp_count_obs.md)
   : Count number and proportion of observations in equal intervals
-- [`adcp_export_deployment_info()`](https://dempsey-cmar.github.io/adcp/reference/adcp_export_deployment_info.md)
-  : Export Current Data Deployment Information Dataset
 - [`adcp_extract_deployment_info()`](https://dempsey-cmar.github.io/adcp/reference/adcp_extract_deployment_info.md)
   : Extract deployment date and station name from file path
 - [`adcp_format_report_table()`](https://dempsey-cmar.github.io/adcp/reference/adcp_format_report_table.md)
-  : Formats tables for summary report
+  : Formats tables for typst summary report
 - [`adcp_ggplot_flags()`](https://dempsey-cmar.github.io/adcp/reference/adcp_ggplot_flags.md)
   : Create ggplot for one current qc_test and variable
 - [`adcp_import_data()`](https://dempsey-cmar.github.io/adcp/reference/adcp_import_data.md)
   : Import current data from rds files.
+- [`adcp_label_direction()`](https://dempsey-cmar.github.io/adcp/reference/adcp_label_direction.md)
+  : Cut wind direction into 8 bins
+- [`adcp_label_speed()`](https://dempsey-cmar.github.io/adcp/reference/adcp_label_speed.md)
+  : Assign intervals to numeric data
 - [`adcp_pivot_bin_height()`](https://dempsey-cmar.github.io/adcp/reference/adcp_pivot_bin_height.md)
   : Pivot ADCP data from bin height as column names to bin height as
   observations
@@ -419,14 +417,10 @@ Plot current speed histogram.
   : Plot current data coloured by flag value
 - [`adcp_plot_speed_hist()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_speed_hist.md)
   : Plot histogram of speed observations
-- [`adcp_read_nsdfa_metadata()`](https://dempsey-cmar.github.io/adcp/reference/adcp_read_nsdfa_metadata.md)
-  : Import NSDFA tracking sheet and extra deployment metadata
 - [`adcp_read_tracking()`](https://dempsey-cmar.github.io/adcp/reference/adcp_read_tracking.md)
   : Read deployment details from CMAR tracking sheet
 - [`adcp_read_txt()`](https://dempsey-cmar.github.io/adcp/reference/adcp_read_txt.md)
   : Read ADCP txt file
-- [`adcp_set_up_folders()`](https://dempsey-cmar.github.io/adcp/reference/adcp_set_up_folders.md)
-  : Set up folder structure for processing ADCP data
 - [`adcp_start_end_obs_to_trim()`](https://dempsey-cmar.github.io/adcp/reference/adcp_start_end_obs_to_trim.md)
   : Flag observations that should be trimmed from beginning and end of
   deployment

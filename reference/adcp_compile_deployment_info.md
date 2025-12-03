@@ -24,3 +24,7 @@ adcp_compile_deployment_info(path_nsdfa = NULL, sheet = NULL)
 ## Value
 
 Exports data frame of wave deployment information.
+
+## Details
+
+TO DO: re-write this with new tracking sheet
