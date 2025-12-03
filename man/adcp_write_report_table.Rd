@@ -7,11 +7,10 @@
 adcp_write_report_table(metadata)
 }
 \arguments{
-\item{metadata}{Deployment metadata from the NSDFA tracking sheet.}
+\item{metadata}{Deployment metadata from the ADCP TRACKING sheet.}
 }
 \value{
-Returns a tibble with three columns: \code{DEPLOYMENT},
-  \code{Depl_Date}, and \code{Station_Name}.
+Returns a data frame with columns for the report table.
 }
 \description{
 Writes deployment table for summary report
