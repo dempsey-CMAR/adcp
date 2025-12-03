@@ -202,3 +202,26 @@ dat_trim_2 <- dat_trim %>%
   )
 
 
+# adcp_label_intervals ----------------------------------------------------
+
+# check edge cases
+# 0 and 3 are both in the [0, 3] bin
+# all other bins are only right inclusive; 9 is in the (6, 9] bin)
+df_speed <- data.frame(
+  sea_water_speed_cm_s = c(0, 3, 9, 10, 15, 20, 30)
+) %>%
+  adcp_label_speed(n_ints = 10)
+
+
+df_direction <- data.frame(
+  sea_water_to_direction_degree = c(
+    0, 45, 90, 135, 180, 225, 270, 315, 360, # cardinal directions
+    22.5, 67.5, 112.5, 247.5, 337.5,         # edge cases - right inclusive
+    -10, 775)                                # NA
+) %>%
+  adcp_label_direction()
+
+
+
+
+
