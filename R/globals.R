@@ -44,37 +44,31 @@ utils::globalVariables(c(
   "BIN_DEPTH_CHECK",
 
   # adcp_plot_depth_flags
-  # "depth_flag",
   "depth_diff",
 
-  # helpers
-  # "DEPLOYMENT",
-
-  # awrite_report_table
-  "Station_Name",
-  "Depl_Date",
-  "Depl_Lat",
-  "Depl_Lon",
-  "Recv_Date",
-  "Inst_Model",
-  "Bin_Size",
-  "First_Bin_Range",
+  # write_report_table
+  "bin_size_m",
+  "current_averaging_interval_s",
+  "current_ensemble_interval_s",
+  "current_pings_per_ensemble",
+  "depl_duration",
+  "deployment_date",
+  "deployment_sounding_m",
+  "first_bin_range_m",
+  "latitude",
+  "longitude",
+  "retrieval_date",
+  "sensor_model",
 
   # export_deployment_info
   "depl_date",
   "station",
 
   # write_report_table
-  "Current_Averaging_Interval_s",
-  "Current_Ensemble_Interval_s",
-  "Current_PingsPerEnsemble",
-  "Depl_Duration",
-  "Depl_Sounding",
   "Depth Sounding (m)",
 
   # format_report_table
-  "Record",
-  "Deployment Info",
+  "col1",
 
   # bin_obs
   "lower",
@@ -84,18 +78,25 @@ utils::globalVariables(c(
   "prop",
 
   # plot_speed_hist
-  "freq",
+  "n_percent",
 
   # plot_current_rose
   "SPEED",
+  "n_prop",
+  "sea_water_speed_cm_s_labels",
+  "sea_water_to_direction_degree_labels",
 
   # count_obs()
   "sea_water_speed_cm_s",
 
+  # label_intervals
+  "ints",
+  "col_to_cut",
+
   # import current data
-  "Open_Data_Station",
-  "2022 Report (sidelobe trimmed)",
-  "Report_2022",
+  # "Open_Data_Station",
+  # "2022 Report (sidelobe trimmed)",
+  # "Report_2022",
 
   # export_deployment_info
   "Depl_ID",

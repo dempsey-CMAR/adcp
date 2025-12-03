@@ -1,29 +1,32 @@
 #' Writes deployment table for summary report
 #'
-#' @param metadata Deployment metadata from the NSDFA tracking sheet.
+#' @param metadata Deployment metadata from the ADCP TRACKING sheet.
 #'
-#' @return Returns a tibble with three columns: \code{DEPLOYMENT},
-#'   \code{Depl_Date}, and \code{Station_Name}.
+#' @return Returns a data frame with columns for the report table.
 #'
-#' @importFrom dplyr if_else mutate select tibble
+#' @importFrom dplyr if_else mutate select
 #'
 #' @export
 
 adcp_write_report_table <- function(metadata) {
   metadata %>%
-    tibble() %>%
+    mutate(
+      depl_duration = as.numeric(
+        difftime(retrieval_date, deployment_date, units = "days")
+      )
+    ) %>%
     select(
-      Station = Station_Name,
-      `Instrument Model` = Inst_Model,
-      Latitude = Depl_Lat, Longitude = Depl_Lon,
-      `Deployment Date` = Depl_Date, `Recovery Date` = Recv_Date,
-      `Duration (d)` = Depl_Duration,
-      `Depth Sounding (m)` = Depl_Sounding,
-      `Ensemble Intervals (s)` = Current_Ensemble_Interval_s,
-      `Averaging Intervals (s)` = Current_Averaging_Interval_s,
-      `Pings per Ensemble` = Current_PingsPerEnsemble,
-      `Bin Size (m)` = Bin_Size,
-      `First Bin Range (m)` = First_Bin_Range
+      Station = station,
+      `Instrument Model` = sensor_model,
+      Latitude = latitude, Longitude = longitude,
+      `Deployment Date` = deployment_date, `Recovery Date` = retrieval_date,
+      `Duration (d)` = depl_duration,
+      `Depth Sounding (m)` = deployment_sounding_m,
+      `Ensemble Interval (s)` = current_ensemble_interval_s,
+      `Averaging Interval (s)` = current_averaging_interval_s,
+      `Pings per Ensemble` = current_pings_per_ensemble,
+      `Bin Size (m)` = bin_size_m,
+      `First Bin Range (m)` = first_bin_range_m
     ) %>%
     mutate(
       `Depth Sounding (m)` = as.character(`Depth Sounding (m)`),

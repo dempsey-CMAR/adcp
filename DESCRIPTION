@@ -1,7 +1,7 @@
 Type: Package
 Package: adcp
 Title: Format and Visualize ADCP data
-Version: 4.0.2
+Version: 4.0.3
 Author: Danielle Dempsey
 Maintainer: Danielle Dempsey <ddempsey@perennia.ca>
 Description: Facilitates wrangling and analysis of Current data collected
@@ -14,20 +14,19 @@ Depends:
     R (>= 3.5)
 Imports: 
     data.table,
+    DescTools,
     dplyr,
-    flextable,
     ggplot2,
     glue,
     googlesheets4,
     gtools,
     lattice,
-    latticeExtra,
     lubridate,
-    officer,
     openair,
     purrr,
     qaqcmar (>= 1.0.11),
     rlang,
+    scales,
     stringi,
     stringr,
     tidyr,
