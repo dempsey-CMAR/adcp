@@ -4,7 +4,13 @@
 \alias{adcp_plot_depth}
 \title{Plot sensor_depth_below_surface_m}
 \usage{
-adcp_plot_depth(dat, title = NULL, date_format = "\%Y-\%b-\%d", geom = "point")
+adcp_plot_depth(
+  dat,
+  title = NULL,
+  date_format = "\%Y-\%b-\%d",
+  geom = "point",
+  pal = "#000000"
+)
 }
 \arguments{
 \item{dat}{Data frame of ACDP data in long format, as returned by
@@ -16,6 +22,8 @@ adcp_plot_depth(dat, title = NULL, date_format = "\%Y-\%b-\%d", geom = "point")
 \code{"\%Y-\%b-\%d"}.}
 
 \item{geom}{Geom to plot. Options are \code{"point"} or \code{"line"}.}
+
+\item{pal}{Character or numeric value indicating colour to plot depth.}
 }
 \value{
 ggplot object. Figure shows sensor_depth_below_surface_m over time.

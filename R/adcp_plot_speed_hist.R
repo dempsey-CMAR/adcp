@@ -1,10 +1,10 @@
 #' Plot histogram of speed observations
 #'
-#' @param dat_hist Data frame that includes columns \code{bins_plot} (text),
-#'   \code{prop}, and \code{freq}.
+#' @inheritParams adcp_plot_current_rose
 #'
-#' @param bar_cols Vector of colours. Must be the same length as the number of
-#'   bins to plot.
+#' @param dat Data frame with at least 1 columns: a factor of speed groups. The
+#'   proportion and percent of observations in each group is counted in the
+#'   function.
 #'
 #' @param speed_label Title of the current speed legend. Default is "Current
 #'   Speed (cm/s)".
@@ -14,20 +14,46 @@
 #'
 #' @return Returns a ggplot object.
 #'
-#' @importFrom ggplot2 expansion geom_col geom_text scale_fill_manual
-#'   scale_x_discrete scale_y_continuous theme_light
+#' @importFrom dplyr reframe
+#' @importFrom ggplot2 expansion geom_col geom_hline geom_text scale_fill_manual
+#'   scale_x_discrete scale_y_continuous
 #'
 #' @export
 
 adcp_plot_speed_hist <- function(
-    dat_hist, bar_cols, text_size = 3,
+    dat,
+    pal = NULL,
+    speed_col = sea_water_speed_cm_s_labels,
+    text_size = 3,
     speed_label = "Current Speed (cm/s)"
-    ) {
-  ggplot(dat_hist, aes(ints_label, prop, fill = ints_label)) +
+) {
+
+  if (is.null(pal)) {
+    n_levels <-  nrow(reframe(dat, levels({{ speed_col }})))
+    pal <- viridis(n_levels, option = "F", direction = -1)
+  }
+
+  dat %>%
+    group_by({{ speed_col }}, drop = FALSE) %>%
+    summarise(n = n()) %>%
+    ungroup() %>%
+    mutate(
+      n_prop = n / sum(n),
+      n_percent = n_prop * 100
+    ) %>%
+    ggplot(aes( {{ speed_col }}, n_percent, fill = {{ speed_col }})) +
     geom_col(col = 1) +
-    geom_text(aes(label = freq), vjust = -0.5, size = text_size) +
-    scale_fill_manual(values = bar_cols, guide = "none") +
-    scale_x_discrete(speed_label) +
-    scale_y_continuous("Percent (%)", expand = expansion(mult = c(0, 0.1))) +
-    theme_light()
+    geom_text(aes(label = n), vjust = -0.5, size = text_size) +
+    geom_hline(yintercept = 0) +
+    scale_fill_manual(values = pal, guide = "none") +
+    scale_x_discrete(speed_label, drop = FALSE) +
+    scale_y_continuous(
+      "Percent of Observations (%)",
+      minor_breaks = NULL,
+      expand = expansion(mult = c(0, 0.1))
+    ) +
+    theme(
+      panel.background = element_rect(colour = "gray70", fill = NA),
+      panel.grid = element_line(color = "gray70", linewidth = 0.25)
+    )
 }

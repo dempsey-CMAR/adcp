@@ -58,6 +58,8 @@ adcp_plot_depth_flags <- function(dat, plotly_friendly = FALSE) {
 #' @param date_format Format for the date labels. Default is
 #'   \code{"\%Y-\%b-\%d"}.
 #'
+#' @param pal Character or numeric value indicating colour to plot depth.
+#'
 #' @param geom Geom to plot. Options are \code{"point"} or \code{"line"}.
 #'
 #' @return ggplot object. Figure shows sensor_depth_below_surface_m over time.
@@ -69,25 +71,26 @@ adcp_plot_depth_flags <- function(dat, plotly_friendly = FALSE) {
 #'
 #' @export
 
-adcp_plot_depth <- function(dat, title = NULL, date_format = "%Y-%b-%d", geom = "point") {
+adcp_plot_depth <- function(
+    dat, title = NULL, date_format = "%Y-%b-%d", geom = "point", pal = "#000000"
+) {
   if (!(geom %in% c("point", "line"))) {
     stop("geom must be 'point' or 'line ")
   }
 
-  # "#66C2A5" "#FC8D62" "#8DA0CB"
   p <- dat %>%
     dplyr::select(timestamp_utc, sensor_depth_below_surface_m) %>%
-    dplyr::mutate(timestamp_utc = as_datetime(timestamp_utc)) %>%
+  #  dplyr::mutate(timestamp_utc = as_datetime(timestamp_utc)) %>%
     dplyr::distinct() %>%
-    ggplot(aes(timestamp_utc, sensor_depth_below_surface_m), col = "#66C2A5") +
+    ggplot(aes(timestamp_utc, sensor_depth_below_surface_m)) +
     scale_x_datetime("Date", date_labels = "%Y-%m-%d") +
     scale_y_continuous("Sensor Depth Below Surface (m)") +
     labs(title = title) +
     theme_light()
 
-  if (geom == "point") p <- p + geom_point(alpha = 0.7, size = 1)
+  if (geom == "point") p <- p + geom_point(alpha = 0.7, size = 1, colour = pal)
 
-  if (geom == "line") p <- p + geom_line(size = 0.25)
+  if (geom == "line") p <- p + geom_line(linewidth = 0.25, colour = pal)
 
   p
 }

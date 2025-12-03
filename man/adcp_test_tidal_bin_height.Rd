@@ -39,13 +39,11 @@ Returns \code{dat} with additional column
   \code{bin_heigh_flag_value}.
 }
 \description{
-TODO need to account for the sensor height above the sea floor
-}
-\details{
 ADCP data from bins near the surface can be contaminated by "side-lobe
 interference." These observations were automatically removed from the data
 output by the ADCP software.
-
+}
+\details{
 The tide can substantially impact the depth of the ADCP. At high tide, there
 may be more "good" bins further from the sensor than at low tide. The sea
 water speed and direction recorded in these high-altitude bins will be

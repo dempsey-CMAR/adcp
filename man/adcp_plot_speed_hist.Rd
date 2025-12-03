@@ -5,18 +5,24 @@
 \title{Plot histogram of speed observations}
 \usage{
 adcp_plot_speed_hist(
-  dat_hist,
-  bar_cols,
+  dat,
+  pal = NULL,
+  speed_col = sea_water_speed_cm_s_labels,
   text_size = 3,
   speed_label = "Current Speed (cm/s)"
 )
 }
 \arguments{
-\item{dat_hist}{Data frame that includes columns \code{bins_plot} (text),
-\code{prop}, and \code{freq}.}
+\item{dat}{Data frame with at least 3 columns: a factor of speed groups,
+\code{n}, the number of observations in each group, and \code{n_percent},
+the percent of observations in each group. The proportion is automatically
+converted to percent for the figure.}
 
-\item{bar_cols}{Vector of colours. Must be the same length as the number of
-bins to plot.}
+\item{pal}{Vector of colours. Must be the same length as the number of speed
+factor levels.}
+
+\item{speed_col}{The column in \code{dat} that holds the speed groups (NOT
+QUOTED).}
 
 \item{text_size}{Size of the text annotating the number of observations in
 each bin.}
