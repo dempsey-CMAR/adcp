@@ -51,15 +51,15 @@
   : Generate current rose
 - [`adcp_plot_current_rose_old()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_rose_old.md)
   : Generate current old rose
-- [`adcp_plot_current_speed_time()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_speed_time.md)
-  : Plot histogram of speed observations
-- [`adcp_plot_depth()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_depth.md)
-  : Plot sensor_depth_below_surface_m
 - [`adcp_plot_depth_flags()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_depth_flags.md)
   : Plot sensor_depth_below_surface_m coloured by depth_flag
 - [`adcp_plot_flags()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_flags.md)
   : Plot current data coloured by flag value
+- [`adcp_plot_speed_at_bins()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_speed_at_bins.md)
+  : Plot sea water speed through the water column
 - [`adcp_plot_speed_hist()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_speed_hist.md)
+  : Plot histogram of speed observations
+- [`adcp_plot_var_time()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_var_time.md)
   : Plot histogram of speed observations
 - [`adcp_read_tracking()`](https://dempsey-cmar.github.io/adcp/reference/adcp_read_tracking.md)
   : Read deployment details from CMAR tracking sheet
@@ -80,9 +80,13 @@
   : Apply the spike test to current parameters
 - [`adcp_test_tidal_bin_height()`](https://dempsey-cmar.github.io/adcp/reference/adcp_test_tidal_bin_height.md)
   : Apply tidal bin height test to adcp data
+- [`adcp_theme()`](https://dempsey-cmar.github.io/adcp/reference/adcp_theme.md)
+  : Theme for adcp plots
 - [`adcp_write_report_table()`](https://dempsey-cmar.github.io/adcp/reference/adcp_write_report_table.md)
   : Writes deployment table for summary report
 - [`current_thresholds`](https://dempsey-cmar.github.io/adcp/reference/current_thresholds.md)
   : Threshold tables
 - [`find_index()`](https://dempsey-cmar.github.io/adcp/reference/find_index.md)
   : Index of first bin column
+- [`get_speed_colour_pal()`](https://dempsey-cmar.github.io/adcp/reference/get_speed_colour_pal.md)
+  : Generate colour palette for speed values

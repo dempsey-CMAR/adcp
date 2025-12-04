@@ -51,6 +51,7 @@ direction data, use <code><a href="adcp_label_direction.html">adcp_label_directi
 <span>  <span class="va">dat</span>,</span>
 <span>  column <span class="op">=</span> <span class="va">sea_water_speed_cm_s</span>,</span>
 <span>  n_ints <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  upper_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  label_sep <span class="op">=</span> <span class="st">" "</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -77,6 +78,11 @@ Alternatively, a vector of two or more unique break points. Passed to the
 <code>breaks</code> argument of <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut()</a></code>.</p></dd>
 
 
+<dt id="arg-upper-value">upper_value<a class="anchor" aria-label="anchor" href="#arg-upper-value"></a></dt>
+<dd><p>Value used to generate the upper limit of the final
+interval. Default is the maximum values of <code> column </code>.</p></dd>
+
+
 <dt id="arg-label-sep">label_sep<a class="anchor" aria-label="anchor" href="#arg-label-sep"></a></dt>
 <dd><p>Separator for the interval labels ("lower to upper").
 Default is a new line to save room on plot axis.</p></dd>
@@ -89,9 +95,9 @@ Default is a new line to save room on plot axis.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Intervals start and 0 and end at the maximum value that gives a <code>n_ints</code>
-equal intervals. This means some small and/or large intervals may have zero
-observations.</p>
+    <p>Intervals start and 0 and end at the smallest value that includes all
+observations and results in <code>n_ints</code> equal intervals. Some small and/or
+large intervals may have zero observations.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

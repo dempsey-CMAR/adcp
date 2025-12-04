@@ -29,11 +29,11 @@
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_pivot_vars_longer.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_rose.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_rose_old.html</loc></url>
-<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_speed_time.html</loc></url>
-<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_depth.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_depth_flags.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_flags.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_speed_at_bins.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_speed_hist.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_plot_var_time.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_read_tracking.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_read_txt.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_start_end_obs_to_trim.html</loc></url>
@@ -43,9 +43,11 @@
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_test_rolling_sd.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_test_spike.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_test_tidal_bin_height.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_theme.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/adcp_write_report_table.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/current_thresholds.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/find_index.html</loc></url>
+<url><loc>https://dempsey-cmar.github.io/adcp/reference/get_speed_colour_pal.html</loc></url>
 <url><loc>https://dempsey-cmar.github.io/adcp/reference/index.html</loc></url>
 </urlset>
 

@@ -18,10 +18,9 @@ adcp_plot_speed_hist(
 
 - dat:
 
-  Data frame with at least 3 columns: a factor of speed groups, `n`, the
-  number of observations in each group, and `n_percent`, the percent of
-  observations in each group. The proportion is automatically converted
-  to percent for the figure.
+  Data frame with at least 1 columns: a factor of speed groups. The
+  proportion and percent of observations in each group is counted in the
+  function.
 
 - pal:
 
