@@ -407,6 +407,8 @@ Plot current speed histogram.
   : Pivot current data
 - [`adcp_plot_current_rose()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_rose.md)
   : Generate current rose
+- [`adcp_plot_current_rose_old()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_rose_old.md)
+  : Generate current old rose
 - [`adcp_plot_current_speed_time()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_current_speed_time.md)
   : Plot histogram of speed observations
 - [`adcp_plot_depth()`](https://dempsey-cmar.github.io/adcp/reference/adcp_plot_depth.md)
