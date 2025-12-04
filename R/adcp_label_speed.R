@@ -4,9 +4,9 @@
 #' \code{column} will typically be a \code{sea_water_speed} column. To label
 #' direction data, use \code{adcp_label_direction()}.
 #'
-#' Intervals start and 0 and end at the maximum value that gives a \code{n_ints}
-#' equal intervals. This means some small and/or large intervals may have zero
-#' observations.
+#' Intervals start and 0 and end at the smallest value that includes all
+#' observations and results in \code{n_ints} equal intervals. Some small and/or
+#' large intervals may have zero observations.
 #'
 #' @param dat Data frame including the column with observations that will be
 #'   assigned to intervals. The interval size is determined by the range of
@@ -19,6 +19,9 @@
 #'   size is determined by the range of these observations and \code{n_ints}.
 #'   Alternatively, a vector of two or more unique break points. Passed to the
 #'   \code{breaks} argument of \code{cut()}.
+#'
+#' @param upper_value Value used to generate the upper limit of the final
+#'   interval. Default is the maximum values of \code{ column }.
 #'
 #' @param label_sep Separator for the interval labels ("lower to upper").
 #'   Default is a new line to save room on plot axis.
@@ -36,6 +39,7 @@ adcp_label_speed <- function(
     dat,
     column = sea_water_speed_cm_s,
     n_ints = 12,
+    upper_value = NULL,
     label_sep = " "
 ) {
 
@@ -43,7 +47,11 @@ adcp_label_speed <- function(
     mutate(col_to_cut = {{ column }})
 
   vals <- dat %>% pull(col_to_cut)
-  max_value <- RoundTo(max(vals), n_ints, FUN = ceiling)
+  if (is.null(upper_value)) {
+    max_value <- RoundTo(max(vals), n_ints, FUN = ceiling)
+  } else{
+    max_value <- RoundTo(upper_value, n_ints, FUN = ceiling)
+  }
   cut_width <- max_value / n_ints # interval width for n_ints intervals from 0 to max_value
 
   dat$ints <- cut(

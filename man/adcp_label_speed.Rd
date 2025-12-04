@@ -8,6 +8,7 @@ adcp_label_speed(
   dat,
   column = sea_water_speed_cm_s,
   n_ints = 12,
+  upper_value = NULL,
   label_sep = " "
 )
 }
@@ -24,6 +25,9 @@ size is determined by the range of these observations and \code{n_ints}.
 Alternatively, a vector of two or more unique break points. Passed to the
 \code{breaks} argument of \code{cut()}.}
 
+\item{upper_value}{Value used to generate the upper limit of the final
+interval. Default is the maximum values of \code{ column }.}
+
 \item{label_sep}{Separator for the interval labels ("lower to upper").
 Default is a new line to save room on plot axis.}
 }
@@ -37,7 +41,7 @@ Assigns intervals to \code{column} using the \code{cut()} function.
 direction data, use \code{adcp_label_direction()}.
 }
 \details{
-Intervals start and 0 and end at the maximum value that gives a \code{n_ints}
-equal intervals. This means some small and/or large intervals may have zero
-observations.
+Intervals start and 0 and end at the smallest value that includes all
+observations and results in \code{n_ints} equal intervals. Some small and/or
+large intervals may have zero observations.
 }
