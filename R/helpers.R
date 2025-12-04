@@ -174,4 +174,45 @@ adcp_convert_bin_height_to_ordered_factor <- function(dat) {
 }
 
 
+#' Generate colour palette for speed values
+#'
+#' @param n_colours Integer indicating how many colours to generate.
+#'
+#' @returns Character vector of \code{n_levels} hex codes from \code{viridis}
+#'   option "F".
+#'
+#' @export
+
+get_speed_colour_pal <- function(n_colours) {
+
+  viridis(n_colours, option = "F", direction = -1, end = 0.8)
+}
+
+
+#' Theme for adcp plots
+#'
+#' @returns Returns a ggtheme
+#'
+#' @importFrom ggplot2 element_line element_rect element_text theme
+
+adcp_theme <- function() {
+
+  theme_col_dark <- "gray50"
+  theme_col_light <- "gray80"
+
+  theme(
+    axis.ticks.x = element_line(colour = theme_col_dark),
+    axis.ticks.y = element_line(colour = theme_col_dark),
+
+    panel.border =  element_rect(colour = theme_col_dark, fill = NA),
+    panel.background = element_rect(fill = NA),
+    panel.grid = element_line(color = theme_col_light, linewidth = 0.25),
+
+    strip.text = element_text(colour = "black", size = 10),
+    strip.background = element_rect(fill = "white", colour = theme_col_dark)
+  )
+
+}
+
+
 

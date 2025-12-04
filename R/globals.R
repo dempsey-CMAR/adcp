@@ -86,6 +86,14 @@ utils::globalVariables(c(
   "sea_water_speed_cm_s_labels",
   "sea_water_to_direction_degree_labels",
 
+  # plot_speed_at_bins
+  "med_sea_water_speed_cm_s",
+  "med_sea_water_speed_cm_s_labels",
+  "q_25",
+  "q_75",
+
+  "sensor_height_above_sea_floor_m",
+
   # count_obs()
   "sea_water_speed_cm_s",
 
