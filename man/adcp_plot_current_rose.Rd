@@ -13,10 +13,10 @@ adcp_plot_current_rose(
 )
 }
 \arguments{
-\item{dat}{Data frame with at least 3 columns: an ordered factor of direction
-groups, a factor of speed groups, and \code{n_prop}, the proportion of
-observations in the corresponding direction and speed groups. The
-proportion is automatically converted to percent for the figure.}
+\item{dat}{Data frame with at least 2 columns: an ordered factor of direction
+groups, and a factor of speed groups. The proportion of observations in
+each group is counted in the function and automatically converted to
+percent for the figure.}
 
 \item{pal}{Vector of colours. Must be the same length as the number of speed
 factor levels.}

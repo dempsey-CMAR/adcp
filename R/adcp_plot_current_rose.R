@@ -43,7 +43,7 @@ adcp_plot_current_rose <- function(
 
   if (is.null(pal)) {
     n_levels <-  nrow(reframe(dat, levels({{ speed_col }})))
-    pal <- viridis(n_levels, option = "F", direction = -1)
+    pal <- get_speed_colour_pal(n_levels)
   }
 
   dat %>%
@@ -65,13 +65,16 @@ adcp_plot_current_rose <- function(
     theme(
       axis.title.x = element_blank(),
       axis.title.y = element_blank(),
-      axis.ticks.y = element_blank(),
-      # axis.text.y = element_text(color = 1),
+
       axis.ticks.x = element_blank(),
+      axis.ticks.y = element_blank(),
+
       axis.text.x = element_text(color = 1),
+
+      panel.border =  element_rect(colour = "gray50", fill = NA),
       panel.background = element_rect(fill = NA, color = NA),
+
       panel.grid = element_line(color = "gray70", linewidth = 0.5),
-      # panel.grid.minor.y = element_line(color = "gray70", linewidth = 0.5)
       panel.grid.minor.y = element_blank()
     )
 }

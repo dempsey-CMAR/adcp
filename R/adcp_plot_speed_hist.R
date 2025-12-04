@@ -30,8 +30,10 @@ adcp_plot_speed_hist <- function(
 
   if (is.null(pal)) {
     n_levels <-  nrow(reframe(dat, levels({{ speed_col }})))
-    pal <- viridis(n_levels, option = "F", direction = -1)
+    pal <- get_speed_colour_pal(n_levels)
   }
+
+  theme_col <- "gray70"
 
   dat %>%
     group_by({{ speed_col }}, drop = FALSE) %>%
@@ -52,8 +54,13 @@ adcp_plot_speed_hist <- function(
       minor_breaks = NULL,
       expand = expansion(mult = c(0, 0.1))
     ) +
-    theme(
-      panel.background = element_rect(colour = "gray70", fill = NA),
-      panel.grid = element_line(color = "gray70", linewidth = 0.25)
-    )
+    adcp_theme()
+    # theme(
+    #   axis.ticks.x = element_line(colour = theme_col),
+    #   axis.ticks.y = element_line(colour = theme_col),
+    #
+    #   panel.border =  element_rect(colour = theme_col, fill = NA),
+    #   panel.background = element_rect(fill = NA),
+    #   panel.grid = element_line(color = theme_col, linewidth = 0.25)
+    # )
 }
