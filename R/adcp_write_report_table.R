@@ -25,8 +25,9 @@ adcp_write_report_table <- function(metadata) {
       `Ensemble Interval (s)` = current_ensemble_interval_s,
       `Averaging Interval (s)` = current_averaging_interval_s,
       `Pings per Ensemble` = current_pings_per_ensemble,
+      `Sensor Height above Sea Floor (m)` = sensor_height_above_sea_floor_m,
+      `First Bin Range (m)` = first_bin_range_m,
       `Bin Size (m)` = bin_size_m,
-      `First Bin Range (m)` = first_bin_range_m
     ) %>%
     mutate(
       `Depth Sounding (m)` = as.character(`Depth Sounding (m)`),
